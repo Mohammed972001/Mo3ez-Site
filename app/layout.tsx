@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Reem_Kufi, Sora, Cairo } from "next/font/google";
+import { Reem_Kufi, Cairo } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/data/business";
 import { UtilityBar } from "@/components/layout/UtilityBar";
@@ -7,24 +7,13 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 
-/* Type 3 — العناوين: Fraunces (لاتيني) + ريم كوفي (عربي) · النص: Sora + Cairo.
-   كلها self-hosted عبر next/font مع display:swap (يحمي LCP/CLS). */
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
+/* Type 3 (الجانب العربي) — العناوين: ريم كوفي · النص: Cairo.
+   موقع عربي أولًا: نستضيف خطّي العربية فقط (self-hosted, display:swap) — أخفّ وأسرع
+   (LCP)، والخط العربي أول المكدّس فلا يعترضه أي fallback لاتيني. */
 const reemKufi = Reem_Kufi({
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-reem",
-  display: "swap",
-});
-const sora = Sora({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sora",
   display: "swap",
 });
 const cairo = Cairo({
@@ -34,7 +23,7 @@ const cairo = Cairo({
   display: "swap",
 });
 
-const fontVars = `${fraunces.variable} ${reemKufi.variable} ${sora.variable} ${cairo.variable}`;
+const fontVars = `${reemKufi.variable} ${cairo.variable}`;
 
 export const metadata: Metadata = {
   title: {

@@ -5,29 +5,30 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ===========================================================================
-   توكنز الثيم — Palette 3 (Warm Artisan) لايت · Palette 5 (Dark Premium) دارك
-   كل القيم متحقّقة WCAG AA (انظر سجلّ القرارات، القرار 14).
+   توكنز الثيم — Palette 4 (Soft Nordic) لايت · Palette 5 (Dark Premium) دارك
+   كل القيم متحقّقة WCAG AA (انظر سجلّ القرارات، القرار 16).
    =========================================================================== */
 :root {
-  /* Light · Warm Artisan */
-  --bg: #f6eee3;
-  --surface: #efe4d4;
-  --text: #2e251f;
-  --muted: #7a6e61;
-  --border: #dbcbb4;
-  --primary: #8e3b2c; /* تيراكوتا */
+  /* Light · Soft Nordic */
+  --bg: #fcfbf9;
+  --surface: #ede9e2;
+  --text: #2c2925;
+  --muted: #837c72;
+  --border: #e6e1d8;
+  --primary: #5e6b5a; /* سيج (sage) */
   --on-primary: #ffffff;
-  --accent: #1e6e68; /* تيل */
-  --on-accent: #ffffff;
-  --accent-ink: #1a5f5a; /* تيل أغمق لنص الإيبرو الصغير */
-  --success: #1e6e54;
-  --sale: #c0392b;
-  --star: #c9912b;
+  --accent: #b98e6b; /* كامل (camel) — تعبئة بنص داكن */
+  --on-accent: #2c2925;
+  --accent-ink: #8e5c39; /* كامل أغمق لنص الإيبرو الصغير (يجتاز AA) */
+  --success: #4e7a5e;
+  --sale: #b5503c;
+  --star: #b98e6b;
   color-scheme: light;
 
-  /* مكدّسات الخطوط (المتغيّرات يضبطها next/font على <html>) — Type 3 */
-  --font-display-stack: var(--font-fraunces), var(--font-reem), Georgia, "Times New Roman", serif;
-  --font-body-stack: var(--font-sora), var(--font-cairo), system-ui, -apple-system, sans-serif;
+  /* مكدّسات الخطوط (يضبطها next/font على <html>) — Type 3 عربي-أولًا.
+     الخط العربي أول المكدّس → لا يعترضه أي fallback، فيظهر ريم كوفي/Cairo دائمًا. */
+  --font-display-stack: var(--font-reem), Georgia, "Times New Roman", serif;
+  --font-body-stack: var(--font-cairo), system-ui, -apple-system, sans-serif;
 
   /* مقاييس مشتركة */
   --radius: 0.875rem;
