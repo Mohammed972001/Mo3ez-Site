@@ -10,7 +10,7 @@
 |---|---|---|
 | T00 | تهيئة المشروع (Scaffold) | ✅ |
 | T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ✅ |
-| T02 | عناصر UI الأساسية (Primitives) | ⬜ |
+| T02 | عناصر UI الأساسية (Primitives) | ✅ |
 | T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ⬜ |
 | T04 | طبقة البيانات (تصنيفات/منتجات/NAP) | ⬜ |
 | T05 | خط أنابيب الصور (تحسين + slugs + alt) | ⬜ |
@@ -43,9 +43,10 @@ Next.js (أحدث) + TS صارم + Tailwind v4 + ESLint/Prettier + هيكل ال
 **القبول:** تبديل لايت/دارك يعمل ويحترم `prefers-color-scheme` · تباين AA · CLS=0 عند التبديل · بوابة `web-design-guidelines`.
 **التنفيذ:** `globals.css` توكنز Palette 3/5 (كلها AA — text 13:1/15.7:1، primary 6.5:1، accent 5.2:1، gold 7.8:1) مربوطة في Tailwind `@theme inline`. خطوط Type 3 (Fraunces/ريم كوفي/Sora/Cairo) self-hosted عبر `next/font` بـ swap. `ThemeToggle` + سكربت no-flash يحترم `prefers-color-scheme`. تحقّق بصري: لايت+دارك على 390px موبايل ✅، `next build` ✅.
 
-### T02 — عناصر UI الأساسية
+### T02 — عناصر UI الأساسية ✅
 نقل المكوّنات من `components.css`: Button (كل الأنواع) · Badge · Price (ر.س) · Rating · Card (pcard) · Input/Select · Chip · Qty · Swatch/Size · Breadcrumb · Skeleton · Empty · Toast. Tailwind، موبايل-أولاً، a11y، RTL.
 **القبول:** معرض مكوّنات يطابق الموكاب · لمس ≥44px · focus-visible · بوابة `frontend-design`+`web-design-guidelines`.
+**التنفيذ:** 15 ملف في `components/ui/` + `lib/utils/cn.ts`. RSC: المكوّنات التفاعلية client (Chip/Swatch/Qty/Toast/WishButton)، والعرضية server. ProductCard = server + رابط ممتدّ + `next/image` (أبعاد محجوزة). تحقّق: build أخضر، eslint نظيف، التوكنز والخطوط صحيحة في المعاينة، `:focus-visible` عام، أهداف لمس ≥44px.
 
 ### T03 — هيكل الصفحة
 UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FAB. درج جوال. كله `<nav>/<footer>` دلالي وروابط `<a href>` حقيقية.
