@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Fraunces, Reem_Kufi, Sora, Cairo } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/data/business";
+import { UtilityBar } from "@/components/layout/UtilityBar";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 
 /* Type 3 — العناوين: Fraunces (لاتيني) + ريم كوفي (عربي) · النص: Sora + Cairo.
    كلها self-hosted عبر next/font مع display:swap (يحمي LCP/CLS). */
@@ -58,7 +62,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-bg text-text">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <UtilityBar />
+        <Navbar />
         {children}
+        <Footer />
+        <WhatsAppFab />
       </body>
     </html>
   );

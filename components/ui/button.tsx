@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, AnchorHTMLAttributes, ReactNode } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils/cn";
 
 type Variant = "primary" | "secondary" | "accent" | "ghost";
@@ -44,7 +45,12 @@ export function Button({
   const classes = cn(base, variants[variant], sizes[size], block && "w-full", className);
 
   if (href !== undefined) {
-    return <a href={href} className={classes} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)} />;
+    const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
+    // روابط داخلية → next/link (يبقى <a href> قابلًا للزحف + prefetch). الخارجية → <a> عادي.
+    if (href.startsWith("/")) {
+      return <Link href={href} className={classes} {...anchorProps} />;
+    }
+    return <a href={href} className={classes} {...anchorProps} />;
   }
   return <button className={classes} {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)} />;
 }

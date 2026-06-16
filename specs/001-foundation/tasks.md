@@ -11,7 +11,7 @@
 | T00 | تهيئة المشروع (Scaffold) | ✅ |
 | T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ✅ |
 | T02 | عناصر UI الأساسية (Primitives) | ✅ |
-| T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ⬜ |
+| T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ✅ |
 | T04 | طبقة البيانات (تصنيفات/منتجات/NAP) | ⬜ |
 | T05 | خط أنابيب الصور (تحسين + slugs + alt) | ⬜ |
 | T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | ⬜ |
@@ -48,9 +48,10 @@ Next.js (أحدث) + TS صارم + Tailwind v4 + ESLint/Prettier + هيكل ال
 **القبول:** معرض مكوّنات يطابق الموكاب · لمس ≥44px · focus-visible · بوابة `frontend-design`+`web-design-guidelines`.
 **التنفيذ:** 15 ملف في `components/ui/` + `lib/utils/cn.ts`. RSC: المكوّنات التفاعلية client (Chip/Swatch/Qty/Toast/WishButton)، والعرضية server. ProductCard = server + رابط ممتدّ + `next/image` (أبعاد محجوزة). تحقّق: build أخضر، eslint نظيف، التوكنز والخطوط صحيحة في المعاينة، `:focus-visible` عام، أهداف لمس ≥44px.
 
-### T03 — هيكل الصفحة
+### T03 — هيكل الصفحة ✅
 UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FAB. درج جوال. كله `<nav>/<footer>` دلالي وروابط `<a href>` حقيقية.
 **القبول:** ملاحة كاملة بالكيبورد · موبايل-أولاً (درج) · روابط قابلة للزحف · CLS=0.
+**التنفيذ:** `lib/data/categories.ts` (9 تصنيفات، slugs عربية) + 6 مكوّنات layout. القائمة الكبرى C تظهر بالـ CSS (group-hover/focus-within) فتبقى الروابط الـ9 في DOM للزحف. الروابط الداخلية عبر `next/link` (زحف + prefetch). ThemeToggle بلا حالة (تبديل الأيقونة بالـ CSS). تحقّق: build + eslint نظيفان، light=Palette 3 / dark=Palette 5 يتبدّلان، واتساب FAB برسالة معبّأة، درج جوال.
 
 ### T04 — طبقة البيانات
 `categories.ts` + `products.ts` (مشتقّة من مجلدات `public`) + `business.ts` + مخططات `zod`. أوصاف/أسماء عربية + كلمات مفتاحية + FAQ لكل تصنيف.
