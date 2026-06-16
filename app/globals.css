@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
+/* تفعيل الوضع الداكن عبر سمة [data-theme="dark"] على <html> (تبديل يدوي يتجاوز النظام).
+   التوكنز نفسها تنقلب بالـ CSS variables، فمعظم المكوّنات تستخدم utilities دلالية بلا dark:. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ===========================================================================
+   توكنز الثيم — Palette 3 (Warm Artisan) لايت · Palette 5 (Dark Premium) دارك
+   كل القيم متحقّقة WCAG AA (انظر سجلّ القرارات، القرار 14).
+   =========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light · Warm Artisan */
+  --bg: #f6eee3;
+  --surface: #efe4d4;
+  --text: #2e251f;
+  --muted: #7a6e61;
+  --border: #dbcbb4;
+  --primary: #8e3b2c; /* تيراكوتا */
+  --on-primary: #ffffff;
+  --accent: #1e6e68; /* تيل */
+  --on-accent: #ffffff;
+  --accent-ink: #1a5f5a; /* تيل أغمق لنص الإيبرو الصغير */
+  --success: #1e6e54;
+  --sale: #c0392b;
+  --star: #c9912b;
+  color-scheme: light;
+
+  /* مكدّسات الخطوط (المتغيّرات يضبطها next/font على <html>) — Type 3 */
+  --font-display-stack: var(--font-fraunces), var(--font-reem), Georgia, "Times New Roman", serif;
+  --font-body-stack: var(--font-sora), var(--font-cairo), system-ui, -apple-system, sans-serif;
+
+  /* مقاييس مشتركة */
+  --radius: 0.875rem;
+  --wrap: 80rem; /* 1280px */
 }
 
+[data-theme="dark"] {
+  /* Dark · Dark Premium */
+  --bg: #14110e;
+  --surface: #1f1a16;
+  --text: #f0eae0;
+  --muted: #a39b8e;
+  --border: #312a23;
+  --primary: #c9a24b; /* ذهبي — الفعل الأساسي بنص داكن */
+  --on-primary: #14110e;
+  --accent: #c9a24b;
+  --on-accent: #14110e;
+  --accent-ink: #d9b665; /* ذهبي أفتح لنص الإيبرو على خلفية داكنة */
+  --success: #5ba77d;
+  --sale: #e08363;
+  --star: #c9a24b;
+  color-scheme: dark;
+}
+
+/* ربط التوكنز في نظام Tailwind v4 → utilities مثل bg-bg / text-text / text-primary */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-success: var(--success);
+  --color-sale: var(--sale);
+  --color-star: var(--star);
+
+  --font-display: var(--font-display-stack);
+  --font-body: var(--font-body-stack);
+
+  --radius-theme: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===========================================================================
+   الأساس (Base) — RTL أصلي، خطوط، حركة مخفّضة
+   =========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.15;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+/* تركيز ظاهر متّسق (a11y) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* أرقام جدولية للأسعار */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,6 +1,36 @@
 import type { Metadata } from "next";
+import { Fraunces, Reem_Kufi, Sora, Cairo } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/data/business";
+
+/* Type 3 — العناوين: Fraunces (لاتيني) + ريم كوفي (عربي) · النص: Sora + Cairo.
+   كلها self-hosted عبر next/font مع display:swap (يحمي LCP/CLS). */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+const reemKufi = Reem_Kufi({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-reem",
+  display: "swap",
+});
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sora",
+  display: "swap",
+});
+const cairo = Cairo({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cairo",
+  display: "swap",
+});
+
+const fontVars = `${fraunces.variable} ${reemKufi.variable} ${sora.variable} ${cairo.variable}`;
 
 export const metadata: Metadata = {
   title: {
@@ -12,13 +42,24 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"), // يُضبط النطاق الحقيقي في T06
 };
 
+/* يضبط الوضع (داكن/فاتح) قبل الرسم لمنع وميض الثيم — يقرأ التخزين ثم تفضيل النظام. */
+const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.dataset.theme=t;}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // عربي RTL أصلي — أساس كل الصفحات (الدستور: المادة 1 و2).
+  // عربي RTL أصلي. suppressHydrationWarning لأن سكربت الثيم يعدّل data-theme قبل الترطيب.
   return (
-    <html lang="ar" dir="rtl" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`${fontVars} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col bg-bg text-text">
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {children}
+      </body>
     </html>
   );
 }
