@@ -1,0 +1,108 @@
+<div dir="rtl" align="right">
+
+# ✅ التاسكات · 001 — الأساس (Ordered Backlog)
+
+> تُنفَّذ **بالترتيب**. لا يُفتح تاسك إلا بعد إغلاق السابق (build ناجح + معايير القبول + بوابة السكيل + تحديث السجلّ).
+> كل تاسك = فرع `feature/T<NN>-<slug>` → PR على `develop`.
+> الحالة: ⬜ لم يبدأ · 🟡 جارٍ · ✅ مكتمل
+
+| # | التاسك | الحالة |
+|---|---|---|
+| T00 | تهيئة المشروع (Scaffold) | ⬜ |
+| T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ⬜ |
+| T02 | عناصر UI الأساسية (Primitives) | ⬜ |
+| T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ⬜ |
+| T04 | طبقة البيانات (تصنيفات/منتجات/NAP) | ⬜ |
+| T05 | خط أنابيب الصور (تحسين + slugs + alt) | ⬜ |
+| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | ⬜ |
+| T07 | الرئيسية (تصميم A) | ⬜ |
+| T08 | الكتالوج (تصميم B) | ⬜ |
+| T09 | صفحات التصنيف `/c/[category]` (B + محتوى SEO) | ⬜ |
+| T10 | صفحة المنتج `/p/[product]` (تصميم A) | ⬜ |
+| T11 | توليد العملاء (واتساب/اتصال/فورم عرض سعر) | ⬜ |
+| T12 | نظام المدوّنة (MDX) — الأساس بلا مقالات | ⬜ |
+| T13 | صفحات: من نحن / تواصل | ⬜ |
+| T14 | تمريرة الأداء (CWV) | ⬜ |
+| T15 | تمريرة a11y + RTL | ⬜ |
+| T16 | الاختبارات (Playwright + Lighthouse CI) | ⬜ |
+| T17 | إعداد النشر (Vercel) + QA نهائي | ⬜ |
+
+> لاحقًا (خارج 001): توسيع الكلمات + صفحات المناطق · كتابة مقالات المدوّنة.
+
+---
+
+## التفاصيل ومعايير القبول
+
+### T00 — تهيئة المشروع (Scaffold)
+Next.js (أحدث) + TS صارم + Tailwind v4 + ESLint/Prettier + هيكل المجلدات (خطة §2) + `lib/data/business.ts` (NAP) + `.env.example`. حذف/أرشفة ملفات الموكاب الثابتة إلى `design-reference/`.
+**القبول:** `next build` و`next dev` يعملان · لينتر نظيف · صفحة `/` فاضية SSR · بوابة `clean-code-guard`.
+
+### T01 — الثيم والتوكنز + الخطوط
+متغيّرات CSS لـ Palette 3 (لايت) و5 (دارك) + اشتقاق success/sale/on-colors · ربطها في Tailwind `@theme` · خطوط Type 3 عبر `next/font` · `ThemeToggle` بلا وميض · `html lang=ar dir=rtl`.
+**القبول:** تبديل لايت/دارك يعمل ويحترم `prefers-color-scheme` · تباين AA · CLS=0 عند التبديل · بوابة `web-design-guidelines`.
+
+### T02 — عناصر UI الأساسية
+نقل المكوّنات من `components.css`: Button (كل الأنواع) · Badge · Price (ر.س) · Rating · Card (pcard) · Input/Select · Chip · Qty · Swatch/Size · Breadcrumb · Skeleton · Empty · Toast. Tailwind، موبايل-أولاً، a11y، RTL.
+**القبول:** معرض مكوّنات يطابق الموكاب · لمس ≥44px · focus-visible · بوابة `frontend-design`+`web-design-guidelines`.
+
+### T03 — هيكل الصفحة
+UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FAB. درج جوال. كله `<nav>/<footer>` دلالي وروابط `<a href>` حقيقية.
+**القبول:** ملاحة كاملة بالكيبورد · موبايل-أولاً (درج) · روابط قابلة للزحف · CLS=0.
+
+### T04 — طبقة البيانات
+`categories.ts` + `products.ts` (مشتقّة من مجلدات `public`) + `business.ts` + مخططات `zod`. أوصاف/أسماء عربية + كلمات مفتاحية + FAQ لكل تصنيف.
+**القبول:** بيانات مُتحقّقة بـ zod · تغطّي كل التصنيفات · معزولة وقابلة للاستبدال · اختبارات وحدة (`tdd`).
+
+### T05 — خط أنابيب الصور
+سكربت تحويل WebP/AVIF + إعادة تسمية slug + أبعاد + blur + خريطة `alt`. (خطة §4).
+**القبول:** كل الصور محسّنة + slugs وصفية + alt عربي · أوزان أقل بكثير · أبعاد محجوزة (CLS).
+
+### T06 — معمارية SEO
+`lib/seo/metadata.ts` · `components/seo/JsonLd.tsx` · `app/sitemap.ts` · `app/robots.ts` · `app/llms.txt` · canonical/OG base.
+**القبول:** sitemap/robots/llms صحيحة وتشمل كل المسارات · JSON-LD يجتاز Rich Results · لا تكرار canonical.
+
+### T07 — الرئيسية (A)
+كل أقسام تصميم A (Hero، شريط ثقة، الأكثر مبيعًا، تسوّق بالغرفة/النوع، الميزانية، إلهام، عروض، نشرة) ببيانات حقيقية. `Organization`+`LocalBusiness`+`WebSite` JSON-LD.
+**القبول:** مطابقة A · LCP<2.5s (hero `priority`) · CLS<0.1 · SEO=100 · موبايل-أولاً.
+
+### T08 — الكتالوج (B)
+شبكة 4 أعمدة + فلاتر علوية + معاينة سريعة (تصميم B) لكل المنتجات. `ItemList` JSON-LD · ترقيم/تحميل.
+**القبول:** مطابقة B · فلاتر تعمل (URL state للـ SEO) · CWV ضمن الميزانية.
+
+### T09 — صفحات التصنيف
+`/c/[category]` بتصميم B + **كتلة إجابة مباشرة (GEO)** + وصف عربي أصيل + **FAQ** + `ItemList`+`Breadcrumb`+`FAQPage`.
+**القبول:** محتوى فريد لكل تصنيف · h1 بالكلمة المستهدفة · FAQ schema صحيح · SEO=100.
+
+### T10 — صفحة المنتج (A)
+معرض + مواصفات + تقييمات + CTA واتساب/عرض سعر (تصميم A). `Product`+`Breadcrumb` JSON-LD · صور alt.
+**القبول:** مطابقة A · Product schema صحيح · CTA يفتح واتساب معبّأ · LCP<2.5s.
+
+### T11 — توليد العملاء
+WhatsApp FAB + أزرار CTA (`wa.me` معبّأة) + `tel:` + فورم `/quote` (Server Action + zod + honeypot).
+**القبول:** الفورم يتحقّق ويُرسل · واتساب يفتح برسالة صحيحة · بلا spam مفتوح.
+
+### T12 — نظام المدوّنة (MDX)
+`/blog` فهرس + `/blog/[slug]` (MDX) + `Article`+`Breadcrumb` + metadata + `next/image`. **بلا مقالات** (تُكتب في النهاية).
+**القبول:** النظام يعرض مقال تجريبي ويُحذف · Article schema صحيح · جاهز ليكتب المالك مقالات داخل الكود.
+
+### T13 — من نحن / تواصل
+`/about` (E-E-A-T: خبرة/ضمان/أعمال) + `/contact` (NAP موحّد + خريطة + واتساب/اتصال + ساعات).
+**القبول:** NAP مطابق لـ business.ts · `LocalBusiness` schema · موبايل-أولاً.
+
+### T14 — تمريرة الأداء (CWV)
+قياس Lighthouse لكل صفحة رئيسية، إصلاح LCP/CLS/INP، تأكيد `priority`/أبعاد/تأجيل JS.
+**القبول:** كل الصفحات ضمن ميزانية المادة 3 · تقرير مرفق.
+
+### T15 — تمريرة a11y + RTL
+فحص WCAG AA، تباين، focus، tab order، `prefers-reduced-motion`، سلامة RTL على كل صفحة.
+**القبول:** A11y≥95 · لا مشاكل RTL · بوابة `web-design-guidelines`.
+
+### T16 — الاختبارات
+Playwright لمسارات حرجة (تحميل، ملاحة، فورم، واتساب) + Lighthouse CI في الـ pipeline.
+**القبول:** اختبارات خضراء · بوابة `test-guard` · CI يفشل عند كسر الميزانية.
+
+### T17 — النشر + QA نهائي
+إعداد Vercel (أو البديل) + متغيّرات البيئة + فحص نهائي شامل لكل معايير القبول.
+**القبول:** نشر ناجح · كل بنود DoD في المواصفات ✅ · سجلّ القرارات محدَّث.
+
+</div>
