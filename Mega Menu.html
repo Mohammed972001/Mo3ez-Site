@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-type="4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>رُقعة — القائمة الكبرى · 3 تصاميم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="store.css" />
+<style>
+.menubar { position:relative; }
+.mega-panel { background:var(--c-bg); border-top:1px solid var(--c-border); box-shadow:var(--sh-lg); }
+.mega-inner { max-width:var(--wrap); margin:0 auto; padding:28px 32px; }
+
+/* shared column styling */
+.mcol h5 { font-family:var(--font-body); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--c-muted); margin:0 0 13px; font-weight:700; display:flex; align-items:center; gap:8px; }
+.mcol h5 .ic { color:var(--c-accent); }
+.mcol h5 .ic svg { width:15px; height:15px; }
+.mcol a { display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--c-text); text-decoration:none; padding:6px 0; transition:.14s; }
+.mcol a:hover { color:var(--c-accent); padding-inline-start:5px; }
+.mcol a .cnt { margin-inline-start:auto; font-size:11px; color:var(--c-muted); }
+.mcol a .dot { width:15px; height:15px; border-radius:50%; border:1px solid color-mix(in srgb,var(--c-text) 18%, transparent); flex:none; }
+.mcol .allbtn { margin-top:8px; font-size:13px; font-weight:600; color:var(--c-primary); display:inline-flex; align-items:center; gap:6px; text-decoration:none; }
+
+/* size pills */
+.size-pills { display:flex; flex-wrap:wrap; gap:7px; }
+.size-pills a { padding:6px 11px; border:1px solid var(--c-border); border-radius:8px; font-size:12.5px; font-weight:600; text-decoration:none; color:var(--c-text); transition:.14s; }
+.size-pills a:hover { border-color:var(--c-text); background:var(--c-surface); }
+
+/* offers links with badge */
+.mcol .offlink { justify-content:flex-start; }
+
+/* featured promo block */
+.mpromo { border-radius:14px; overflow:hidden; position:relative; isolation:isolate; min-height:100%; display:flex; align-items:flex-end; padding:20px; color:#fff; }
+.mpromo image-slot { position:absolute; inset:0; z-index:-2; }
+.mpromo .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(46,41,37,.82), transparent 60%); }
+.mpromo .eyebrow { font-size:11px; letter-spacing:.1em; text-transform:uppercase; opacity:.85; }
+.mpromo b { font-family:var(--font-display); font-size:21px; font-weight:600; display:block; margin:4px 0 12px; }
+.mpromo-lg { min-height:300px; }
+.mpromo-lg b { font-size:26px; }
+
+/* room rail tiles */
+.room-rail { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:20px 32px; border-top:1px solid var(--c-border); background:var(--c-surface); max-width:var(--wrap); margin:0 auto; }
+.room-tile { position:relative; border-radius:12px; overflow:hidden; aspect-ratio:16/9; display:flex; align-items:flex-end; padding:12px; color:#fff; isolation:isolate; text-decoration:none; }
+.room-tile image-slot { position:absolute; inset:0; z-index:-2; }
+.room-tile .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(46,41,37,.72), transparent 62%); }
+.room-tile .t { font-family:var(--font-display); font-size:15px; font-weight:600; }
+
+/* A wide */
+.mega-wide { display:grid; grid-template-columns:repeat(5,1fr) 1.4fr; gap:28px; }
+/* B split */
+.mega-split { display:grid; grid-template-columns:1.1fr 1.1fr 1.5fr; gap:30px; }
+.mega-split .grp { display:flex; flex-direction:column; gap:26px; }
+/* C compact + rail */
+.mega-compact { display:grid; grid-template-columns:248px 1fr; gap:28px; }
+.compact-list { display:flex; flex-direction:column; }
+.compact-list a { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:10px; text-decoration:none; color:var(--c-text); font-size:14.5px; font-weight:600; transition:.14s; }
+.compact-list a:hover, .compact-list a.active { background:var(--c-surface); color:var(--c-accent); }
+.compact-list a .ci { width:32px; height:32px; border-radius:9px; background:var(--c-surface); display:grid; place-items:center; color:var(--c-primary); flex:none; }
+.compact-list a:hover .ci, .compact-list a.active .ci { background:var(--c-bg); }
+.compact-list a .ci svg { width:17px; height:17px; }
+.compact-list a .arr { margin-inline-start:auto; color:var(--c-muted); }
+.rail { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(190px,1fr); gap:16px; overflow-x:auto; padding-bottom:6px; }
+.rail .rcard { position:relative; border-radius:14px; overflow:hidden; aspect-ratio:3/4; display:flex; align-items:flex-end; padding:16px; color:#fff; isolation:isolate; text-decoration:none; }
+.rail .rcard image-slot { position:absolute; inset:0; z-index:-2; }
+.rail .rcard .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(46,41,37,.78), transparent 58%); }
+.rail .rcard .t { font-family:var(--font-display); font-size:16px; font-weight:600; }
+.rail .rcard .c { font-size:11.5px; opacity:.85; }
+
+/* trigger highlight + faint page behind */
+.snav .links a.open { background:var(--c-surface); color:var(--c-accent); }
+.page-dim { padding:28px 0; background:var(--c-bg); position:relative; }
+.page-dim::after { content:""; position:absolute; inset:0; background:rgba(46,41,37,.28); }
+.page-dim .wrap { filter:saturate(.6); opacity:.5; }
+
+@media (max-width:1000px){
+  .mega-wide { grid-template-columns:repeat(2,1fr); }
+  .mega-split { grid-template-columns:1fr 1fr; }
+  .mega-compact { grid-template-columns:1fr; }
+  .room-rail { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-top">
+  <div class="mk">ر</div>
+  <div class="ttl">رُقعة — القائمة الكبرى<small>MEGA MENU</small></div>
+  <nav class="doc-nav"><a href="#va">تصميم A</a><a href="#vb">تصميم B</a><a href="#vc">تصميم C</a></nav>
+  <div class="meta"><a class="pill" href="Home.html" style="text-decoration:none">الرئيسية</a><a class="pill" href="Shop.html" style="text-decoration:none">السجاد</a><a class="pill" href="Product.html" style="text-decoration:none">المنتج</a><a class="pill" href="Mega Menu.html" style="text-decoration:none;background:var(--c-primary);color:#fff;border-color:var(--c-primary)">القائمة</a><span class="pill">Palette <b>4</b></span><span class="pill">Type <b>4</b></span><span class="pill">RTL</span></div>
+</header>
+
+<div class="doc">
+  <div class="doc-intro">
+    <h1>القائمة الكبرى — ثلاثة تصاميم</h1>
+    <p>قائمة منسدلة تظهر عند المرور على «السجاد»، مع تصنيف متعدّد الأعمدة (النوع · الغرفة · اللون · المقاس · العروض)، كتلة ترويجية مميّزة، ومربّعات اختصار للغرف. ثلاثة هياكل: أربعة أعمدة عريضة، عمودان + ترويج كبير، وقائمة مدمجة مع شريط صور.</p>
+  </div>
+
+  <!-- ===================================================== VARIATION A -->
+  <div class="vlabel" id="va">
+    <div class="vk">A</div>
+    <div class="vt"><h2>أربعة أعمدة عريضة (+اللون والعروض) · ترويج جانبي · شريط غرف</h2>
+      <div class="sub">لوحة بعرض كامل تعرض كل التصنيفات في خمسة أعمدة مع كتلة ترويجية على الطرف، وأسفلها شريط مربّعات اختصار للغرف.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div class="menubar" data-nav-mega="a" data-active="shop"></div>
+      <div class="mega-panel">
+        <div class="mega-inner mega-wide" id="mega-a"></div>
+        <div class="room-rail" id="rooms-a"></div>
+      </div>
+      <div class="page-dim"><div class="wrap"><div class="hero-min" style="padding:30px 0"><h1 style="font-size:40px">…صفحة الرئيسية خلف القائمة…</h1></div></div></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم A</b>
+      <ul><li>القائمة الكبرى تُستبدل بقائمة جانبية منزلقة (Drawer) من اليمين بكامل الارتفاع.</li>
+      <li>الأعمدة الخمسة تصبح أقسامًا قابلة للطيّ (Accordion): النوع، الغرفة، اللون، المقاس، العروض.</li>
+      <li>الكتلة الترويجية تنتقل لأعلى القائمة، ومربّعات الغرف تصبح صفًّا قابلاً للتمرير أفقيًا.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== VARIATION B -->
+  <div class="vlabel alt" id="vb">
+    <div class="vk">B</div>
+    <div class="vt"><h2>عمودان مجمّعان + كتلة ترويجية كبيرة</h2>
+      <div class="sub">عمودان يجمّعان التصنيفات على اليمين، وكتلة ترويجية كبيرة بصورة بارزة تشغل نحو ثلث العرض على اليسار، مع شريط غرف أسفل العمودين.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div class="menubar" data-nav-mega="b" data-active="shop"></div>
+      <div class="mega-panel">
+        <div class="mega-inner mega-split" id="mega-b"></div>
+      </div>
+      <div class="page-dim"><div class="wrap"><div class="hero-min" style="padding:30px 0"><h1 style="font-size:40px">…صفحة الرئيسية خلف القائمة…</h1></div></div></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم B</b>
+      <ul><li>تتحوّل لدرج منزلق؛ العمودان يتراصّان في قائمة واحدة قابلة للطيّ.</li>
+      <li>الكتلة الترويجية الكبيرة تتحوّل لبانر أفقي واحد أعلى القائمة.</li>
+      <li>شريط الغرف يصبح تمريرًا أفقيًا في أسفل الدرج.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== VARIATION C -->
+  <div class="vlabel" id="vc">
+    <div class="vk">C</div>
+    <div class="vt"><h2>قائمة مدمجة + شريط صور أفقي</h2>
+      <div class="sub">قائمة عمودية مدمجة بأيقونات على اليمين تكشف التصنيفات الرئيسية، وشريط صور أفقي على اليسار يعرض الغرف والكتلة الترويجية — مساحة أقل وتصفّح بصري سريع.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div class="menubar" data-nav-mega="c" data-active="shop"></div>
+      <div class="mega-panel">
+        <div class="mega-inner mega-compact" id="mega-c"></div>
+      </div>
+      <div class="page-dim"><div class="wrap"><div class="hero-min" style="padding:30px 0"><h1 style="font-size:40px">…صفحة الرئيسية خلف القائمة…</h1></div></div></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم C</b>
+      <ul><li>القائمة المدمجة هي الأقرب لنمط الجوال أصلًا — تتحوّل لقائمة كاملة العرض داخل درج.</li>
+      <li>شريط الصور الأفقي يبقى قابلاً للتمرير، ويظهر تحت قائمة التصنيفات.</li>
+      <li>النقر على تصنيف يفتح صفحته مباشرة بدل لوحة فرعية.</li></ul></div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="image-slot.js"></script>
+<script src="store-cards.js"></script>
+<script>
+const TYPE = [['كليم',48],['شاج',36],['فينتيج',29],['صوف طبيعي',72],['جوت ونباتي',18],['عصري هندسي',45],['قطن مغسول',24],['دائري',16],['ممرات',31]];
+const ROOM = [['المجلس',128],['غرفة المعيشة',96],['غرفة النوم',74],['غرفة الطعام',52],['غرفة الأطفال',33],['المدخل والممرات',41]];
+const COLOR = [['بيج','#C9B58E'],['رمادي','#9A958B'],['أخضر سيج','#5E6B5A'],['أزرق','#16213A'],['تيراكوتا','#B98E6B'],['كريمي','#EDE9E2'],['فحمي','#2C2925']];
+const SIZE = ['80×150','120×170','160×230','200×290','240×340','300×400','دائري','ممر'];
+const OFFERS = [['تخفيضات حتى 40%','sale'],['وصل حديثاً','new'],['الأكثر مبيعاً',''],['تصفية المخزون','']];
+const ROOMTILES = [['المجلس','room-a-majlis'],['غرفة المعيشة','room-a-living'],['غرفة النوم','room-a-bed'],['غرفة الأطفال','room-a-kids']];
+
+function navMega(active, mid){
+  const A = n => active===n ? ' class="active"' : '';
+  return `<nav class="snav" style="position:static"><div class="wrap"><div class="row">
+    <a class="logo" href="Home.html">رُقعة<small>RUGAT · CARPETS</small></a>
+    <div class="links">
+      <a href="Home.html">الرئيسية</a>
+      <a href="Shop.html" class="open">السجاد ${icon('chevDown')}</a>
+      <a href="#">تسوّق حسب الغرفة</a>
+      <a href="#">العروض</a>
+      <a href="#">إلهام</a>
+    </div>
+    <div class="tools">
+      <button class="icon-btn" aria-label="بحث">${icon('search')}</button>
+      <button class="icon-btn" aria-label="المفضلة">${icon('heart')}</button>
+      <button class="icon-btn" aria-label="حسابي">${icon('user')}</button>
+      <button class="icon-btn" aria-label="السلة">${icon('cart')}<span class="cnt">3</span></button>
+    </div>
+  </div></div></nav>`;
+}
+
+function linkCol(title, ic, items, withCount){
+  const links = items.map(it=>`<a href="Shop.html">${it[0]}${withCount?`<span class="cnt">${it[1]}</span>`:''}</a>`).join('');
+  return `<div class="mcol"><h5><span class="ic">${icon(ic)}</span>${title}</h5>${links}<a class="allbtn" href="Shop.html">عرض الكل ${icon('arrowL')}</a></div>`;
+}
+function colorCol(){
+  const links = COLOR.map(c=>`<a href="Shop.html"><span class="dot" style="background:${c[1]}"></span>${c[0]}</a>`).join('');
+  return `<div class="mcol"><h5><span class="ic">${icon('swatch')}</span>اللون</h5>${links}</div>`;
+}
+function sizeCol(){
+  const pills = SIZE.map(s=>`<a href="Shop.html"><span dir="ltr">${s}</span></a>`).join('');
+  return `<div class="mcol"><h5><span class="ic">${icon('ruler')}</span>المقاس</h5><div class="size-pills">${pills}</div></div>`;
+}
+function offersCol(){
+  const links = OFFERS.map(o=>`<a class="offlink" href="Shop.html">${o[0]}${o[1]?` <span class="badge badge-${o[1]}" style="margin-inline-start:6px">${o[1]==='sale'?'خصم':'جديد'}</span>`:''}</a>`).join('');
+  return `<div class="mcol"><h5><span class="ic">${icon('sparkle')}</span>العروض</h5>${links}</div>`;
+}
+function promo(id, lg){
+  return `<a class="mpromo ${lg?'mpromo-lg':''}" href="Shop.html"><image-slot id="${id}" placeholder="صورة ترويجية"></image-slot><div class="scrim"></div>
+    <div><span class="eyebrow">مجموعة موسمية</span><b>مجموعة الأطلس · شتاء 2026</b><span class="btn btn-accent btn-sm">اكتشفها</span></div></a>`;
+}
+function roomTiles(prefix){
+  return ROOMTILES.map((r,i)=>`<a class="room-tile" href="Shop.html"><image-slot id="${prefix}-${i}" placeholder="${r[0]}"></image-slot><div class="scrim"></div><span class="t">${r[0]}</span></a>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelectorAll('[data-nav-mega]').forEach(el=>{ el.innerHTML = navMega(el.getAttribute('data-active'), el.getAttribute('data-nav-mega')); });
+
+  // A — wide 5 cols + promo, room rail below
+  document.getElementById('mega-a').innerHTML =
+    linkCol('النوع','grid',TYPE,true) + linkCol('الغرفة','bag',ROOM,true) + colorCol() + sizeCol() + offersCol() + promo('mega-a-promo');
+  document.getElementById('rooms-a').innerHTML = roomTiles('rta');
+
+  // B — two grouped link columns + large promo
+  document.getElementById('mega-b').innerHTML =
+    `<div class="grp">${linkCol('النوع','grid',TYPE,true)}${sizeCol()}</div>` +
+    `<div class="grp">${linkCol('الغرفة','bag',ROOM,true)}${colorCol()}${offersCol()}</div>` +
+    promo('mega-b-promo', true);
+
+  // C — compact list + image rail
+  const items = [['النوع','grid'],['الغرفة','bag'],['اللون','swatch'],['المقاس','ruler'],['العروض','sparkle'],['كل السجاد','filter']];
+  const list = items.map((it,i)=>`<a href="Shop.html" class="${i===0?'active':''}"><span class="ci">${icon(it[1])}</span>${it[0]}<span class="arr">${icon('chevLeft')}</span></a>`).join('');
+  const rail = [['المجلس','الأكثر طلبًا','rc-0'],['غرفة المعيشة','96 منتج','rc-1'],['غرفة النوم','74 منتج','rc-2'],['عرض الموسم','حتى 40%','rc-3'],['وصل حديثاً','جديد','rc-4']]
+    .map(r=>`<a class="rcard" href="Shop.html"><image-slot id="mega-c-${r[2]}" placeholder="${r[0]}"></image-slot><div class="scrim"></div><div><div class="t">${r[0]}</div><div class="c">${r[1]}</div></div></a>`).join('');
+  document.getElementById('mega-c').innerHTML = `<div class="compact-list">${list}</div><div class="rail">${rail}</div>`;
+});
+</script>
+</body>
+</html>

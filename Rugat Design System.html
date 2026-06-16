@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-type="1">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>رُقعة · Rugat — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Playfair+Display:wght@500;600;700&family=Cormorant:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=El+Messiri:wght@400;500;600;700&family=Tajawal:wght@400;500;700&family=Reem+Kufi:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&family=Almarai:wght@400;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="components.css" />
+</head>
+<body>
+
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar">
+  <div class="brand">
+    <div class="mark">ر</div>
+    <div class="wm">رُقعة<small>RUGAT · DESIGN SYSTEM</small></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="switchers">
+    <div class="switch-group">
+      <label>Palette</label>
+      <div class="seg" id="paletteSeg">
+        <button data-theme="1" aria-pressed="true">1</button>
+        <button data-theme="2" aria-pressed="false">2</button>
+        <button data-theme="3" aria-pressed="false">3</button>
+        <button data-theme="4" aria-pressed="false">4</button>
+        <button data-theme="5" aria-pressed="false">5</button>
+      </div>
+    </div>
+    <div class="switch-group">
+      <label>Type</label>
+      <div class="seg" id="typeSeg">
+        <button data-type="1" aria-pressed="true">1</button>
+        <button data-type="2" aria-pressed="false">2</button>
+        <button data-type="3" aria-pressed="false">3</button>
+        <button data-type="4" aria-pressed="false">4</button>
+        <button data-type="5" aria-pressed="false">5</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <!-- ===================== SIDE NAV ===================== -->
+  <nav class="sidenav" id="sidenav">
+    <p class="nav-title">المحتويات · Contents</p>
+    <a href="#brand" class="active"><span class="n">01</span> Brand &amp; Mood</a>
+    <a href="#color"><span class="n">02</span> Color System</a>
+    <a href="#type"><span class="n">03</span> Typography</a>
+    <a href="#space"><span class="n">04</span> Spacing &amp; Layout</a>
+    <a href="#components"><span class="n">05</span> Components</a>
+    <a href="#icons"><span class="n">06</span> Icons &amp; Imagery</a>
+    <a href="#motion"><span class="n">07</span> Motion</a>
+    <a href="#a11y"><span class="n">08</span> Accessibility</a>
+  </nav>
+
+  <!-- ===================== CONTENT ===================== -->
+  <main class="content">
+
+    <!-- ============ 01 · BRAND ============ -->
+    <section class="section" id="brand">
+      <div class="section-head">
+        <span class="kicker">01 — Brand &amp; Mood</span>
+        <h2>رُقعة · Rugat</h2>
+        <p>A premium online destination for handmade &amp; machine-made rugs, built for the Gulf. The personality is that of a calm modern gallery — the chrome stays quiet so the weave, pile and colour of each piece carry the warmth. Confident but never ornate.</p>
+      </div>
+      <div class="panel panel-pad" style="display:grid; grid-template-columns:1.4fr 1fr; gap:24px; align-items:center;">
+        <div>
+          <p style="margin:0 0 16px; font-size:15px; color:var(--chrome-ink-2); max-width:60ch; line-height:1.7;">
+            رُقعة متجرٌ راقٍ للسجاد المنسوج يدويًا والمصنوع آليًا — كليم، شاج، فينتيج، وتصاميم عصرية. نُبقي الواجهة هادئةً ونظيفة لتتحدّث صورة المنتج بدفئها. تجربة عربية أولًا، متجاوبة مع كل الشاشات.
+          </p>
+          <div class="row">
+            <span class="adj">هادئ · Refined</span>
+            <span class="adj">دافئ · Warm</span>
+            <span class="adj">أصيل · Crafted</span>
+          </div>
+        </div>
+        <ul class="principles">
+          <li><b>Photography leads.</b> Product imagery carries the warmth — UI stays neutral.</li>
+          <li><b>No bazaar clichés.</b> No gold frames, no medallion borders. Texture, not ornament.</li>
+          <li><b>Arabic-first.</b> Every component designed RTL-native, LTR-ready.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 02 · COLOR ============ -->
+    <section class="section" id="color">
+      <div class="section-head">
+        <span class="kicker">02 — Color System</span>
+        <h2>خمس لوحات · Five palettes</h2>
+        <p>Five complete schemes — pick one to approve. Use the <b>Palette</b> switcher up top to render any scheme live across the whole component gallery. Below: every token with hex, usage, and a live WCAG contrast audit of the active scheme.</p>
+      </div>
+      <div id="paletteSets"></div>
+
+      <h3 class="subhead">Contrast &amp; WCAG AA — live audit of active palette</h3>
+      <div class="panel panel-pad">
+        <p class="cap" style="margin:0 0 14px;">Ratios computed live from the active scheme. <b>AA</b> = 4.5:1 (normal text) · <b>AA-large/UI</b> = 3:1 (≥24px / bold ≥18.66px / UI) · <b>AAA</b> = 7:1.</p>
+        <table class="contrast-table">
+          <thead><tr><th>Pair</th><th>Sample</th><th>Ratio</th><th>Normal text</th><th>Large / UI</th></tr></thead>
+          <tbody id="contrastBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 03 · TYPOGRAPHY ============ -->
+    <section class="section" id="type">
+      <div class="section-head">
+        <span class="kicker">03 — Typography</span>
+        <h2>Type system</h2>
+        <p>Five Arabic + Latin pairings. Use the <b>Type</b> switcher to preview any pairing live on the scale below. Each pairing lists a display face (headings) and a body face; the Latin face is listed first and the browser falls through to the Arabic face per-script.</p>
+      </div>
+      <div id="pairingCards" class="grid-auto" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); margin-bottom:22px;"></div>
+
+      <h3 class="subhead">Type scale — live in active pairing</h3>
+      <div class="live-theme framed" data-theme="1">
+        <div id="typeScale" class="stack" style="gap:20px;"></div>
+        <hr style="border:0; border-top:1px solid var(--c-border); margin:24px 0;" />
+        <div class="row-t" style="gap:34px;">
+          <div>
+            <span class="state-tag">الأرقام · Numerals (both supported)</span>
+            <div style="font-family:var(--font-body); font-size:15px; color:var(--c-text); line-height:2;">
+              غربية / Western: <b>1٬234٫50 ر.س</b><br/>
+              شرقية / Eastern: <b>١٬٢٣٤٫٥٠ ر.س</b>
+            </div>
+          </div>
+          <div>
+            <span class="state-tag">RTL specifics</span>
+            <div style="font-family:var(--font-body); font-size:13px; color:var(--c-muted); line-height:1.8; max-width:42ch;">
+              letter-spacing disabled for Arabic · tabular-nums on prices · mixed runs use <span class="mono">dir="auto"</span> · prices read <span class="mono">1٬234 ر.س</span> with the symbol trailing.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · SPACING & LAYOUT ============ -->
+    <section class="section" id="space">
+      <div class="section-head">
+        <span class="kicker">04 — Spacing &amp; Layout</span>
+        <h2>Spacing, grid &amp; elevation</h2>
+        <p>An 8px base unit (with a 4px half-step) keeps rhythm consistent. Below: the spacing scale, radius scale, responsive grid, breakpoints, and a four-level elevation system.</p>
+      </div>
+      <div class="grid-auto" style="grid-template-columns:1fr 1fr; gap:18px;">
+        <div class="panel panel-pad">
+          <h3 class="subhead" style="margin-top:0;">Spacing scale · 8px base</h3>
+          <div id="spaceScale" class="stack" style="gap:9px;"></div>
+        </div>
+        <div class="stack" style="gap:18px;">
+          <div class="panel panel-pad">
+            <h3 class="subhead" style="margin-top:0;">Radius</h3>
+            <div id="radiusScale" class="row"></div>
+          </div>
+          <div class="panel panel-pad">
+            <h3 class="subhead" style="margin-top:0;">Breakpoints</h3>
+            <table class="contrast-table"><tbody>
+              <tr><td><b>Mobile</b></td><td class="mono">&lt; 640px</td><td class="cap">1 col · 16px gutters</td></tr>
+              <tr><td><b>Tablet</b></td><td class="mono">640–1024px</td><td class="cap">2–3 col · 20px</td></tr>
+              <tr><td><b>Desktop</b></td><td class="mono">&gt; 1024px</td><td class="cap">4 col · 24px · max 1280px</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+      </div>
+      <h3 class="subhead">Product grid — 12-col, 24px gutter, max-width 1280px</h3>
+      <div class="panel panel-pad">
+        <div id="gridDemo" style="display:grid; grid-template-columns:repeat(12,1fr); gap:10px;"></div>
+        <p class="cap" style="margin:12px 0 0;">Catalogue maps 12 columns → 4 cards desktop (3 cols each) · 3 cards tablet · 2 cards mobile. Container max-width 1280px, side padding 16/24/32px.</p>
+      </div>
+      <h3 class="subhead">Elevation</h3>
+      <div id="shadowScale" class="row-t" style="gap:20px;"></div>
+    </section>
+
+    <!-- ============ 05 · COMPONENTS ============ -->
+    <section class="section" id="components">
+      <div class="section-head">
+        <span class="kicker">05 — Core Components</span>
+        <h2>Components</h2>
+        <p>Every component renders in the active palette &amp; type pairing, RTL-native. States shown inline. Switch palette/type up top to stress-test contrast and mirroring.</p>
+      </div>
+      <div id="componentsArea"></div>
+    </section>
+
+    <!-- ============ 06 · ICONS & IMAGERY ============ -->
+    <section class="section" id="icons">
+      <div class="section-head">
+        <span class="kicker">06 — Iconography &amp; Imagery</span>
+        <h2>Icons &amp; imagery</h2>
+        <p>A single line icon set at 1.75px stroke; filled variants reserved for active/selected states (e.g. wishlist heart). Photography guidance below.</p>
+      </div>
+      <div id="iconsArea"></div>
+    </section>
+
+    <!-- ============ 07 · MOTION ============ -->
+    <section class="section" id="motion">
+      <div class="section-head">
+        <span class="kicker">07 — Motion</span>
+        <h2>Motion</h2>
+        <p>Quiet, quick, purposeful. Hover feedback is near-instant; lifts and reveals are short; page transitions stay under a third of a second. Everything respects <span class="mono">prefers-reduced-motion</span>.</p>
+      </div>
+      <div id="motionArea"></div>
+    </section>
+
+    <!-- ============ 08 · ACCESSIBILITY ============ -->
+    <section class="section" id="a11y">
+      <div class="section-head">
+        <span class="kicker">08 — Accessibility</span>
+        <h2>Accessibility &amp; RTL rules</h2>
+        <p>Contrast minimums, focus rings, tap targets, and the bidi rules that keep mixed Arabic + Latin + number text correct.</p>
+      </div>
+      <div id="a11yArea"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- floating active-theme readout -->
+<div class="theme-readout">
+  <span class="dot"></span>
+  <span>Palette <b id="roPal">1</b> · <span id="roPalName">Modern Gallery</span></span>
+  <span class="sep"></span>
+  <span>Type <b id="roType">1</b> · <span id="roTypeName">Fraunces + Readex</span></span>
+  <span class="sep"></span>
+  <span class="approve">approve one of each →</span>
+</div>
+
+<script src="data.js"></script>
+<script src="gallery.js"></script>
+<script src="ds-app.js"></script>
+</body>
+</html>

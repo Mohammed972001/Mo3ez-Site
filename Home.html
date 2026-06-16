@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-type="4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>رُقعة — الرئيسية · 3 تصاميم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="store.css" />
+<style>
+/* ---- Home-specific hero & editorial layouts ---- */
+.hero-full { position:relative; min-height:600px; display:flex; align-items:center; isolation:isolate; }
+.hero-full image-slot { position:absolute; inset:0; z-index:-2; }
+.hero-full .scrim { position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(290deg, rgba(46,41,37,.18) 0%, rgba(46,41,37,.62) 70%, rgba(46,41,37,.78) 100%); }
+.hero-full .pin { max-width:48ch; color:#fff; }
+.hero-full .kick { font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:#fff; opacity:.9; display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+.hero-full .kick::before { content:""; width:26px; height:1.5px; background:#fff; opacity:.7; }
+.hero-full h1 { font-size:54px; line-height:1.04; letter-spacing:-.015em; }
+.hero-full p { font-size:17px; opacity:.92; margin:16px 0 26px; max-width:42ch; }
+.hero-full .ctas { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-full .meta { margin-top:22px; font-size:13px; opacity:.82; display:flex; gap:18px; flex-wrap:wrap; }
+.hero-full .meta span { display:flex; align-items:center; gap:7px; }
+.hero-full .meta svg { width:16px; height:16px; }
+
+/* split hero (B) */
+.hero-split { display:grid; grid-template-columns:1.05fr .95fr; min-height:600px; }
+.hero-split .txt { padding:64px; display:flex; flex-direction:column; justify-content:center; background:var(--c-surface); }
+.hero-split .kick { font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--c-accent-ink); display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+.hero-split .kick::before { content:""; width:26px; height:1.5px; background:var(--c-accent); }
+.hero-split h1 { font-size:50px; line-height:1.05; letter-spacing:-.015em; }
+.hero-split p { font-size:16px; color:var(--c-muted); margin:16px 0 26px; max-width:40ch; }
+.hero-split .ctas { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-split .feat { position:relative; isolation:isolate; display:flex; align-items:flex-end; padding:30px; }
+.hero-split .feat image-slot { position:absolute; inset:0; z-index:-2; }
+.hero-split .feat .fcard { background:color-mix(in srgb, var(--c-bg) 94%, transparent); backdrop-filter:blur(6px); border:1px solid var(--c-border);
+  border-radius:16px; padding:18px 20px; width:min(330px,100%); box-shadow:var(--sh-lg); }
+.hero-split .feat .fcard .ttl { font-family:var(--font-display); font-size:18px; font-weight:600; }
+.hero-split .feat .fcard .cap { font-size:12px; color:var(--c-muted); margin-top:2px; }
+.hero-split .feat .fcard .b { display:flex; align-items:center; justify-content:space-between; margin-top:13px; gap:12px; }
+
+/* minimal gallery hero (C) */
+.hero-min { text-align:center; padding:62px 0 30px; }
+.hero-min .kick { font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--c-accent-ink); margin-bottom:18px; }
+.hero-min h1 { font-size:58px; line-height:1.02; letter-spacing:-.02em; max-width:18ch; margin:0 auto; }
+.hero-min p { font-size:16px; color:var(--c-muted); margin:18px auto 26px; max-width:52ch; }
+.hero-min .ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.gallery-row { display:grid; grid-template-columns:1fr 1.3fr 1fr; gap:18px; align-items:center; }
+.gallery-row image-slot { border-radius:16px; }
+.gallery-row .g1 { aspect-ratio:3/4; }
+.gallery-row .g2 { aspect-ratio:4/5; }
+.gallery-row .g3 { aspect-ratio:3/4; }
+
+/* asymmetric editorial grid (B bestsellers) */
+.editorial { display:grid; grid-template-columns:1.4fr 1fr 1fr; grid-auto-rows:1fr; gap:20px; }
+.editorial .feature { grid-row:span 2; position:relative; border-radius:16px; overflow:hidden; isolation:isolate; display:flex; align-items:flex-end; padding:26px; color:#fff; min-height:520px; }
+.editorial .feature image-slot { position:absolute; inset:0; z-index:-2; }
+.editorial .feature .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(46,41,37,.8), transparent 58%); }
+.editorial .feature h3 { font-size:26px; line-height:1.1; }
+.editorial .feature p { opacity:.9; font-size:14px; margin:8px 0 16px; max-width:34ch; }
+
+/* asymmetric room layout (B) */
+.room-asym { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:18px; }
+.room-asym .lead { grid-row:span 2; aspect-ratio:auto; }
+
+/* dense combo grid (C) */
+.dense-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+
+@media (max-width:900px){
+  .hero-split { grid-template-columns:1fr; }
+  .hero-split .feat { min-height:360px; }
+  .editorial, .room-asym, .dense-grid, .gallery-row { grid-template-columns:1fr 1fr; }
+  .editorial .feature { grid-row:auto; min-height:340px; grid-column:span 2; }
+  .hero-full h1, .hero-split h1, .hero-min h1 { font-size:38px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ REVIEW DOC CHROME ============ -->
+<header class="doc-top">
+  <div class="mk">ر</div>
+  <div class="ttl">رُقعة — الرئيسية<small>HOME / LANDING</small></div>
+  <nav class="doc-nav">
+    <a href="#va">تصميم A</a><a href="#vb">تصميم B</a><a href="#vc">تصميم C</a><a href="#states">الحالات</a>
+  </nav>
+  <div class="meta">
+    <a class="pill" href="Home.html" style="text-decoration:none;background:var(--c-primary);color:#fff;border-color:var(--c-primary)">الرئيسية</a>
+    <a class="pill" href="Shop.html" style="text-decoration:none">السجاد</a>
+    <a class="pill" href="Product.html" style="text-decoration:none">المنتج</a>
+    <a class="pill" href="Mega Menu.html" style="text-decoration:none">القائمة</a>
+    <span class="pill">Palette <b>4 · Soft Nordic</b></span>
+    <span class="pill">Type <b>4 · Sora + Almarai</b></span>
+    <span class="pill">RTL</span>
+  </div>
+</header>
+
+<div class="doc">
+  <div class="doc-intro">
+    <h1>الصفحة الرئيسية — ثلاثة تصاميم</h1>
+    <p>ثلاثة هياكل مختلفة جذريًا للصفحة الرئيسية، كلها ضمن لوحة «الشمالي الهادئ» ونظام الخطوط Sora + Almarai. اسحب صور سجادك إلى أي إطار صورة. تحت كل تصميم ملاحظات تحوّله للجوال، وفي الأسفل حالات التحميل والفراغ والخطأ.</p>
+  </div>
+
+  <!-- ===================================================== VARIATION A -->
+  <div class="vlabel" id="va">
+    <div class="vk">A</div>
+    <div class="vt">
+      <h2>هيرو بصورة كاملة · أقسام كلاسيكية متتالية</h2>
+      <div class="sub">صورة ملء الشاشة مع نداء واضح للفعل، ثم أقسام مكدّسة بترتيب تقليدي مريح للتصفّح — صف الأكثر مبيعاً قابل للسحب أفقيًا.</div>
+    </div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="home"></div>
+
+      <!-- hero -->
+      <section class="hero-full">
+        <image-slot id="a-hero" placeholder="صورة الهيرو — غرفة معيشة بسجادة"></image-slot>
+        <div class="scrim"></div>
+        <div class="wrap"><div class="pin">
+          <div class="kick">مجموعة 2026</div>
+          <h1>سجادٌ يروي حكاية بيتك</h1>
+          <p>قطعٌ منسوجة يدويًا وتصاميم عصرية مختارة بعناية — لتمنح كل غرفة دفئًا وملمسًا يدوم لسنوات.</p>
+          <div class="ctas">
+            <a class="btn btn-accent btn-lg" href="Shop.html">تسوّق الآن</a>
+            <a class="btn btn-secondary btn-lg" href="#" style="color:#fff;border-color:rgba(255,255,255,.6)">استكشف المجموعات</a>
+          </div>
+          <div class="meta">
+            <span>أكثر من 1,200 تصميم</span><span>توصيل لكل مدن المملكة</span><span>دفع عند الاستلام</span>
+          </div>
+        </div></div>
+      </section>
+
+      <!-- trust strip -->
+      <section class="sec tight surface"><div class="wrap">
+        <div class="trust" id="a-trust"></div>
+      </div></section>
+
+      <!-- best sellers -->
+      <section class="sec"><div class="wrap">
+        <div class="s-head">
+          <div><div class="kick">المفضّل لدى عملائنا</div><h2>الأكثر مبيعاً</h2></div>
+          <a class="more" href="Shop.html">عرض الكل</a>
+        </div>
+        <div class="hscroll" id="a-best"></div>
+      </div></section>
+
+      <!-- shop by room -->
+      <section class="sec surface"><div class="wrap">
+        <div class="s-head">
+          <div><div class="kick">لكل مساحة قطعتها</div><h2>تسوّق حسب الغرفة</h2></div>
+          <a class="more" href="#">كل الغرف</a>
+        </div>
+        <div class="roomgrid pgrid c3" data-rooms id="a-rooms"></div>
+      </div></section>
+
+      <!-- shop by budget -->
+      <section class="sec"><div class="wrap">
+        <div class="s-head">
+          <div><div class="kick">يناسب كل جيب</div><h2>تسوّق حسب الميزانية</h2><p>اختر نطاق سعرك وابدأ من هناك — كل النطاقات شاملة الضريبة.</p></div>
+        </div>
+        <div class="budget-band" id="a-budget"></div>
+      </div></section>
+
+      <!-- lifestyle / inspiration -->
+      <section class="sec surface"><div class="wrap">
+        <div class="s-head">
+          <div><div class="kick">من بيوت عملائنا</div><h2>إلهام لمساحتك</h2></div>
+          <a class="more" href="#">مدوّنة الإلهام</a>
+        </div>
+        <div class="inspo">
+          <div class="big">
+            <image-slot id="a-inspo-1" placeholder="مشهد لايف ستايل كبير"></image-slot>
+            <div class="scrim"></div>
+            <div><h3>كيف تختار مقاس السجادة لمجلسك؟</h3><p>دليل سريع لاختيار المقاس والملمس المناسبين لمساحتك.</p><a class="btn btn-accent" href="#">اقرأ الدليل</a></div>
+          </div>
+          <div class="col">
+            <div class="mini"><image-slot id="a-inspo-2" placeholder="مشهد صغير"></image-slot><div class="scrim"></div><h4>طبقات الكليم</h4></div>
+            <div class="mini"><image-slot id="a-inspo-3" placeholder="مشهد صغير"></image-slot><div class="scrim"></div><h4>دفء غرفة النوم</h4></div>
+          </div>
+        </div>
+      </div></section>
+
+      <!-- limited-time offers -->
+      <section class="sec"><div class="wrap">
+        <div class="offers-band">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:22px">
+            <div>
+              <div class="kick" style="color:#fff;opacity:.85">عرض ينتهي قريباً</div>
+              <h2 style="font-size:30px;color:#fff">تخفيضات لفترة محدودة — حتى 40%</h2>
+            </div>
+            <div class="countdown" data-countdown>
+              <div class="cd-unit"><b data-d>01</b><span>يوم</span></div>
+              <div class="cd-unit"><b data-h>06</b><span>ساعة</span></div>
+              <div class="cd-unit"><b data-m>24</b><span>دقيقة</span></div>
+              <div class="cd-unit"><b data-s>00</b><span>ثانية</span></div>
+            </div>
+          </div>
+          <div class="pgrid c4" id="a-offers" data-quick style="--c-bg:#fff"></div>
+        </div>
+      </div></section>
+
+      <!-- shop by style -->
+      <section class="sec surface"><div class="wrap">
+        <div class="s-head"><div><div class="kick">طابعك الخاص</div><h2>تسوّق حسب الستايل</h2></div></div>
+        <div class="style-grid" id="a-styles"></div>
+      </div></section>
+
+      <!-- promo banner -->
+      <section class="sec"><div class="wrap">
+        <div class="promo-banner">
+          <image-slot id="a-promo" placeholder="بانر ترويجي عريض"></image-slot>
+          <div class="scrim"></div>
+          <div class="pin">
+            <div class="kick" style="color:#fff;opacity:.85">عملاء جدد</div>
+            <h2>خصم 15% على طلبك الأول</h2>
+            <p>اشترك معنا واحصل على خصم فوري + استشارة مجانية لاختيار المقاس المناسب.</p>
+            <a class="btn btn-accent btn-lg" href="#">احصل على الخصم</a>
+          </div>
+        </div>
+      </div></section>
+
+      <!-- newsletter -->
+      <section class="sec"><div class="wrap">
+        <div class="news">
+          <div>
+            <h2>انضم لنشرة رُقعة</h2>
+            <p>وصل حديثاً، عروض حصرية، ونصائح تنسيق — مرة واحدة أسبوعياً، بلا إزعاج.</p>
+          </div>
+          <div>
+            <div class="form">
+              <input class="input" type="email" placeholder="بريدك الإلكتروني" dir="ltr" style="text-align:right" />
+              <button class="btn btn-primary">اشترك</button>
+            </div>
+            <div class="fine">بالاشتراك أنت توافق على سياسة الخصوصية. يمكنك إلغاء الاشتراك في أي وقت.</div>
+          </div>
+        </div>
+      </div></section>
+
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx">
+      <b>على الجوال — تصميم A</b>
+      <ul>
+        <li>الهيرو يصبح بارتفاع 78vh، العنوان 32px، والزرّان يمتدّان بعرض كامل فوق بعضهما.</li>
+        <li>القائمة العلوية تنطوي في زر «همبرغر»؛ تبقى أيقونتا البحث والسلة ظاهرتين.</li>
+        <li>«الأكثر مبيعاً» يبقى تمريرًا أفقيًا (بطاقتان ونصف ظاهرة)؛ الغرف عمودان؛ الميزانية والستايل عمود واحد.</li>
+        <li>شريط الثقة يتحول إلى صفّين 2×2، والنشرة تتراص عموديًا.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================================================== VARIATION B -->
+  <div class="vlabel alt" id="vb">
+    <div class="vk">B</div>
+    <div class="vt">
+      <h2>هيرو مقسوم · شبكات تحريرية غير متماثلة</h2>
+      <div class="sub">النص في جهة ومنتج مميّز في الجهة الأخرى، يليه تخطيط «مجلة» بقطعة بطل كبيرة تجاور شبكة أصغر — إيقاع بصري غير متماثل.</div>
+    </div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="home"></div>
+
+      <!-- split hero -->
+      <section class="hero-split">
+        <div class="txt">
+          <div class="kick">منسوج يدويًا · صوف طبيعي 100%</div>
+          <h1>قطعةٌ واحدة تُغيّر الغرفة بالكامل</h1>
+          <p>اكتشف كليم أطلس المغربي — منسوج على نول تقليدي بألوان نباتية تدوم. عددٌ محدود هذا الموسم.</p>
+          <div class="ctas">
+            <a class="btn btn-primary btn-lg" href="Product.html">تسوّق القطعة</a>
+            <a class="btn btn-secondary btn-lg" href="Shop.html">كل المجموعة</a>
+          </div>
+        </div>
+        <div class="feat">
+          <image-slot id="b-hero" placeholder="صورة المنتج المميّز"></image-slot>
+          <div class="fcard">
+            <div class="ttl">كليم أطلس المغربي</div>
+            <div class="cap">كليم · صوف · <span dir="ltr">200×290</span> سم</div>
+            <div class="b">
+              <span class="price"><span class="now sale tnum">1,290 <span class="sar">ر.س</span></span><span class="was tnum">1,850 <span class="sar">ر.س</span></span></span>
+              <a class="btn btn-accent btn-sm" href="Product.html">عرض</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- editorial bestsellers -->
+      <section class="sec"><div class="wrap">
+        <div class="s-head"><div><div class="kick">المفضّل لدى عملائنا</div><h2>الأكثر مبيعاً</h2></div><a class="more" href="Shop.html">عرض الكل</a></div>
+        <div class="editorial">
+          <div class="feature">
+            <image-slot id="b-feat" placeholder="قطعة البطل"></image-slot>
+            <div class="scrim"></div>
+            <div>
+              <span class="badge badge-new" style="margin-bottom:10px">الأكثر طلباً</span>
+              <h3>فارسية كلاسيكية — قطع نادرة</h3>
+              <p>عقدٌ يدوي كثيف وألوان عميقة تليق بالمجالس الفخمة.</p>
+              <a class="btn btn-accent" href="Product.html">اكتشف القطعة</a>
+            </div>
+          </div>
+          <div class="pgrid" id="b-best" style="grid-template-columns:1fr 1fr;grid-column:span 2;gap:20px"></div>
+        </div>
+      </div></section>
+
+      <!-- asymmetric rooms -->
+      <section class="sec surface"><div class="wrap">
+        <div class="s-head"><div><div class="kick">لكل مساحة قطعتها</div><h2>تسوّق حسب الغرفة</h2></div></div>
+        <div class="room-asym">
+          <a class="ccard lead" href="#"><image-slot id="b-room-lead" placeholder="المجلس"></image-slot><div class="scrim"></div><div class="cap"><div class="t">المجلس</div><div class="c">128 منتج</div></div></a>
+          <a class="ccard" href="#"><image-slot id="b-room-2" placeholder="المعيشة"></image-slot><div class="scrim"></div><div class="cap"><div class="t">غرفة المعيشة</div><div class="c">96 منتج</div></div></a>
+          <a class="ccard" href="#"><image-slot id="b-room-3" placeholder="النوم"></image-slot><div class="scrim"></div><div class="cap"><div class="t">غرفة النوم</div><div class="c">74 منتج</div></div></a>
+          <a class="ccard" href="#"><image-slot id="b-room-4" placeholder="الطعام"></image-slot><div class="scrim"></div><div class="cap"><div class="t">غرفة الطعام</div><div class="c">52 منتج</div></div></a>
+          <a class="ccard" href="#"><image-slot id="b-room-5" placeholder="المدخل"></image-slot><div class="scrim"></div><div class="cap"><div class="t">المدخل والممرات</div><div class="c">41 منتج</div></div></a>
+        </div>
+      </div></section>
+
+      <!-- budget as wide split + inspiration combined editorial -->
+      <section class="sec"><div class="wrap">
+        <div class="s-head"><div><div class="kick">يناسب كل جيب</div><h2>تسوّق حسب الميزانية</h2></div></div>
+        <div class="budget-band" id="b-budget"></div>
+      </div></section>
+
+      <!-- inspiration offset -->
+      <section class="sec surface"><div class="wrap">
+        <div class="inspo" style="grid-template-columns:1fr 1.3fr">
+          <div class="col">
+            <div class="mini"><image-slot id="b-inspo-2" placeholder="مشهد"></image-slot><div class="scrim"></div><h4>تنسيق الألوان الترابية</h4></div>
+            <div class="mini"><image-slot id="b-inspo-3" placeholder="مشهد"></image-slot><div class="scrim"></div><h4>سجاد فوق سجاد</h4></div>
+          </div>
+          <div class="big">
+            <image-slot id="b-inspo-1" placeholder="مشهد كبير"></image-slot>
+            <div class="scrim"></div>
+            <div><h3>غرفٌ من بيوت حقيقية</h3><p>شاهد كيف نسّق عملاؤنا قطع رُقعة في بيوتهم — واستلهم.</p><a class="btn btn-accent" href="#">تصفّح المعرض</a></div>
+          </div>
+        </div>
+      </div></section>
+
+      <!-- offers accent -->
+      <section class="sec"><div class="wrap">
+        <div class="offers-band accentbg">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:22px">
+            <div><div class="kick" style="color:var(--c-on-accent);opacity:.8">عرض ينتهي قريباً</div><h2 style="font-size:30px">تخفيضات لفترة محدودة</h2></div>
+            <a class="btn btn-primary btn-lg" href="Shop.html">كل العروض</a>
+          </div>
+          <div class="pgrid c4" id="b-offers" style="--c-bg:#fff"></div>
+        </div>
+      </div></section>
+
+      <!-- style grid offset -->
+      <section class="sec surface"><div class="wrap">
+        <div class="s-head"><div><div class="kick">طابعك الخاص</div><h2>تسوّق حسب الستايل</h2></div></div>
+        <div class="style-grid" id="b-styles"></div>
+      </div></section>
+
+      <!-- promo + newsletter side by side -->
+      <section class="sec"><div class="wrap">
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px">
+          <div class="promo-banner" style="min-height:auto">
+            <image-slot id="b-promo" placeholder="بانر ترويجي"></image-slot>
+            <div class="scrim"></div>
+            <div class="pin"><div class="kick" style="color:#fff;opacity:.85">عملاء جدد</div><h2 style="font-size:30px">خصم 15% على طلبك الأول</h2><a class="btn btn-accent" href="#" style="margin-top:14px">احصل على الخصم</a></div>
+          </div>
+          <div class="news" style="grid-template-columns:1fr;padding:32px">
+            <div><h2 style="font-size:24px">نشرة رُقعة</h2><p>وصل حديثاً وعروض حصرية أسبوعياً.</p>
+              <div class="form" style="margin-top:16px"><input class="input" type="email" placeholder="بريدك الإلكتروني" dir="ltr" style="text-align:right" /><button class="btn btn-primary">اشترك</button></div>
+            </div>
+          </div>
+        </div>
+      </div></section>
+
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx">
+      <b>على الجوال — تصميم B</b>
+      <ul>
+        <li>الهيرو المقسوم يصبح عموديًا: النص أولًا ثم بطاقة المنتج المميّز أسفله بصورة بنسبة 4:3.</li>
+        <li>الشبكة التحريرية تنهار: قطعة البطل بعرض كامل في الأعلى، ثم بطاقتان في كل صف.</li>
+        <li>شبكة الغرف غير المتماثلة تصبح تمريرًا أفقيًا بنسب موحّدة 1:1.</li>
+        <li>البانر والنشرة يتراصّان عموديًا بدل التجاور.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================================================== VARIATION C -->
+  <div class="vlabel" id="vc">
+    <div class="vk">C</div>
+    <div class="vt">
+      <h2>هيرو معرض بسيط · مساحات بيضاء واسعة · أقسام أقل وأكثف</h2>
+      <div class="sub">عنوان مركزي هادئ فوق صفّ معرض من ثلاث صور، ثم عدد أقل من الأقسام لكنها أكثف — شبكة منتجات 4 أعمدة وروابط مدمجة.</div>
+    </div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="home"></div>
+
+      <!-- minimal gallery hero -->
+      <section class="sec" style="padding-top:0"><div class="wrap">
+        <div class="hero-min">
+          <div class="kick">رُقعة · مجموعة 2026</div>
+          <h1>دفءٌ منسوج بعناية</h1>
+          <p>مجموعة مختارة من السجاد اليدوي والعصري — قطعٌ قليلة، اختيارٌ دقيق.</p>
+          <div class="ctas"><a class="btn btn-primary btn-lg" href="Shop.html">تسوّق المجموعة</a><a class="btn btn-ghost btn-lg" href="#">شاهد القصة</a></div>
+        </div>
+        <div class="gallery-row">
+          <image-slot id="c-hero-1" class="g1" placeholder="معرض ١"></image-slot>
+          <image-slot id="c-hero-2" class="g2" placeholder="معرض ٢ — الأكبر"></image-slot>
+          <image-slot id="c-hero-3" class="g3" placeholder="معرض ٣"></image-slot>
+        </div>
+      </div></section>
+
+      <!-- dense combined: bestsellers + new, 4-col -->
+      <section class="sec"><div class="wrap">
+        <div class="s-head">
+          <div><div class="kick">مختاراتنا</div><h2>الأكثر مبيعاً ووصل حديثاً</h2></div>
+          <div class="chips"><button class="chip active">الكل</button><button class="chip">الأكثر مبيعاً</button><button class="chip">وصل حديثاً</button></div>
+        </div>
+        <div class="dense-grid" id="c-best"></div>
+      </div></section>
+
+      <!-- rooms as compact list (roomcard) + budget combined band -->
+      <section class="sec surface"><div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:42px">
+          <div>
+            <div class="s-head" style="margin-bottom:16px"><div><div class="kick">تصفّح سريع</div><h2 style="font-size:24px">حسب الغرفة</h2></div></div>
+            <div class="stack" id="c-rooms" style="gap:12px"></div>
+          </div>
+          <div>
+            <div class="s-head" style="margin-bottom:16px"><div><div class="kick">يناسب كل جيب</div><h2 style="font-size:24px">حسب الميزانية</h2></div></div>
+            <div class="budget-band" id="c-budget" style="grid-template-columns:1fr 1fr"></div>
+          </div>
+        </div>
+      </div></section>
+
+      <!-- single full-bleed inspiration -->
+      <section class="sec"><div class="wrap">
+        <div class="promo-banner" style="min-height:380px">
+          <image-slot id="c-inspo" placeholder="مشهد إلهام عريض"></image-slot>
+          <div class="scrim" style="background:linear-gradient(to top,rgba(46,41,37,.78),transparent 60%)"></div>
+          <div class="pin" style="align-self:flex-end"><div class="kick" style="color:#fff;opacity:.85">إلهام</div><h2>غرفٌ تنبض بالدفء</h2><p>استلهم من بيوت عملائنا — وابدأ من القطعة المناسبة.</p><a class="btn btn-accent" href="#">تصفّح المعرض</a></div>
+        </div>
+      </div></section>
+
+      <!-- offers compact row + style chips -->
+      <section class="sec"><div class="wrap">
+        <div class="s-head">
+          <div><div class="kick">ينتهي قريباً</div><h2>تخفيضات لفترة محدودة</h2></div>
+          <div class="countdown" data-countdown style="--c-bg:transparent">
+            <div class="cd-unit" style="background:var(--c-surface);color:var(--c-text)"><b data-d>01</b><span>يوم</span></div>
+            <div class="cd-unit" style="background:var(--c-surface);color:var(--c-text)"><b data-h>06</b><span>ساعة</span></div>
+            <div class="cd-unit" style="background:var(--c-surface);color:var(--c-text)"><b data-m>24</b><span>دقيقة</span></div>
+            <div class="cd-unit" style="background:var(--c-surface);color:var(--c-text)"><b data-s>00</b><span>ثانية</span></div>
+          </div>
+        </div>
+        <div class="dense-grid" id="c-offers" data-quick></div>
+        <div class="style-grid" id="c-styles" style="grid-template-columns:repeat(6,1fr);margin-top:34px"></div>
+      </div></section>
+
+      <!-- minimal inline newsletter -->
+      <section class="sec surface"><div class="wrap" style="max-width:760px;text-align:center">
+        <h2 style="font-size:26px">انضم لنشرة رُقعة</h2>
+        <p style="color:var(--c-muted);margin:8px 0 18px">وصل حديثاً وعروض حصرية — مرة أسبوعياً.</p>
+        <div class="form" style="display:flex;gap:10px;max-width:460px;margin:0 auto"><input class="input" type="email" placeholder="بريدك الإلكتروني" dir="ltr" style="text-align:right" /><button class="btn btn-primary">اشترك</button></div>
+      </div></section>
+
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx">
+      <b>على الجوال — تصميم C</b>
+      <ul>
+        <li>صفّ المعرض الثلاثي يصبح تمريرًا أفقيًا بنسبة 3:4 موحّدة تحت العنوان المركزي.</li>
+        <li>الشبكة الكثيفة (4 أعمدة) تصبح عمودين؛ شرائح الفلترة قابلة للتمرير أفقيًا.</li>
+        <li>قسم «الغرفة + الميزانية» المزدوج يصبح عمودًا واحدًا متتاليًا.</li>
+        <li>العدّاد التنازلي ينتقل أسفل العنوان بدل محاذاته يمينًا.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================================================== STATES -->
+  <div class="states-head" id="states">
+    <span class="vk">الحالات · STATES</span>
+    <h2>التحميل · الفراغ · الخطأ</h2>
+    <p style="color:var(--doc-muted);max-width:70ch;margin:8px 0 0">حالات مشتركة عبر تصاميم الرئيسية الثلاثة (تظهر مرة واحدة).</p>
+  </div>
+  <div class="states-grid">
+    <div class="state-card">
+      <div class="sc-top"><span class="dotx"></span>تحميل — هيكل بطاقات (Skeleton)</div>
+      <div class="sc-body"><div class="pgrid c2" id="st-skel" style="gap:16px"></div></div>
+    </div>
+    <div class="state-card">
+      <div class="sc-top err"><span class="dotx"></span>خطأ — تعذّر تحميل المنتجات</div>
+      <div class="sc-body">
+        <div class="empty">
+          <div class="ill" style="color:var(--c-sale)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+          <h4>تعذّر تحميل المحتوى</h4>
+          <p>حدث خطأ أثناء جلب المنتجات. تحقّق من اتصالك ثم أعد المحاولة.</p>
+          <button class="btn btn-primary">إعادة المحاولة</button>
+        </div>
+      </div>
+    </div>
+    <div class="state-card">
+      <div class="sc-top"><span class="dotx"></span>فراغ — لا توجد عناصر في المفضلة</div>
+      <div class="sc-body">
+        <div class="empty">
+          <div class="ill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5 4.5 13a5 5 0 0 1 7-7l.5.5.5-.5a5 5 0 0 1 7 7Z"/></svg></div>
+          <h4>قائمة المفضلة فارغة</h4>
+          <p>لم تُضِف أي سجادة بعد. تصفّح المجموعة واحفظ ما يعجبك هنا.</p>
+          <a class="btn btn-accent" href="Shop.html">ابدأ التصفّح</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="image-slot.js"></script>
+<script src="store-cards.js"></script>
+<script>
+const POOL = [
+  {id:'kilim-atlas', title:'كليم أطلس المغربي', eyebrow:'كليم · صوف', price:1290, was:1850, rating:4.8, count:214, badge:'sale', colors:['#B98E6B','#5E6B5A','#2C2925']},
+  {id:'shag-cream',  title:'شاج كريمي ناعم',   eyebrow:'شاج · بوليستر', price:690, rating:4.6, count:132, badge:'best', colors:['#EDE9E2','#B98E6B']},
+  {id:'vintage-wash',title:'فينتيج مغسولة',    eyebrow:'فينتيج · قطن', price:980, was:1290, rating:4.7, count:96, badge:'sale', colors:['#8E7A66','#5E6B5A','#B5503C']},
+  {id:'wool-geo',    title:'صوف هندسي حديث',   eyebrow:'عصري · صوف', price:1650, rating:4.9, count:78, badge:'new', colors:['#2C2925','#B98E6B']},
+  {id:'jute-natural',title:'جوت طبيعي مضفور',  eyebrow:'طبيعي · جوت', price:459, rating:4.4, count:51, colors:['#C9B58E','#837C72']},
+  {id:'persian-cl',  title:'فارسية كلاسيكية',  eyebrow:'كلاسيك · صوف', price:3200, was:3850, rating:5.0, count:42, badge:'low', colors:['#7E4A35','#16213A','#B98E6B']},
+  {id:'runner-ait',  title:'ممر آيت ساحلي',    eyebrow:'ممر · صوف', price:540, rating:4.5, count:67, colors:['#5E6B5A','#EDE9E2']},
+  {id:'round-sage',  title:'دائرية سيج',       eyebrow:'دائري · قطن', price:620, rating:4.3, count:38, badge:'new', colors:['#5E6B5A','#B98E6B']},
+];
+const ROOMS = [
+  {id:'room-majlis', title:'المجلس', count:128},
+  {id:'room-living', title:'غرفة المعيشة', count:96},
+  {id:'room-bedroom',title:'غرفة النوم', count:74},
+  {id:'room-dining', title:'غرفة الطعام', count:52},
+  {id:'room-kids',   title:'غرفة الأطفال', count:33},
+  {id:'room-entry',  title:'المدخل والممرات', count:41},
+];
+const STYLES = [
+  {id:'st-boho', t:'بوهيمي', c:'Boho'}, {id:'st-modern', t:'عصري', c:'Modern'}, {id:'st-classic', t:'كلاسيكي', c:'Classic'},
+  {id:'st-moroccan', t:'مغربي', c:'Moroccan'}, {id:'st-minimal', t:'بساطة', c:'Minimal'}, {id:'st-vintage', t:'فينتيج', c:'Vintage'},
+];
+const BUDGETS = [
+  {amt:'تحت 500', lab:'بدايات أنيقة', cnt:'120 منتج', bg:'#5E6B5A'},
+  {amt:'500–1000', lab:'الأكثر رواجاً', cnt:'210 منتج', bg:'#837C72'},
+  {amt:'1000–2000', lab:'قطع مميّزة', cnt:'156 منتج', bg:'#8E7A66'},
+  {amt:'+2000', lab:'فاخر ونادر', cnt:'64 منتج', bg:'#2C2925'},
+];
+
+function fill(id, html){ const e=document.getElementById(id); if(e) e.innerHTML=html; }
+function budgetCards(idp){
+  return BUDGETS.map((b,i)=>`<a class="budget-card" href="Shop.html">
+    <image-slot id="${idp}-bud-${i}" placeholder="${b.amt} ر.س"></image-slot>
+    <div class="scrim" style="background:linear-gradient(to top, ${b.bg}E6, ${b.bg}55)"></div>
+    <div class="amt">${b.amt} <span class="sar">ر.س</span></div><div class="lab">${b.lab}</div><div class="cnt">${b.cnt}</div>
+  </a>`).join('');
+}
+function styleTiles(idp, list){
+  return (list||STYLES).map(s=>`<a class="style-tile" href="Shop.html">
+    <image-slot id="${idp}-${s.id}" placeholder="${s.t}"></image-slot><div class="scrim"></div>
+    <div><div class="t">${s.t}</div><div class="c">${s.c}</div></div></a>`).join('');
+}
+function roomListCard(r, idp){
+  return `<a class="roomcard" href="#"><div class="thumb"><image-slot id="${idp}-${r.id}" placeholder="${r.title}"></image-slot></div>
+    <div><div class="t">${r.title}</div><div class="c">${r.count} منتج</div></div><span class="arr">${icon('arrowL')}</span></a>`;
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // trust
+  const T = [
+    ['truck','شحن مجاني','للطلبات فوق 300 ر.س'],
+    ['shield','إرجاع خلال 14 يوم','استبدال سهل بلا متاعب'],
+    ['check','دفع آمن','مدى · تابي · تمارا · Apple Pay'],
+    ['user','دعم متخصص','استشارة مجانية للمقاسات'],
+  ];
+  fill('a-trust', T.map(t=>`<div class="ti"><div class="ic">${icon(t[0])}</div><div><b>${t[1]}</b><span>${t[2]}</span></div></div>`).join(''));
+
+  // A
+  fill('a-best', POOL.slice(0,6).map(p=>productCard(p,{quick:true,idp:'a-'})).join(''));
+  const aRooms=document.getElementById('a-rooms'); aRooms.setAttribute('data-rooms', JSON.stringify(ROOMS.map(r=>({...r,id:'a-'+r.id}))));
+  fill('a-budget', budgetCards('a'));
+  fill('a-offers', POOL.filter(p=>p.was).concat(POOL.filter(p=>!p.was)).slice(0,4).map(p=>productCard(p,{quick:true,idp:'ao-'})).join(''));
+  fill('a-styles', styleTiles('a'));
+
+  // B
+  fill('b-best', POOL.slice(1,5).map(p=>productCard(p,{idp:'b-'})).join(''));
+  fill('b-budget', budgetCards('b'));
+  fill('b-offers', POOL.filter(p=>p.was).slice(0,4).concat(POOL.slice(0,2)).slice(0,4).map(p=>productCard(p,{idp:'bo-'})).join(''));
+  fill('b-styles', styleTiles('b'));
+
+  // C
+  fill('c-best', POOL.map(p=>productCard(p,{idp:'c-'})).join(''));
+  fill('c-rooms', ROOMS.slice(0,5).map(r=>roomListCard(r,'c')).join(''));
+  fill('c-budget', budgetCards('c'));
+  fill('c-offers', POOL.filter(p=>p.was).concat(POOL.slice(3,5)).slice(0,4).map(p=>productCard(p,{quick:true,idp:'co-'})).join(''));
+  fill('c-styles', styleTiles('c', STYLES));
+
+  // states skeletons
+  fill('st-skel', skelCard()+skelCard());
+
+  // re-hydrate any data-rooms added above + upgrade image-slots
+  hydrateGrids();
+
+  // countdown
+  const target = Date.now() + (30*3600 + 24*60)*1000;
+  function tick(){
+    let s = Math.max(0, Math.floor((target - Date.now())/1000));
+    const d=Math.floor(s/86400); s%=86400; const h=Math.floor(s/3600); s%=3600; const m=Math.floor(s/60); const sec=s%60;
+    const p=n=>String(n).padStart(2,'0');
+    document.querySelectorAll('[data-countdown]').forEach(cd=>{
+      cd.querySelector('[data-d]') && (cd.querySelector('[data-d]').textContent=p(d));
+      cd.querySelector('[data-h]') && (cd.querySelector('[data-h]').textContent=p(h));
+      cd.querySelector('[data-m]') && (cd.querySelector('[data-m]').textContent=p(m));
+      cd.querySelector('[data-s]') && (cd.querySelector('[data-s]').textContent=p(sec));
+    });
+  }
+  tick(); setInterval(tick, 1000);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-type="4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>رُقعة — السجاد · 3 تصاميم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="store.css" />
+<style>
+/* shop banner */
+.shop-banner { position:relative; isolation:isolate; padding:34px 0 30px; min-height:170px; display:flex; align-items:flex-end; }
+.shop-banner image-slot { position:absolute; inset:0; z-index:-2; }
+.shop-banner .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(290deg, rgba(46,41,37,.35), rgba(46,41,37,.7)); }
+.shop-banner .crumbs a, .shop-banner .crumbs .cur, .shop-banner .crumbs { color:rgba(255,255,255,.9); }
+.shop-banner h1 { color:#fff; font-size:36px; line-height:1.1; margin-top:10px; }
+.shop-banner p { color:rgba(255,255,255,.86); margin:6px 0 0; font-size:14px; }
+
+/* sidebar layout (A) */
+.shop-layout { display:grid; grid-template-columns:268px 1fr; gap:32px; align-items:start; }
+.fsidebar { position:sticky; top:90px; background:var(--c-bg); }
+.fgroup { padding:18px 0; border-bottom:1px solid var(--c-border); }
+.fgroup:first-child { padding-top:0; }
+.fgroup > h4 { font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:13px; display:flex; align-items:center; justify-content:space-between; }
+.fgroup .stack { gap:11px; }
+
+/* toolbar */
+.toolbar { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:18px; }
+.toolbar .count { font-size:13.5px; color:var(--c-muted); }
+.toolbar .count b { color:var(--c-text); font-weight:700; }
+.toolbar .sortwrap { margin-inline-start:auto; display:flex; align-items:center; gap:10px; }
+.toolbar .sortwrap > span { font-size:13px; color:var(--c-muted); white-space:nowrap; }
+.toolbar .select-wrap { min-width:200px; }
+.viewtoggle { display:flex; gap:3px; background:var(--c-surface); border:1px solid var(--c-border); border-radius:10px; padding:3px; }
+.viewtoggle button { width:38px; height:34px; border:0; background:transparent; color:var(--c-muted); border-radius:7px; cursor:pointer; display:grid; place-items:center; }
+.viewtoggle button.on { background:var(--c-bg); color:var(--c-text); box-shadow:var(--sh-sm); }
+.viewtoggle svg { width:18px; height:18px; }
+
+/* top filter bar (B) — native popover dropdowns */
+.filterbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding:14px 0; border-block:1px solid var(--c-border); margin-bottom:20px; }
+.fdrop { position:relative; }
+.fdrop > summary { list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-family:var(--font-body);
+  font-size:13.5px; font-weight:600; color:var(--c-text); background:var(--c-bg); border:1px solid var(--c-border); border-radius:10px; padding:9px 14px; }
+.fdrop > summary::-webkit-details-marker { display:none; }
+.fdrop > summary svg { width:15px; height:15px; opacity:.7; transition:transform .2s; }
+.fdrop[open] > summary { border-color:var(--c-text); }
+.fdrop[open] > summary svg { transform:rotate(180deg); }
+.fdrop .pop { position:absolute; inset-block-start:calc(100% + 8px); inset-inline-start:0; z-index:30; width:260px;
+  background:var(--c-bg); border:1px solid var(--c-border); border-radius:14px; box-shadow:var(--sh-lg); padding:16px; }
+.fdrop .pop.wide { width:320px; }
+.filterbar .spacer { flex:1; }
+
+/* masonry (C) */
+.masonry { columns:4; column-gap:20px; }
+.masonry > * { break-inside:avoid; margin-bottom:20px; }
+
+/* drawer (C) */
+.drawer-scrim { position:absolute; inset:0; background:rgba(46,41,37,.45); z-index:90; opacity:0; pointer-events:none; transition:.2s; }
+.drawer-scrim.open { opacity:1; pointer-events:auto; }
+.drawer { position:absolute; inset-block:0; inset-inline-start:0; width:340px; max-width:88%; background:var(--c-bg); z-index:91;
+  transform:translateX(-103%); transition:transform .26s cubic-bezier(.2,.7,.3,1); display:flex; flex-direction:column; box-shadow:var(--sh-xl); }
+[dir="rtl"] .drawer { inset-inline-start:auto; inset-inline-end:0; transform:translateX(103%); }
+.drawer.open { transform:translateX(0); }
+.drawer .dhead { display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--c-border); }
+.drawer .dhead h3 { font-size:18px; }
+.drawer .dbody { padding:6px 20px 20px; overflow-y:auto; flex:1; }
+.drawer .dfoot { padding:16px 20px; border-top:1px solid var(--c-border); display:flex; gap:10px; }
+
+.price-row { display:flex; gap:10px; align-items:center; }
+.price-row .input { padding:9px 11px; }
+.range { width:100%; accent-color:var(--c-primary); margin-top:12px; }
+.range-labels { display:flex; justify-content:space-between; font-size:11.5px; color:var(--c-muted); margin-top:4px; }
+.toggle-row { display:flex; align-items:center; justify-content:space-between; }
+.switch { position:relative; width:44px; height:25px; flex:none; }
+.switch input { position:absolute; opacity:0; }
+.switch .tr { position:absolute; inset:0; background:var(--c-border); border-radius:999px; transition:.18s; }
+.switch .tr::after { content:""; position:absolute; inset-block:3px; inset-inline-start:3px; width:19px; height:19px; background:#fff; border-radius:50%; transition:.18s; box-shadow:var(--sh-sm); }
+.switch input:checked + .tr { background:var(--c-success); }
+.switch input:checked + .tr::after { inset-inline-start:22px; }
+
+.loadmore { display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:36px; }
+.loadmore .bar { width:200px; height:4px; border-radius:999px; background:var(--c-border); overflow:hidden; }
+.loadmore .bar i { display:block; height:100%; width:48%; background:var(--c-primary); border-radius:999px; }
+
+@media (max-width:980px){
+  .shop-layout { grid-template-columns:1fr; }
+  .fsidebar { display:none; }
+  .masonry { columns:2; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-top">
+  <div class="mk">ر</div>
+  <div class="ttl">رُقعة — السجاد<small>SHOP / LISTING</small></div>
+  <nav class="doc-nav"><a href="#va">تصميم A</a><a href="#vb">تصميم B</a><a href="#vc">تصميم C</a><a href="#states">الحالات</a></nav>
+  <div class="meta"><a class="pill" href="Home.html" style="text-decoration:none">الرئيسية</a><a class="pill" href="Shop.html" style="text-decoration:none;background:var(--c-primary);color:#fff;border-color:var(--c-primary)">السجاد</a><a class="pill" href="Product.html" style="text-decoration:none">المنتج</a><a class="pill" href="Mega Menu.html" style="text-decoration:none">القائمة</a><span class="pill">Palette <b>4</b></span><span class="pill">Type <b>4</b></span><span class="pill">RTL</span></div>
+</header>
+
+<div class="doc">
+  <div class="doc-intro">
+    <h1>صفحة السجاد — ثلاثة تصاميم</h1>
+    <p>قائمة منتجات بثلاث طرق تنظيم للفلاتر والشبكة: شريط جانبي + 3 أعمدة، شريط علوي أفقي + 4 أعمدة مع معاينة سريعة، ودرج فلاتر منزلق + شبكة تحريرية «ماسونري». حالات الفراغ والتحميل والخطأ في الأسفل.</p>
+  </div>
+
+  <!-- ===================================================== VARIATION A -->
+  <div class="vlabel" id="va">
+    <div class="vk">A</div>
+    <div class="vt"><h2>شريط فلاتر جانبي · شبكة 3 أعمدة</h2>
+      <div class="sub">الفلاتر دائمة الظهور في عمود جانبي ثابت (يلتصق عند التمرير)، والمنتجات في شبكة من ثلاثة أعمدة مريحة للقراءة.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa/carpets</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="shop"></div>
+      <section class="shop-banner">
+        <image-slot id="shop-a-banner" placeholder="بانر القسم — صورة سجاد"></image-slot>
+        <div class="scrim"></div>
+        <div class="wrap">
+          <nav class="crumbs"><a href="Home.html">الرئيسية</a><span class="sep"></span><span class="cur">السجاد</span></nav>
+          <h1>كل السجاد</h1>
+          <p>كليم، شاج، فينتيج وتصاميم عصرية — منسوجة بعناية لكل غرفة.</p>
+        </div>
+      </section>
+      <section class="sec" style="padding-block:30px"><div class="wrap">
+        <div class="shop-layout">
+          <aside class="fsidebar" id="a-filters"></aside>
+          <div>
+            <div class="chips" id="a-active" style="margin-bottom:14px"></div>
+            <div class="toolbar">
+              <span class="count">عرض <b>1–12</b> من <b>248</b> منتج</span>
+              <div class="sortwrap">
+                <span>ترتيب حسب</span>
+                <div class="select-wrap"><select class="input"><option>الأكثر رواجاً</option><option>الأحدث</option><option>السعر: من الأقل للأعلى</option><option>السعر: من الأعلى للأقل</option><option>الأعلى تقييماً</option></select></div>
+              </div>
+            </div>
+            <div class="pgrid c3" id="a-grid"></div>
+            <div style="display:flex;justify-content:center;margin-top:34px"><div class="pager" id="a-pager"></div></div>
+          </div>
+        </div>
+      </div></section>
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم A</b>
+      <ul><li>الشريط الجانبي يختفي ويُستبدل بزر «الفلاتر» يفتح درجًا منزلقًا (كما في تصميم C).</li>
+      <li>الشبكة تصبح عمودين، وشريط الأدوات (العدد + الترتيب) يلتصق أسفل القائمة العلوية.</li>
+      <li>شرائح الفلاتر النشطة تُمرَّر أفقيًا فوق الشبكة.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== VARIATION B -->
+  <div class="vlabel alt" id="vb">
+    <div class="vk">B</div>
+    <div class="vt"><h2>شريط فلاتر علوي أفقي · شبكة 4 أعمدة · معاينة سريعة</h2>
+      <div class="sub">الفلاتر قوائم منسدلة أفقية تفتح فوق الشبكة، مع 4 أعمدة أكثف ومعاينة سريعة «أضف للسلة» تظهر عند المرور على البطاقة.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa/carpets</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="shop"></div>
+      <section class="sec" style="padding-block:26px"><div class="wrap">
+        <nav class="crumbs" style="margin-bottom:8px"><a href="Home.html">الرئيسية</a><span class="sep"></span><span class="cur">السجاد</span></nav>
+        <h1 style="font-size:32px">كل السجاد</h1>
+        <div class="filterbar" id="b-filterbar"></div>
+        <div class="chips" id="b-active" style="margin-bottom:14px"></div>
+        <div class="toolbar">
+          <span class="count">عرض <b>1–16</b> من <b>248</b> منتج</span>
+          <div class="sortwrap">
+            <span>ترتيب حسب</span>
+            <div class="select-wrap"><select class="input"><option>الأكثر رواجاً</option><option>الأحدث</option><option>السعر: من الأقل للأعلى</option><option>السعر: من الأعلى للأقل</option></select></div>
+            <div class="viewtoggle"><button class="on" aria-label="شبكة"></button><button aria-label="قائمة"></button></div>
+          </div>
+        </div>
+        <div class="pgrid c4" id="b-grid" data-quick></div>
+        <div style="display:flex;justify-content:center;margin-top:34px"><div class="pager" id="b-pager"></div></div>
+      </div></section>
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم B</b>
+      <ul><li>القوائم المنسدلة الأفقية تتجمّع في زرّي «فلاتر» و«ترتيب» يفتحان أوراقًا سفلية (bottom sheet).</li>
+      <li>الشبكة 4 أعمدة تصبح عمودين؛ المعاينة السريعة تتحوّل لزر «أضف» ظاهر دائمًا بدل ظهوره عند المرور.</li>
+      <li>مبدّل العرض شبكة/قائمة يُخفى.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== VARIATION C -->
+  <div class="vlabel" id="vc">
+    <div class="vk">C</div>
+    <div class="vt"><h2>درج فلاتر منزلق · شبكة تحريرية «ماسونري»</h2>
+      <div class="sub">زر «الفلاتر» يفتح درجًا منزلقًا من الجانب، والمنتجات في شبكة ماسونري بارتفاعات متغيّرة لإيقاع تحريري، مع «تحميل المزيد» بدل الترقيم.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa/carpets</span></div>
+    <div class="store" id="c-store">
+      <div data-ubar></div>
+      <div data-nav data-active="shop"></div>
+      <section class="sec" style="padding-block:28px"><div class="wrap">
+        <nav class="crumbs" style="margin-bottom:8px"><a href="Home.html">الرئيسية</a><span class="sep"></span><span class="cur">السجاد</span></nav>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <h1 style="font-size:32px">كل السجاد</h1>
+          <div class="toolbar" style="margin:0">
+            <button class="btn btn-secondary" id="c-openfilters"></button>
+            <div class="sortwrap" style="margin:0">
+              <div class="select-wrap"><select class="input"><option>الأكثر رواجاً</option><option>الأحدث</option><option>السعر: من الأقل</option><option>السعر: من الأعلى</option></select></div>
+            </div>
+          </div>
+        </div>
+        <div class="chips" id="c-active" style="margin:14px 0"></div>
+        <span class="count" style="display:block;margin-bottom:18px;font-size:13.5px;color:var(--c-muted)">عرض <b style="color:var(--c-text)">18</b> من <b style="color:var(--c-text)">248</b> منتج</span>
+        <div class="masonry" id="c-grid"></div>
+        <div class="loadmore"><button class="btn btn-primary btn-lg">تحميل المزيد</button><div class="bar"><i></i></div><span class="cap" style="color:var(--c-muted);font-size:12px">شاهدت 18 من 248</span></div>
+      </div></section>
+      <div data-foot></div>
+      <!-- drawer -->
+      <div class="drawer-scrim" id="c-scrim"></div>
+      <aside class="drawer" id="c-drawer">
+        <div class="dhead"><h3>الفلاتر</h3><button class="btn-icon" id="c-closefilters" aria-label="إغلاق"></button></div>
+        <div class="dbody" id="c-filters"></div>
+        <div class="dfoot"><button class="btn btn-ghost" style="flex:1">مسح الكل</button><button class="btn btn-primary" id="c-applyfilters" style="flex:1">عرض النتائج</button></div>
+      </aside>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم C</b>
+      <ul><li>الدرج المنزلق يصبح بعرض كامل تقريبًا (88vw)، وهو أصلًا نمط الجوال — يعمل كما هو.</li>
+      <li>الماسونري يتحوّل لعمودين؛ «تحميل المزيد» يبقى في الأسفل.</li>
+      <li>زرّا «الفلاتر» و«الترتيب» يلتصقان في شريط سفلي ثابت.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== STATES -->
+  <div class="states-head" id="states">
+    <span class="vk">الحالات · STATES</span>
+    <h2>التحميل · الفراغ · الخطأ</h2>
+  </div>
+  <div class="states-grid">
+    <div class="state-card">
+      <div class="sc-top"><span class="dotx"></span>تحميل — شبكة هيكلية</div>
+      <div class="sc-body"><div class="pgrid c2" id="st-skel" style="gap:16px"></div></div>
+    </div>
+    <div class="state-card">
+      <div class="sc-top"><span class="dotx"></span>فراغ — لا نتائج للفلاتر</div>
+      <div class="sc-body">
+        <div class="chips" style="margin-bottom:8px"><span class="chip removable active">شاج <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></span><span class="chip removable active">أزرق <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></span></div>
+        <div class="empty">
+          <div class="ill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <h4>لا توجد منتجات مطابقة</h4>
+          <p>جرّب توسيع نطاق السعر أو إزالة بعض الفلاتر للعثور على المزيد.</p>
+          <button class="btn btn-secondary">مسح كل الفلاتر</button>
+        </div>
+      </div>
+    </div>
+    <div class="state-card">
+      <div class="sc-top err"><span class="dotx"></span>خطأ — تعذّر تحميل القائمة</div>
+      <div class="sc-body">
+        <div class="empty">
+          <div class="ill" style="color:var(--c-sale)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+          <h4>تعذّر عرض المنتجات</h4>
+          <p>حدث خطأ في الخادم. أعد المحاولة بعد لحظات.</p>
+          <button class="btn btn-primary">إعادة المحاولة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="image-slot.js"></script>
+<script src="store-cards.js"></script>
+<script>
+const SHOP = [
+  {id:'kilim-atlas', title:'كليم أطلس المغربي', eyebrow:'كليم · صوف', price:1290, was:1850, rating:4.8, count:214, badge:'sale', colors:['#B98E6B','#5E6B5A','#2C2925']},
+  {id:'shag-cream',  title:'شاج كريمي ناعم',   eyebrow:'شاج · بوليستر', price:690, rating:4.6, count:132, badge:'best', colors:['#EDE9E2','#B98E6B']},
+  {id:'vintage-wash',title:'فينتيج مغسولة',    eyebrow:'فينتيج · قطن', price:980, was:1290, rating:4.7, count:96, badge:'sale', colors:['#8E7A66','#5E6B5A','#B5503C']},
+  {id:'wool-geo',    title:'صوف هندسي حديث',   eyebrow:'عصري · صوف', price:1650, rating:4.9, count:78, badge:'new', colors:['#2C2925','#B98E6B']},
+  {id:'jute-natural',title:'جوت طبيعي مضفور',  eyebrow:'طبيعي · جوت', price:459, rating:4.4, count:51, colors:['#C9B58E','#837C72']},
+  {id:'persian-cl',  title:'فارسية كلاسيكية',  eyebrow:'كلاسيك · صوف', price:3200, was:3850, rating:5.0, count:42, badge:'low', colors:['#7E4A35','#16213A','#B98E6B']},
+  {id:'runner-ait',  title:'ممر آيت ساحلي',    eyebrow:'ممر · صوف', price:540, rating:4.5, count:67, colors:['#5E6B5A','#EDE9E2']},
+  {id:'round-sage',  title:'دائرية سيج',       eyebrow:'دائري · قطن', price:620, rating:4.3, count:38, badge:'new', colors:['#5E6B5A','#B98E6B']},
+  {id:'berber-snow', title:'بربري ثلجي',       eyebrow:'بربري · صوف', price:1120, was:1490, rating:4.8, count:88, badge:'sale', colors:['#EDE9E2','#2C2925']},
+  {id:'kelim-grey',  title:'كليم رمادي مسطّح', eyebrow:'كليم · قطن', price:760, rating:4.5, count:60, colors:['#9A958B','#2C2925']},
+  {id:'shag-sage',   title:'شاج أخضر سيج',     eyebrow:'شاج · صوف', price:890, rating:4.6, count:44, badge:'new', colors:['#5E6B5A','#EDE9E2']},
+  {id:'antique-blue',title:'أزرق عتيق فاخر',   eyebrow:'فينتيج · صوف', price:2450, was:2990, rating:4.9, count:31, badge:'low', colors:['#16213A','#B98E6B','#8E7A66']},
+];
+
+const FILTERS = {
+  type: [['كليم',48],['شاج',36],['فينتيج',29],['صوف',72],['جوت',18],['عصري',45]],
+  room: [['المجلس',128],['المعيشة',96],['النوم',74],['الطعام',52],['الأطفال',33],['المدخل',41]],
+  color: [['بيج','#C9B58E'],['رمادي','#9A958B'],['أخضر','#5E6B5A'],['أزرق','#16213A'],['تيري','#8E3B2C'],['كريمي','#EDE9E2'],['أسود','#2C2925']],
+  size: ['80×150','160×230','200×290','240×340','دائري','ممر'],
+};
+
+function checkList(items, name, checked){
+  return `<div class="stack">`+items.map((it,i)=>`<label class="choice"><input type="checkbox" name="${name}" ${checked&&checked.includes(i)?'checked':''}/><span class="box"></span><span style="flex:1">${it[0]}</span><span class="cap" style="font-size:11.5px;color:var(--c-muted)">${it[1]}</span></label>`).join('')+`</div>`;
+}
+function colorPick(){
+  return `<div class="swatches" style="flex-wrap:wrap;gap:12px">`+FILTERS.color.map((c,i)=>`<span class="swcolor ${i===3?'sel':''}" title="${c[0]}" style="background:${c[1]}"></span>`).join('')+`</div>`;
+}
+function sizePick(){
+  return `<div class="sizes">`+FILTERS.size.map((s,i)=>`<button class="size ${i===2?'sel':''}">${s}<small>سم</small></button>`).join('')+`</div>`;
+}
+function priceRange(){
+  return `<div class="price-row"><input class="input" value="300" dir="ltr" style="text-align:center"/><span style="color:var(--c-muted)">—</span><input class="input" value="2,500" dir="ltr" style="text-align:center"/></div>
+  <input class="range" type="range" min="0" max="5000" value="2500"/><div class="range-labels"><span>0 ر.س</span><span>5,000 ر.س</span></div>`;
+}
+function saleToggle(){
+  return `<div class="toggle-row"><span style="font-size:14px">على التخفيض فقط</span><label class="switch"><input type="checkbox" checked/><span class="tr"></span></label></div>`;
+}
+
+/* full filter set as sidebar groups */
+function filterGroups(){
+  return `
+  <div class="fgroup"><h4>النوع</h4>${checkList(FILTERS.type,'type',[0,3])}</div>
+  <div class="fgroup"><h4>الغرفة</h4>${checkList(FILTERS.room,'room')}</div>
+  <div class="fgroup"><h4>اللون</h4>${colorPick()}</div>
+  <div class="fgroup"><h4>المقاس</h4>${sizePick()}</div>
+  <div class="fgroup"><h4>نطاق السعر</h4>${priceRange()}</div>
+  <div class="fgroup">${saleToggle()}</div>`;
+}
+
+function activeChips(){
+  const chipX = '<svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg>';
+  const items = ['كليم','صوف','أزرق','200×290','تحت 2,500 ر.س','على التخفيض'];
+  return items.map(t=>`<span class="chip removable active">${t} ${chipX}</span>`).join('') + `<button class="chip" style="border-style:dashed">مسح الكل</button>`;
+}
+
+function pager(current, total){
+  let html = `<button aria-label="السابق">${icon('chevRight')}</button>`;
+  for(let i=1;i<=total;i++){
+    if(i>4 && i<total){ if(i===5) html+=`<span class="gap">…</span>`; continue; }
+    html += `<button ${i===current?'aria-current="true"':''}>${i}</button>`;
+  }
+  html += `<button aria-label="التالي">${icon('chevLeft')}</button>`;
+  return html;
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // A
+  document.getElementById('a-filters').innerHTML = filterGroups();
+  document.getElementById('a-active').innerHTML = activeChips();
+  document.getElementById('a-grid').innerHTML = SHOP.map(p=>productCard(p,{idp:'sa-'})).join('');
+  document.getElementById('a-pager').innerHTML = pager(1, 21);
+
+  // B — top filter dropdowns
+  const fb = document.getElementById('b-filterbar');
+  fb.innerHTML = `
+    <details class="fdrop"><summary>النوع ${icon('chevDown')}</summary><div class="pop">${checkList(FILTERS.type,'type',[0,3])}</div></details>
+    <details class="fdrop"><summary>الغرفة ${icon('chevDown')}</summary><div class="pop">${checkList(FILTERS.room,'room')}</div></details>
+    <details class="fdrop"><summary>اللون ${icon('chevDown')}</summary><div class="pop">${colorPick()}</div></details>
+    <details class="fdrop"><summary>المقاس ${icon('chevDown')}</summary><div class="pop wide">${sizePick()}</div></details>
+    <details class="fdrop"><summary>السعر ${icon('chevDown')}</summary><div class="pop">${priceRange()}</div></details>
+    <span class="spacer"></span>
+    <label class="chip" style="cursor:pointer">على التخفيض <label class="switch" style="width:38px;height:21px"><input type="checkbox"/><span class="tr"></span></label></label>`;
+  document.getElementById('b-active').innerHTML = activeChips();
+  document.getElementById('b-grid').innerHTML = SHOP.map(p=>productCard(p,{quick:true,idp:'sb-'})).join('');
+  document.getElementById('b-pager').innerHTML = pager(1, 16);
+  // fix view toggle icons
+  const vt = document.querySelector('.viewtoggle'); if(vt){ vt.children[0].innerHTML = icon('grid'); vt.children[1].innerHTML = icon('menu'); }
+
+  // C — masonry + drawer
+  document.getElementById('c-active').innerHTML = activeChips();
+  const aspects = ['4/5','3/4','1/1','4/5','3/5','4/5','1/1','3/4','4/5','3/5','4/5','3/4'];
+  document.getElementById('c-grid').innerHTML = SHOP.map((p,i)=>productCardCompact(p, aspects[i%aspects.length], 'sc-')).join('');
+  document.getElementById('c-filters').innerHTML = filterGroups();
+  document.getElementById('c-openfilters').innerHTML = icon('filter') + ' الفلاتر';
+  document.getElementById('c-closefilters').innerHTML = icon('x');
+  const drawer=document.getElementById('c-drawer'), scrim=document.getElementById('c-scrim');
+  const open=()=>{drawer.classList.add('open');scrim.classList.add('open');};
+  const close=()=>{drawer.classList.remove('open');scrim.classList.remove('open');};
+  document.getElementById('c-openfilters').addEventListener('click',open);
+  document.getElementById('c-closefilters').addEventListener('click',close);
+  document.getElementById('c-applyfilters').addEventListener('click',close);
+  scrim.addEventListener('click',close);
+
+  // states
+  document.getElementById('st-skel').innerHTML = skelCard()+skelCard();
+
+  // fill crumb separators + select chevrons globally
+  document.querySelectorAll('.crumbs .sep').forEach(s=>{ if(!s.querySelector('svg')) s.innerHTML=icon('chevLeft'); });
+  document.querySelectorAll('.select-wrap').forEach(w=>{ if(!w.querySelector('svg')) w.insertAdjacentHTML('beforeend', icon('chevDown')); });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-type="4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>رُقعة — صفحة المنتج · 3 تصاميم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="store.css" />
+<style>
+/* gallery */
+.gallery .g-main { position:relative; aspect-ratio:1/1; border-radius:16px; overflow:hidden; background:var(--c-surface); }
+.gallery .g-main .zoom { position:absolute; inset-block-end:14px; inset-inline-end:14px; z-index:2; width:40px; height:40px; border-radius:50%;
+  background:color-mix(in srgb,var(--c-bg) 88%, transparent); backdrop-filter:blur(4px); border:1px solid var(--c-border); display:grid; place-items:center; color:var(--c-text); cursor:pointer; }
+.gallery .g-main .gbadge { position:absolute; inset-block-start:14px; inset-inline-start:14px; z-index:2; }
+.gallery .g-thumbs { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:12px; }
+.gallery .g-thumbs .th { position:relative; aspect-ratio:1/1; border-radius:10px; overflow:hidden; border:2px solid transparent; cursor:pointer; background:var(--c-surface); }
+.gallery .g-thumbs .th.sel { border-color:var(--c-primary); }
+.gallery.vertical { display:grid; grid-template-columns:78px 1fr; gap:12px; }
+.gallery.vertical .g-thumbs { grid-template-columns:1fr; grid-auto-rows:78px; margin-top:0; }
+.gallery.vertical .g-main { aspect-ratio:4/5; }
+.gallery.top .g-main { aspect-ratio:16/10; }
+
+/* buy panel */
+.buy { display:flex; flex-direction:column; gap:18px; }
+.buy .eyebrow { font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--c-muted); }
+.buy h1 { font-size:32px; line-height:1.12; letter-spacing:-.01em; }
+.buy .topline { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.buy .sku { font-size:12px; color:var(--c-muted); }
+.buy .opt-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.buy .opt-head .lbl { font-size:13.5px; font-weight:700; }
+.buy .opt-head .pick { font-size:13px; color:var(--c-muted); }
+.buy .guide { font-size:12.5px; color:var(--c-primary); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.buy .cta-row { display:flex; gap:12px; align-items:stretch; }
+.buy .cta-row .qty { flex:none; }
+.buy .stock { display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding:14px 0; border-block:1px solid var(--c-border); }
+.buy .stock .it { display:flex; align-items:center; gap:8px; font-size:13px; }
+.buy .stock .it svg { width:17px; height:17px; }
+.buy .stock .it.ok { color:var(--c-success); }
+.buy .stock .it.del { color:var(--c-text); }
+.buy .trust-mini { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.buy .trust-mini .ti { display:flex; gap:10px; align-items:center; font-size:12.5px; }
+.buy .trust-mini .ti .ic { width:34px; height:34px; border-radius:9px; background:var(--c-surface); color:var(--c-primary); display:grid; place-items:center; flex:none; }
+.buy .trust-mini .ti svg { width:18px; height:18px; }
+.buy .trust-mini .ti b { display:block; font-family:var(--font-display); font-size:12.5px; }
+.buy .trust-mini .ti span { color:var(--c-muted); font-size:11.5px; }
+
+/* specs */
+.specs { display:grid; grid-template-columns:1fr 1fr; gap:0 32px; }
+.specs .sp { display:flex; justify-content:space-between; gap:12px; padding:11px 0; border-bottom:1px solid var(--c-border); font-size:14px; }
+.specs .sp .k { color:var(--c-muted); }
+.specs .sp .v { font-weight:600; }
+
+/* reviews */
+.rev-summary { display:grid; grid-template-columns:200px 1fr; gap:28px; align-items:center; padding:20px 0; }
+.rev-big { text-align:center; }
+.rev-big .n { font-family:var(--font-display); font-size:52px; font-weight:700; line-height:1; }
+.rev-big .of { font-size:13px; color:var(--c-muted); margin-top:6px; }
+.rev-bars { display:flex; flex-direction:column; gap:7px; }
+.rev-bar { display:flex; align-items:center; gap:10px; font-size:12.5px; }
+.rev-bar .lab { width:34px; color:var(--c-muted); display:flex; align-items:center; gap:3px; }
+.rev-bar .track { flex:1; height:8px; border-radius:999px; background:var(--c-surface); overflow:hidden; }
+.rev-bar .track i { display:block; height:100%; background:var(--c-star); border-radius:999px; }
+.rev-bar .pct { width:36px; text-align:start; color:var(--c-muted); }
+.rev-list { display:flex; flex-direction:column; gap:16px; margin-top:8px; }
+.rev-card { padding:16px; border:1px solid var(--c-border); border-radius:14px; background:var(--c-bg); }
+.rev-card .rh { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.rev-card .av { width:38px; height:38px; border-radius:50%; background:var(--c-surface); display:grid; place-items:center; font-weight:700; color:var(--c-primary); flex:none; }
+.rev-card .nm { font-weight:700; font-size:14px; }
+.rev-card .dt { font-size:11.5px; color:var(--c-muted); }
+.rev-card .vbadge { margin-inline-start:auto; font-size:10.5px; font-weight:700; color:var(--c-success); display:flex; align-items:center; gap:4px; }
+.rev-card p { font-size:13.5px; margin:0; color:var(--c-text); }
+
+/* sticky-info layout (B) */
+.pdp-2col { display:grid; gap:44px; align-items:start; }
+.pdp-2col.classic { grid-template-columns:1.05fr .95fr; }
+.pdp-2col.sticky { grid-template-columns:1.1fr .9fr; }
+.pdp-2col.sticky .gcol { position:sticky; top:90px; }
+.pdp-compact { max-width:860px; margin:0 auto; }
+
+/* phone mockup for mobile sticky bar */
+.phone { width:300px; border:10px solid #2C2925; border-radius:38px; overflow:hidden; background:var(--c-bg); box-shadow:var(--sh-xl); position:relative; }
+.phone .notch { height:26px; background:#2C2925; }
+.phone .pscreen { height:520px; overflow:hidden; position:relative; }
+.phone .pscroll { padding:14px; }
+.msticky { position:absolute; inset-inline:0; inset-block-end:0; background:color-mix(in srgb,var(--c-bg) 96%, transparent); backdrop-filter:blur(10px);
+  border-top:1px solid var(--c-border); padding:12px 14px; display:flex; align-items:center; gap:12px; }
+.msticky .price .now { font-size:18px; }
+.msticky .btn { flex:1; }
+.mobile-showcase { display:grid; grid-template-columns:auto 1fr; gap:30px; align-items:center; }
+
+@media (max-width:980px){
+  .pdp-2col.classic, .pdp-2col.sticky { grid-template-columns:1fr; }
+  .pdp-2col.sticky .gcol { position:static; }
+  .specs { grid-template-columns:1fr; }
+  .rev-summary { grid-template-columns:1fr; }
+  .mobile-showcase { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-top">
+  <div class="mk">ر</div>
+  <div class="ttl">رُقعة — صفحة المنتج<small>PRODUCT DETAILS</small></div>
+  <nav class="doc-nav"><a href="#va">تصميم A</a><a href="#vb">تصميم B</a><a href="#vc">تصميم C</a><a href="#mobile">الجوال</a></nav>
+  <div class="meta"><a class="pill" href="Home.html" style="text-decoration:none">الرئيسية</a><a class="pill" href="Shop.html" style="text-decoration:none">السجاد</a><a class="pill" href="Product.html" style="text-decoration:none;background:var(--c-primary);color:#fff;border-color:var(--c-primary)">المنتج</a><a class="pill" href="Mega Menu.html" style="text-decoration:none">القائمة</a><span class="pill">Palette <b>4</b></span><span class="pill">Type <b>4</b></span><span class="pill">RTL</span></div>
+</header>
+
+<div class="doc">
+  <div class="doc-intro">
+    <h1>صفحة المنتج — ثلاثة تصاميم</h1>
+    <p>كل التصاميم تعرض المعرض، العنوان، التقييم، السعر مع التخفيض، الألوان، المقاسات مع رابط دليل المقاسات، عدّاد الكمية، إضافة للسلة والمفضلة، حالة المخزون والتوصيل، شارات الثقة، المواصفات، التبويبات والتقييمات والمنتجات المرتبطة. الفرق في التركيب. في الأسفل شريط الشراء الثابت للجوال.</p>
+  </div>
+
+  <!-- ===================================================== VARIATION A -->
+  <div class="vlabel" id="va">
+    <div class="vk">A</div>
+    <div class="vt"><h2>عمودان كلاسيكيان · المعرض والمعلومات جنبًا إلى جنب</h2>
+      <div class="sub">المعرض في جهة وكتلة الشراء في الجهة الأخرى، ثم التبويبات والمواصفات والتقييمات بعرض كامل أسفلها، يليها المنتجات المرتبطة.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa/p/kilim-atlas</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="shop"></div>
+      <section class="sec" style="padding-block:26px"><div class="wrap">
+        <nav class="crumbs" style="margin-bottom:20px"><a href="Home.html">الرئيسية</a><span class="sep"></span><a href="Shop.html">السجاد</a><span class="sep"></span><a href="#">كليم</a><span class="sep"></span><span class="cur">كليم أطلس المغربي</span></nav>
+        <div class="pdp-2col classic">
+          <div class="gallery" id="ga-gallery"></div>
+          <div class="buy" id="ga-buy"></div>
+        </div>
+        <div style="margin-top:48px" id="ga-details"></div>
+        <div style="margin-top:48px">
+          <div class="s-head"><div><div class="kick">قد يعجبك أيضًا</div><h2>منتجات مرتبطة</h2></div><a class="more" href="Shop.html">عرض المزيد</a></div>
+          <div class="pgrid c4" id="ga-related"></div>
+        </div>
+      </div></section>
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم A</b>
+      <ul><li>العمودان يصبحان عمودًا واحدًا: المعرض أولًا (مع مصغّرات قابلة للتمرير أفقيًا) ثم كتلة الشراء.</li>
+      <li>شبكة المنتجات المرتبطة تصبح تمريرًا أفقيًا، والمواصفات عمودًا واحدًا.</li>
+      <li>يظهر شريط شراء ثابت أسفل الشاشة (السعر + أضف للسلة) — انظر قسم «الجوال».</li></ul></div>
+  </div>
+
+  <!-- ===================================================== VARIATION B -->
+  <div class="vlabel alt" id="vb">
+    <div class="vk">B</div>
+    <div class="vt"><h2>معرض ثابت · عمود معلومات متمرّر · غامر</h2>
+      <div class="sub">المعرض يلتصق عند التمرير بمصغّرات عمودية، بينما يمرّر عمود المعلومات بكل تفاصيله (شراء + مواصفات + تقييمات) بجانبه — تجربة غامرة.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa/p/kilim-atlas</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="shop"></div>
+      <section class="sec" style="padding-block:26px"><div class="wrap">
+        <nav class="crumbs" style="margin-bottom:20px"><a href="Home.html">الرئيسية</a><span class="sep"></span><a href="Shop.html">السجاد</a><span class="sep"></span><span class="cur">كليم أطلس المغربي</span></nav>
+        <div class="pdp-2col sticky">
+          <div class="gcol"><div class="gallery vertical" id="gb-gallery"></div></div>
+          <div>
+            <div class="buy" id="gb-buy"></div>
+            <div style="margin-top:36px" id="gb-details"></div>
+          </div>
+        </div>
+        <div style="margin-top:48px">
+          <div class="s-head"><div><div class="kick">قد يعجبك أيضًا</div><h2>منتجات مرتبطة</h2></div></div>
+          <div class="hscroll" id="gb-related"></div>
+        </div>
+      </div></section>
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم B</b>
+      <ul><li>المعرض يفقد الالتصاق ويصبح في الأعلى مع مصغّرات أفقية، ثم تتدفّق المعلومات أسفله.</li>
+      <li>المصغّرات العمودية (78px) تنتقل لصفّ أفقي تحت الصورة الرئيسية.</li>
+      <li>التبويبات تصبح قابلة للتمرير أفقيًا، وشريط الشراء الثابت يظهر أسفل الشاشة.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== VARIATION C -->
+  <div class="vlabel" id="vc">
+    <div class="vk">C</div>
+    <div class="vt"><h2>المعرض في الأعلى · التفاصيل بتبويبات أسفله · مدمج</h2>
+      <div class="sub">معرض عريض في الأعلى وكتلة شراء مدمجة تحته، ثم كل التفاصيل (الوصف/المواصفات/التقييمات) في تبويبات لتقليل الطول — مناسب للمنتجات البسيطة.</div></div>
+  </div>
+  <div class="vframe">
+    <div class="browserbar"><div class="dots"><i></i><i></i><i></i></div><span class="url">rugat.sa/p/kilim-atlas</span></div>
+    <div class="store">
+      <div data-ubar></div>
+      <div data-nav data-active="shop"></div>
+      <section class="sec" style="padding-block:26px"><div class="wrap"><div class="pdp-compact">
+        <nav class="crumbs" style="margin-bottom:18px"><a href="Home.html">الرئيسية</a><span class="sep"></span><a href="Shop.html">السجاد</a><span class="sep"></span><span class="cur">كليم أطلس المغربي</span></nav>
+        <div class="gallery top" id="gc-gallery"></div>
+        <div class="buy" id="gc-buy" style="margin-top:28px"></div>
+        <div style="margin-top:36px" id="gc-details"></div>
+      </div></div></section>
+      <section class="sec surface" style="padding-block:40px"><div class="wrap">
+        <div class="s-head"><div><div class="kick">قد يعجبك أيضًا</div><h2>منتجات مرتبطة</h2></div></div>
+        <div class="pgrid c4" id="gc-related"></div>
+      </div></section>
+      <div data-foot></div>
+    </div>
+  </div>
+  <div class="mnote">
+    <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+    <div class="mx"><b>على الجوال — تصميم C</b>
+      <ul><li>المعرض العريض يصبح مربّعًا مع مصغّرات أسفله؛ كتلة الشراء تتراص عموديًا.</li>
+      <li>التبويبات تتحول لأقسام قابلة للطيّ (Accordion) بدل التبويبات الأفقية.</li>
+      <li>شريط الشراء الثابت يظهر أسفل الشاشة.</li></ul></div>
+  </div>
+
+  <!-- ===================================================== MOBILE STICKY BAR + STATES -->
+  <div class="states-head" id="mobile">
+    <span class="vk">الجوال · MOBILE</span>
+    <h2>شريط الشراء الثابت + الحالات</h2>
+    <p style="color:var(--doc-muted);max-width:70ch;margin:8px 0 0">شريط «أضف للسلة» يلتصق أسفل الشاشة على الجوال عبر التصاميم الثلاثة، إلى جانب حالات التحميل والنفاد والخطأ.</p>
+  </div>
+  <div class="states-grid" style="grid-template-columns:auto 1fr">
+    <div class="state-card" style="width:max-content">
+      <div class="sc-top"><span class="dotx"></span>شريط شراء ثابت — جوال</div>
+      <div class="sc-body" style="display:grid;place-items:center;background:var(--c-surface)">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="pscreen">
+            <div class="pscroll">
+              <div class="g-main" style="aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:var(--c-bg);position:relative;margin-bottom:12px"><image-slot id="m-main" placeholder="صورة"></image-slot></div>
+              <div style="font-family:var(--font-display);font-size:18px;font-weight:600">كليم أطلس المغربي</div>
+              <div style="margin:6px 0" id="m-rating"></div>
+              <span class="price"><span class="now sale tnum">1,290 <span class="sar">ر.س</span></span><span class="was tnum">1,850 <span class="sar">ر.س</span></span></span>
+              <p style="font-size:12.5px;color:var(--c-muted);margin-top:10px">سجادة منسوجة يدويًا من صوف طبيعي، تمنح الغرفة دفئًا وملمسًا غنيًا يدوم لسنوات…</p>
+            </div>
+            <div class="msticky">
+              <span class="price"><span class="now sale tnum">1,290 <span class="sar">ر.س</span></span></span>
+              <button class="btn btn-accent" id="m-add"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;gap:18px;align-content:start">
+      <div class="state-card">
+        <div class="sc-top"><span class="dotx"></span>تحميل — هيكل المعرض والمعلومات</div>
+        <div class="sc-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+            <div class="skel" style="aspect-ratio:1/1;border-radius:14px"></div>
+            <div class="stack" style="gap:11px">
+              <div class="skel" style="height:24px;width:80%"></div>
+              <div class="skel" style="height:14px;width:50%"></div>
+              <div class="skel" style="height:30px;width:40%"></div>
+              <div class="skel" style="height:44px;width:100%;margin-top:8px"></div>
+              <div class="skel" style="height:44px;width:100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <div class="state-card">
+          <div class="sc-top err"><span class="dotx"></span>نفاد المخزون</div>
+          <div class="sc-body">
+            <div class="stock" style="border:0;padding:0;margin-bottom:14px"><span class="it" style="color:var(--c-sale)"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg> غير متوفر حاليًا</span></div>
+            <button class="btn btn-secondary btn-block" disabled>نفد من المخزون</button>
+            <button class="btn btn-ghost btn-block" style="margin-top:8px">أبلغني عند التوفّر</button>
+          </div>
+        </div>
+        <div class="state-card">
+          <div class="sc-top err"><span class="dotx"></span>خطأ — فشل الإضافة للسلة</div>
+          <div class="sc-body">
+            <div class="toast err"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span><div class="tx"><b>تعذّرت الإضافة للسلة</b><span>حدث خطأ مؤقت. حاول مرة أخرى.</span></div><button class="close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="image-slot.js"></script>
+<script src="store-cards.js"></script>
+<script>
+const REL = [
+  {id:'shag-cream', title:'شاج كريمي ناعم', eyebrow:'شاج · بوليستر', price:690, rating:4.6, count:132, badge:'best', colors:['#EDE9E2','#B98E6B']},
+  {id:'vintage-wash', title:'فينتيج مغسولة', eyebrow:'فينتيج · قطن', price:980, was:1290, rating:4.7, count:96, badge:'sale', colors:['#8E7A66','#5E6B5A','#B5503C']},
+  {id:'wool-geo', title:'صوف هندسي حديث', eyebrow:'عصري · صوف', price:1650, rating:4.9, count:78, badge:'new', colors:['#2C2925','#B98E6B']},
+  {id:'persian-cl', title:'فارسية كلاسيكية', eyebrow:'كلاسيك · صوف', price:3200, was:3850, rating:5.0, count:42, badge:'low', colors:['#7E4A35','#16213A','#B98E6B']},
+];
+const SPECS = [
+  ['المادة','صوف طبيعي 100%'],['أسلوب النسج','يدوي على نول تقليدي'],['المقاس المختار','<span dir="ltr">200 × 290</span> سم'],
+  ['الوزن','18 كجم'],['كثافة العقدة','عالية'],['بلد المنشأ','المغرب'],
+  ['العناية','تنظيف جاف موصى به'],['الضمان','سنتان ضد عيوب الصناعة'],
+];
+const PCOLORS = [['تيراكوتا','#B98E6B'],['سيج','#5E6B5A'],['فحمي','#2C2925']];
+const PSIZES = [['120×170',''],['160×230',''],['200×290','sel'],['240×340',''],['300×400','']];
+
+function gallery(idp, mode){
+  const thumbs = [1,2,3,4,5].map((n,i)=>`<div class="th ${i===0?'sel':''}"><image-slot id="${idp}-th-${n}" placeholder="${n}"></image-slot></div>`).join('');
+  return `
+    <div class="g-main"><image-slot id="${idp}-main" placeholder="الصورة الرئيسية للسجادة"></image-slot>
+      <span class="gbadge badge badge-sale">خصم 30%</span>
+      <button class="zoom" aria-label="تكبير">${icon('search')}</button>
+    </div>
+    <div class="g-thumbs">${thumbs}</div>`;
+}
+function buyPanel(idp){
+  return `
+    <span class="eyebrow">كليم · صوف طبيعي</span>
+    <h1>كليم أطلس المغربي</h1>
+    <div class="topline">
+      ${ratingBlock(4.8, 214)}
+      <span class="sku">رقم المنتج: RG-KLM-2290</span>
+      <span class="badge badge-low">آخر 4 قطع</span>
+    </div>
+    <span class="price price-lg"><span class="now sale tnum">1,290 <span class="sar">ر.س</span></span><span class="was tnum">1,850 <span class="sar">ر.س</span></span><span class="off">−30%</span></span>
+    <div>
+      <div class="opt-head"><span class="lbl">اللون</span><span class="pick">تيراكوتا</span></div>
+      <div class="swatches">${PCOLORS.map((c,i)=>`<span class="swcolor ${i===0?'sel':''}" title="${c[0]}" style="background:${c[1]}"></span>`).join('')}</div>
+    </div>
+    <div>
+      <div class="opt-head"><span class="lbl">المقاس (سم)</span><span class="guide">${icon('ruler')} دليل المقاسات</span></div>
+      <div class="sizes">${PSIZES.map(s=>`<button class="size ${s[1]}"><span dir="ltr">${s[0]}</span></button>`).join('')}</div>
+    </div>
+    <div class="cta-row">
+      <div class="qty"><button data-q="-" aria-label="إنقاص">${icon('minus')}</button><span class="val">1</span><button data-q="+" aria-label="زيادة">${icon('plus')}</button></div>
+      <button class="btn btn-primary btn-lg" style="flex:1">${icon('cart')} أضف للسلة</button>
+      <button class="btn-icon btn-lg" aria-label="أضف للمفضلة" style="width:54px">${icon('heart')}</button>
+    </div>
+    <div class="stock">
+      <span class="it ok">${icon('checkCircle')} متوفر في المخزون</span>
+      <span class="it del">${icon('truck')} يصل خلال 3–5 أيام عمل · شحن مجاني</span>
+    </div>
+    <div class="trust-mini">
+      <div class="ti"><div class="ic">${icon('truck')}</div><div><b>شحن مجاني</b><span>للطلبات فوق 300 ر.س</span></div></div>
+      <div class="ti"><div class="ic">${icon('arrowL')}</div><div><b>إرجاع مجاني</b><span>خلال 14 يومًا</span></div></div>
+      <div class="ti"><div class="ic">${icon('shield')}</div><div><b>دفع آمن</b><span>مدى · تابي · تمارا</span></div></div>
+      <div class="ti"><div class="ic">${icon('user')}</div><div><b>دعم متخصص</b><span>استشارة مقاسات مجانية</span></div></div>
+    </div>`;
+}
+function specsList(){
+  return `<div class="specs">${SPECS.map(s=>`<div class="sp"><span class="k">${s[0]}</span><span class="v">${s[1]}</span></div>`).join('')}</div>`;
+}
+function reviewsBlock(){
+  const bars = [[5,72],[4,19],[3,6],[2,2],[1,1]];
+  const cards = [
+    ['ن','نورة العتيبي','قبل 3 أيام','الجودة فاقت توقعاتي — الصوف سميك وناعم والألوان طبيعية تمامًا كما في الصور. أضافت دفئًا رائعًا للمجلس.'],
+    ['س','سعد القحطاني','قبل أسبوع','مقاس 200×290 مثالي لغرفة المعيشة. وصل خلال 4 أيام بتغليف ممتاز. أنصح به.'],
+    ['ل','لمى الدوسري','قبل أسبوعين','جميلة جدًا والملمس فخم. أنقصت نجمة لأن اللون أغمق قليلًا من الصورة تحت الإضاءة الصفراء.'],
+  ];
+  return `
+    <div class="rev-summary">
+      <div class="rev-big"><div class="n">4.8</div>${stars(4.8)}<div class="of">من 214 تقييم</div></div>
+      <div class="rev-bars">${bars.map(b=>`<div class="rev-bar"><span class="lab">${b[0]} ${starSVG(true)}</span><div class="track"><i style="width:${b[1]}%"></i></div><span class="pct">${b[1]}%</span></div>`).join('')}</div>
+    </div>
+    <button class="btn btn-secondary" style="margin:6px 0 18px">اكتب تقييمًا</button>
+    <div class="rev-list">${cards.map(c=>`<div class="rev-card"><div class="rh"><div class="av">${c[0]}</div><div><div class="nm">${c[1]}</div><div class="dt">${c[2]}</div></div><span class="vbadge">${icon('checkCircle')} شراء موثّق</span></div><div style="margin-bottom:8px">${stars(5)}</div><p>${c[3]}</p></div>`).join('')}</div>`;
+}
+function detailsBlock(idp){
+  return `
+    <div class="tabs" data-tabs="${idp}">
+      <button data-tab="desc" aria-selected="true">الوصف</button>
+      <button data-tab="specs" aria-selected="false">المواصفات</button>
+      <button data-tab="reviews" aria-selected="false">التقييمات (214)</button>
+    </div>
+    <div class="tab-body">
+      <div data-panel="desc">
+        <p style="max-width:70ch;font-size:15px;line-height:1.8">كليم أطلس المغربي قطعةٌ منسوجة يدويًا على نول تقليدي في جبال الأطلس، من صوفٍ طبيعي 100% مصبوغ بأصباغ نباتية تمنحه ألوانًا دافئة تدوم. النسج المسطّح خفيف وسهل العناية، ويناسب المجالس وغرف المعيشة والممرات. كل قطعة فريدة بتفاوتٍ طفيف في النقوش يؤكّد أصالتها اليدوية.</p>
+        <ul class="principles" style="margin-top:16px">
+          <li><b>صوف طبيعي 100%</b> — دافئ، متين، ومقاوم للبقع بطبيعته.</li>
+          <li><b>نسج يدوي مسطّح</b> — خفيف الوزن وقابل للقلب لإطالة العمر.</li>
+          <li><b>أصباغ نباتية</b> — ألوان ثابتة لا تبهت بسهولة.</li>
+        </ul>
+      </div>
+      <div data-panel="specs" hidden>${specsList()}</div>
+      <div data-panel="reviews" hidden>${reviewsBlock()}</div>
+    </div>`;
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // A
+  document.getElementById('ga-gallery').innerHTML = gallery('ga','side');
+  document.getElementById('ga-buy').innerHTML = buyPanel('ga');
+  document.getElementById('ga-details').innerHTML = detailsBlock('ga');
+  document.getElementById('ga-related').innerHTML = REL.map(p=>productCard(p,{idp:'rela-'})).join('');
+  // B
+  document.getElementById('gb-gallery').innerHTML = gallery('gb','vertical');
+  document.getElementById('gb-buy').innerHTML = buyPanel('gb');
+  document.getElementById('gb-details').innerHTML = detailsBlock('gb');
+  document.getElementById('gb-related').innerHTML = REL.map(p=>productCard(p,{idp:'relb-'})).join('');
+  // C
+  document.getElementById('gc-gallery').innerHTML = gallery('gc','top');
+  document.getElementById('gc-buy').innerHTML = buyPanel('gc');
+  document.getElementById('gc-details').innerHTML = detailsBlock('gc');
+  document.getElementById('gc-related').innerHTML = REL.map(p=>productCard(p,{idp:'relc-'})).join('');
+  // mobile mock
+  document.getElementById('m-rating').innerHTML = ratingBlock(4.8,214);
+  document.getElementById('m-add').innerHTML = icon('cart') + ' أضف للسلة';
+
+  // crumb seps + select chevrons
+  document.querySelectorAll('.crumbs .sep').forEach(s=>{ if(!s.querySelector('svg')) s.innerHTML=icon('chevLeft'); });
+  document.querySelectorAll('.select-wrap').forEach(w=>{ if(!w.querySelector('svg')) w.insertAdjacentHTML('beforeend', icon('chevDown')); });
+
+  // ---- interactivity (delegated) ----
+  document.addEventListener('click', (e)=>{
+    // swatch select
+    const sw = e.target.closest('.swcolor');
+    if(sw && sw.closest('.swatches')){ sw.closest('.swatches').querySelectorAll('.swcolor').forEach(x=>x.classList.remove('sel')); sw.classList.add('sel');
+      const head = sw.closest('.buy')?.querySelector('.opt-head .pick'); if(head && sw.title) head.textContent = sw.title; }
+    // size select
+    const sz = e.target.closest('.size');
+    if(sz && sz.closest('.sizes') && !sz.classList.contains('oos')){ sz.closest('.sizes').querySelectorAll('.size').forEach(x=>x.classList.remove('sel')); sz.classList.add('sel'); }
+    // thumb select
+    const th = e.target.closest('.g-thumbs .th');
+    if(th){ th.closest('.g-thumbs').querySelectorAll('.th').forEach(x=>x.classList.remove('sel')); th.classList.add('sel'); }
+    // qty
+    const q = e.target.closest('[data-q]');
+    if(q){ const val = q.closest('.qty').querySelector('.val'); let n=parseInt(val.textContent,10); n += q.dataset.q==='+'?1:-1; val.textContent = Math.max(1,n); }
+    // tabs
+    const tb = e.target.closest('[data-tabs] [data-tab]');
+    if(tb){ const grp = tb.closest('[data-tabs]'); grp.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-selected', x===tb?'true':'false'));
+      const body = grp.nextElementSibling; const key=tb.dataset.tab;
+      body.querySelectorAll('[data-panel]').forEach(p=>{ p.hidden = p.dataset.panel!==key; }); }
+  });
+});
+</script>
+</body>
+</html>
