@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Reem_Kufi, Cairo } from "next/font/google";
 import "./globals.css";
+import "./ds-components.css";
+import "./ds-storefront.css";
 import { business } from "@/lib/data/business";
 import { UtilityBar } from "@/components/layout/UtilityBar";
 import { Navbar } from "@/components/layout/Navbar";

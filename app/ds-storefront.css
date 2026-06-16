@@ -1,0 +1,156 @@
+/* =========================================================================
+   ds-storefront.css — أقسام المتجر منقولة من نظام تصميم الريفرنس (store.css).
+   التوكنز (--c-*) و--sp/--sh/--font-* مُعرّفة في globals.css (Palette 4/5).
+   حُذف كروم مراجعة A/B/C وكتلة :root/body المكرّرة.
+   ========================================================================= */
+
+
+/* =========================================================================
+   STOREFRONT — shared structural pieces
+   ========================================================================= */
+.wrap { max-width:var(--wrap); margin:0 auto; padding-inline:32px; }
+.store { background:var(--c-bg); }
+
+/* utility bar above nav */
+.ubar { background:var(--c-primary); color:var(--c-on-primary); font-size:12.5px; }
+.ubar .wrap { display:flex; align-items:center; gap:18px; height:38px; }
+.ubar .uitem { display:flex; align-items:center; gap:7px; opacity:.92; }
+.ubar .uitem svg { width:15px; height:15px; }
+.ubar .spacer { flex:1; }
+.ubar a { color:inherit; text-decoration:none; opacity:.9; }
+.ubar a:hover { opacity:1; }
+.ubar .ulinks { display:flex; gap:16px; }
+
+/* sticky storefront navbar (distinct from DS .nav demo card) */
+.snav { position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--c-bg) 90%, transparent);
+  backdrop-filter:saturate(1.2) blur(12px); border-bottom:1px solid var(--c-border); }
+.snav .row { display:flex; align-items:center; gap:22px; height:74px; }
+.snav .logo { font-family:var(--font-display); font-weight:700; font-size:25px; letter-spacing:.01em; color:var(--c-text); text-decoration:none; }
+.snav .logo small { font-family:var(--font-body); font-weight:600; font-size:9px; letter-spacing:.34em; color:var(--c-muted); display:block; margin-top:-2px; }
+.snav .links { display:flex; gap:2px; }
+.snav .links a { font-size:14.5px; font-weight:600; color:var(--c-text); text-decoration:none; padding:9px 13px; border-radius:9px;
+  display:flex; align-items:center; gap:6px; transition:.15s; }
+.snav .links a:hover { background:var(--c-surface); }
+.snav .links a.active { color:var(--c-primary); }
+.snav .links a svg { width:15px; height:15px; opacity:.7; }
+.snav .tools { margin-inline-start:auto; display:flex; align-items:center; gap:6px; }
+.snav .icon-btn { position:relative; width:44px; height:44px; border-radius:11px; border:0; background:transparent; color:var(--c-text);
+  cursor:pointer; display:grid; place-items:center; transition:.15s; }
+.snav .icon-btn:hover { background:var(--c-surface); }
+.snav .icon-btn svg { width:21px; height:21px; }
+.snav .icon-btn .cnt { position:absolute; inset-block-start:6px; inset-inline-end:6px; min-width:17px; height:17px; padding:0 4px;
+  border-radius:999px; background:var(--c-sale); color:#fff; font-size:10px; font-weight:700; display:grid; place-items:center; }
+.snav .searchbox { flex:1; max-width:340px; }
+
+/* generic storefront section header */
+.s-head { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; }
+.s-head .kick { font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--c-accent-ink); margin-bottom:8px; display:flex; align-items:center; gap:9px; }
+.s-head .kick::before { content:""; width:24px; height:1.5px; background:var(--c-accent); }
+.s-head h2 { font-size:30px; line-height:1.12; letter-spacing:-.01em; }
+.s-head p { color:var(--c-muted); font-size:14.5px; margin:7px 0 0; max-width:54ch; }
+.s-head .more { font-size:13.5px; font-weight:600; color:var(--c-primary); text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; }
+.s-head .more svg { width:16px; height:16px; }
+.s-head .more:hover { gap:10px; }
+.sec { padding-block:56px; }
+.sec.tight { padding-block:38px; }
+.sec.surface { background:var(--c-surface); }
+
+/* product grid columns */
+.pgrid { display:grid; gap:22px; }
+.pgrid.c2 { grid-template-columns:repeat(2,1fr); }
+.pgrid.c3 { grid-template-columns:repeat(3,1fr); }
+.pgrid.c4 { grid-template-columns:repeat(4,1fr); }
+
+/* horizontal scroller (bestsellers row) */
+.hscroll { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(248px,1fr); gap:20px; overflow-x:auto;
+  scroll-snap-type:x mandatory; padding-bottom:10px; scrollbar-width:thin; }
+.hscroll > * { scroll-snap-align:start; }
+
+/* product card image-slot sizing inside .pcard .media */
+.pcard image-slot { position:absolute; inset:0; width:100%; height:100%; }
+.media-slot { position:relative; width:100%; aspect-ratio:4/5; background:var(--c-surface); border-radius:0; overflow:hidden; }
+
+/* image-slot baseline look */
+image-slot { background:var(--c-surface); }
+
+/* room grid */
+.roomgrid { display:grid; gap:18px; }
+
+/* budget / collection band */
+.budget-band { display:grid; gap:16px; grid-template-columns:repeat(4,1fr); }
+.budget-card { position:relative; border-radius:16px; overflow:hidden; min-height:170px; padding:22px; display:flex; flex-direction:column;
+  justify-content:flex-end; color:#fff; isolation:isolate; cursor:pointer; }
+.budget-card .scrim { position:absolute; inset:0; z-index:-1; }
+.budget-card image-slot { position:absolute; inset:0; z-index:-2; }
+.budget-card .amt { font-family:var(--font-display); font-size:30px; font-weight:700; line-height:1; }
+.budget-card .amt .sar { font-size:.5em; font-weight:600; opacity:.85; }
+.budget-card .lab { font-size:13px; opacity:.9; margin-top:6px; }
+.budget-card .cnt { margin-top:10px; font-size:12px; font-weight:600; opacity:.85; }
+
+/* lifestyle / inspiration */
+.inspo { display:grid; grid-template-columns:1.3fr 1fr; gap:24px; align-items:stretch; }
+.inspo .big { position:relative; border-radius:18px; overflow:hidden; min-height:440px; display:flex; align-items:flex-end; padding:34px; color:#fff; isolation:isolate; }
+.inspo .big image-slot { position:absolute; inset:0; z-index:-2; }
+.inspo .big .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(20,17,14,.72), transparent 62%); }
+.inspo .big h3 { font-size:30px; line-height:1.1; max-width:18ch; }
+.inspo .big p { font-size:14px; opacity:.9; max-width:40ch; margin:10px 0 18px; }
+.inspo .col { display:grid; grid-template-rows:1fr 1fr; gap:24px; }
+.inspo .mini { position:relative; border-radius:18px; overflow:hidden; display:flex; align-items:flex-end; padding:22px; color:#fff; isolation:isolate; }
+.inspo .mini image-slot { position:absolute; inset:0; z-index:-2; }
+.inspo .mini .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(20,17,14,.66), transparent 64%); }
+.inspo .mini h4 { font-size:19px; }
+
+/* limited-time offers — countdown band */
+.offers-band { background:var(--c-primary); color:var(--c-on-primary); border-radius:20px; padding:32px; }
+.offers-band.accentbg { background:var(--c-accent); color:var(--c-on-accent); }
+.countdown { display:flex; gap:10px; }
+.cd-unit { background:color-mix(in srgb, #fff 16%, transparent); border-radius:12px; padding:10px 14px; text-align:center; min-width:62px; }
+.cd-unit b { font-family:var(--font-display); font-size:28px; font-weight:700; line-height:1; display:block; font-variant-numeric:tabular-nums; }
+.cd-unit span { font-size:11px; opacity:.82; letter-spacing:.04em; }
+
+/* shop-by-style chips/tiles */
+.style-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.style-tile { position:relative; border-radius:16px; overflow:hidden; min-height:200px; display:flex; align-items:flex-end; padding:22px; color:#fff; isolation:isolate; cursor:pointer; }
+.style-tile image-slot { position:absolute; inset:0; z-index:-2; }
+.style-tile .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(20,17,14,.7), transparent 60%); }
+.style-tile .t { font-family:var(--font-display); font-size:21px; font-weight:600; }
+.style-tile .c { font-size:12.5px; opacity:.85; margin-top:3px; }
+
+/* promo banner */
+.promo-banner { position:relative; border-radius:20px; overflow:hidden; min-height:300px; display:flex; align-items:center; padding:48px; color:#fff; isolation:isolate; }
+.promo-banner image-slot { position:absolute; inset:0; z-index:-2; }
+.promo-banner .scrim { position:absolute; inset:0; z-index:-1; background:linear-gradient(120deg, rgba(46,41,37,.82), rgba(46,41,37,.25)); }
+.promo-banner .pin { max-width:44ch; }
+.promo-banner h2 { font-size:38px; line-height:1.08; letter-spacing:-.01em; }
+.promo-banner p { font-size:15.5px; opacity:.92; margin:12px 0 22px; }
+
+/* newsletter */
+.news { background:var(--c-surface); border-radius:20px; padding:42px; display:grid; grid-template-columns:1.2fr 1fr; gap:34px; align-items:center; }
+.news h2 { font-size:28px; line-height:1.12; }
+.news p { color:var(--c-muted); margin:8px 0 0; max-width:46ch; }
+.news .form { display:flex; gap:10px; }
+.news .form .input { flex:1; }
+.news .fine { font-size:11.5px; color:var(--c-muted); margin-top:10px; }
+
+/* trust strip */
+.trust { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.trust .ti { display:flex; gap:13px; align-items:flex-start; }
+.trust .ti .ic { flex:none; width:42px; height:42px; border-radius:11px; background:var(--c-surface); color:var(--c-primary); display:grid; place-items:center; }
+.trust .ti .ic svg { width:21px; height:21px; }
+.trust .ti b { font-family:var(--font-display); font-size:14.5px; display:block; }
+.trust .ti span { font-size:12.5px; color:var(--c-muted); }
+
+/* footer tweaks reuse .foot from components.css */
+.store .foot { border-radius:0; border-inline:0; border-block-end:0; }
+
+/* eastern-arabic price helper already styled via .price in components.css */
+.sar-sym { font-size:.7em; font-weight:600; opacity:.8; }
+
+@media (max-width: 1100px) {
+  .budget-band { grid-template-columns:repeat(2,1fr); }
+  .style-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 860px) {
+  .doc { padding:22px 14px 90px; }
+  .vframe { border-radius:14px; }
+}
