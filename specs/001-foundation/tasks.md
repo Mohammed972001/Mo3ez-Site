@@ -8,7 +8,7 @@
 
 | # | التاسك | الحالة |
 |---|---|---|
-| T00 | تهيئة المشروع (Scaffold) | ⬜ |
+| T00 | تهيئة المشروع (Scaffold) | ✅ |
 | T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ⬜ |
 | T02 | عناصر UI الأساسية (Primitives) | ⬜ |
 | T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ⬜ |
@@ -33,9 +33,10 @@
 
 ## التفاصيل ومعايير القبول
 
-### T00 — تهيئة المشروع (Scaffold)
+### T00 — تهيئة المشروع (Scaffold) ✅
 Next.js (أحدث) + TS صارم + Tailwind v4 + ESLint/Prettier + هيكل المجلدات (خطة §2) + `lib/data/business.ts` (NAP) + `.env.example`. حذف/أرشفة ملفات الموكاب الثابتة إلى `design-reference/`.
 **القبول:** `next build` و`next dev` يعملان · لينتر نظيف · صفحة `/` فاضية SSR · بوابة `clean-code-guard`.
+**التنفيذ:** Next 16.2.9 / React 19.2 / Tailwind v4 / TS strict. `next build` ✅ (TS نظيف، `/` static). layout عربي RTL. هيكل المجلدات + `business.ts`. الموكاب في `design-reference/`. + تثبيت spec-kit الرسمي (skills + `/speckit-*`).
 
 ### T01 — الثيم والتوكنز + الخطوط
 متغيّرات CSS لـ Palette 3 (لايت) و5 (دارك) + اشتقاق success/sale/on-colors · ربطها في Tailwind `@theme` · خطوط Type 3 عبر `next/font` · `ThemeToggle` بلا وميض · `html lang=ar dir=rtl`.
