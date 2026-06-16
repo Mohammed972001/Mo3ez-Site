@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
-import { CategoryList } from "./MegaMenu";
+import { ProductsMenu } from "./MegaMenu";
 import { whatsappLink, telLink } from "@/lib/data/business";
 
 const navLinks = [
@@ -89,19 +88,19 @@ export function MobileDrawer() {
                 </ul>
               </nav>
 
-              <p className="mb-2 mt-5 px-3 text-[11px] font-bold uppercase tracking-widest text-muted">
-                التصنيفات
+              <p className="mb-2 mt-5 px-3 text-[11px] font-bold uppercase tracking-widest text-[var(--c-muted)]">
+                المنتجات
               </p>
-              <CategoryList onNavigate={close} />
+              <ProductsMenu onNavigate={close} />
             </div>
 
-            <div className="grid grid-cols-2 gap-2 border-t border-border p-4">
-              <Button href={whatsappLink()} variant="accent" size="sm">
+            <div className="grid grid-cols-2 gap-2 border-t border-[var(--c-border)] p-4">
+              <a href={whatsappLink()} onClick={close} className="btn btn-accent btn-sm">
                 <Icon name="whatsapp" /> واتساب
-              </Button>
-              <Button href={telLink} variant="secondary" size="sm">
+              </a>
+              <a href={telLink} onClick={close} className="btn btn-secondary btn-sm">
                 <Icon name="phone" /> اتصال
-              </Button>
+              </a>
             </div>
           </div>
         </div>
