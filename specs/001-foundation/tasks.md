@@ -9,7 +9,7 @@
 | # | التاسك | الحالة |
 |---|---|---|
 | T00 | تهيئة المشروع (Scaffold) | ✅ |
-| T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ⬜ |
+| T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ✅ |
 | T02 | عناصر UI الأساسية (Primitives) | ⬜ |
 | T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ⬜ |
 | T04 | طبقة البيانات (تصنيفات/منتجات/NAP) | ⬜ |
@@ -38,9 +38,10 @@ Next.js (أحدث) + TS صارم + Tailwind v4 + ESLint/Prettier + هيكل ال
 **القبول:** `next build` و`next dev` يعملان · لينتر نظيف · صفحة `/` فاضية SSR · بوابة `clean-code-guard`.
 **التنفيذ:** Next 16.2.9 / React 19.2 / Tailwind v4 / TS strict. `next build` ✅ (TS نظيف، `/` static). layout عربي RTL. هيكل المجلدات + `business.ts`. الموكاب في `design-reference/`. + تثبيت spec-kit الرسمي (skills + `/speckit-*`).
 
-### T01 — الثيم والتوكنز + الخطوط
+### T01 — الثيم والتوكنز + الخطوط ✅
 متغيّرات CSS لـ Palette 3 (لايت) و5 (دارك) + اشتقاق success/sale/on-colors · ربطها في Tailwind `@theme` · خطوط Type 3 عبر `next/font` · `ThemeToggle` بلا وميض · `html lang=ar dir=rtl`.
 **القبول:** تبديل لايت/دارك يعمل ويحترم `prefers-color-scheme` · تباين AA · CLS=0 عند التبديل · بوابة `web-design-guidelines`.
+**التنفيذ:** `globals.css` توكنز Palette 3/5 (كلها AA — text 13:1/15.7:1، primary 6.5:1، accent 5.2:1، gold 7.8:1) مربوطة في Tailwind `@theme inline`. خطوط Type 3 (Fraunces/ريم كوفي/Sora/Cairo) self-hosted عبر `next/font` بـ swap. `ThemeToggle` + سكربت no-flash يحترم `prefers-color-scheme`. تحقّق بصري: لايت+دارك على 390px موبايل ✅، `next build` ✅.
 
 ### T02 — عناصر UI الأساسية
 نقل المكوّنات من `components.css`: Button (كل الأنواع) · Badge · Price (ر.س) · Rating · Card (pcard) · Input/Select · Chip · Qty · Swatch/Size · Breadcrumb · Skeleton · Empty · Toast. Tailwind، موبايل-أولاً، a11y، RTL.
