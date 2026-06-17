@@ -40,5 +40,8 @@ Thumbs.db
 # Local agent/tooling artifacts
 .image-slots.state.json
 
-# لقطات تحقّق محلية
+# Local verification screenshots
 .shots/
+
+# Local-only Arabic working notes (kept on disk, never committed)
+docs/*-ar.md
