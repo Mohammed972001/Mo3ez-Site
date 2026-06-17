@@ -146,11 +146,86 @@ image-slot { background:var(--c-surface); }
 /* eastern-arabic price helper already styled via .price in components.css */
 .sar-sym { font-size:.7em; font-weight:600; opacity:.8; }
 
+/* =========================================================================
+   HOME — full-bleed hero (تصميم A) — منقول من <style> داخل Home.html
+   image-slot استُبدل بـ next/image fill عبر .bgimg (z-index سالب خلف الـ scrim).
+   ========================================================================= */
+.hero-full { position:relative; min-height:600px; display:flex; align-items:center; isolation:isolate; overflow:hidden; }
+.hero-full .scrim { position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(290deg, rgba(20,17,14,.20) 0%, rgba(20,17,14,.62) 70%, rgba(20,17,14,.80) 100%); }
+.hero-full .pin { max-width:48ch; color:#fff; }
+.hero-full .kick { font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:#fff; opacity:.92; display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+.hero-full .kick::before { content:""; width:26px; height:1.5px; background:#fff; opacity:.7; }
+.hero-full h1 { font-family:var(--font-display); font-size:54px; line-height:1.06; letter-spacing:-.015em; }
+.hero-full p { font-size:17px; opacity:.94; margin:16px 0 26px; max-width:42ch; }
+.hero-full .ctas { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-full .meta { margin-top:22px; font-size:13px; opacity:.85; display:flex; gap:18px; flex-wrap:wrap; }
+.hero-full .meta span { display:flex; align-items:center; gap:7px; }
+.hero-full .meta svg { width:16px; height:16px; }
+
+/* خلفية صورة عبر next/image fill: تقع خلف الـ scrim والمحتوى */
+.bgimg { z-index:-2 !important; object-fit:cover; }
+/* صورة تملأ الإطار وتكون هي المحتوى (بطاقة/تصنيف) */
+.coverimg { object-fit:cover; }
+
+/* روابط بطاقات الهوم بلا خط/لون افتراضي */
+.style-tile, .budget-card, .ccard, .roomcard, .pcard { text-decoration:none; color:inherit; }
+
+/* صف الأكثر طلبًا: إخفاء شريط التمرير */
+.hscroll { scrollbar-width:thin; }
+
+/* =========================================================================
+   RESPONSIVE — موبايل أولاً (قاعدة الدستور #1). الافتراضي أعلاه = ديسكتوب،
+   ونطوي تدريجيًا. أهم نقاط الانهيار من ملاحظات «على الجوال» في الريفرنس.
+   ========================================================================= */
 @media (max-width: 1100px) {
   .budget-band { grid-template-columns:repeat(2,1fr); }
-  .style-grid { grid-template-columns:repeat(2,1fr); }
+  .style-grid  { grid-template-columns:repeat(2,1fr); }
+  .trust       { grid-template-columns:repeat(2,1fr); }
+  .pgrid.c4    { grid-template-columns:repeat(2,1fr); }
+  .inspo       { grid-template-columns:1fr; }
+  .inspo .col  { grid-template-rows:auto; grid-template-columns:1fr 1fr; }
 }
-@media (max-width: 860px) {
-  .doc { padding:22px 14px 90px; }
-  .vframe { border-radius:14px; }
+
+@media (max-width: 820px) {
+  .wrap { padding-inline:18px; }
+  .sec { padding-block:42px; }
+  .sec.tight { padding-block:30px; }
+  .s-head { gap:14px; }
+  .s-head h2 { font-size:24px; }
+
+  /* الهيرو: ارتفاع أقصر، عنوان أصغر، زرّان بعرض كامل */
+  .hero-full { min-height:78vh; }
+  .hero-full h1 { font-size:34px; }
+  .hero-full p { font-size:15.5px; }
+  .hero-full .ctas { width:100%; }
+  .hero-full .ctas .btn { flex:1 1 auto; justify-content:center; }
+
+  /* شبكات تنطوي */
+  .pgrid.c3, .roomgrid.c3 { grid-template-columns:repeat(2,1fr); }
+  .inspo .col { grid-template-columns:1fr 1fr; }
+  .inspo .big { min-height:280px; padding:24px; }
+  .inspo .big h3 { font-size:24px; }
+
+  /* العروض + العدّاد يتراصّان */
+  .offers-band { padding:22px; }
+  .offers-band > div:first-child { flex-direction:column; align-items:flex-start; }
+  .countdown { width:100%; }
+  .cd-unit { flex:1; min-width:0; }
+
+  /* البانر والنشرة عمود واحد */
+  .promo-banner { padding:30px; min-height:260px; }
+  .promo-banner h2 { font-size:28px; }
+  .news { grid-template-columns:1fr; padding:28px; gap:18px; }
+}
+
+@media (max-width: 560px) {
+  /* عمود واحد للميزانية/المكان والستايل، وصفّان 2×2 للثقة */
+  .budget-band { grid-template-columns:1fr 1fr; }
+  .style-grid  { grid-template-columns:1fr; }
+  .roomgrid.c3, .pgrid.c3 { grid-template-columns:1fr; }
+  .pgrid.c4 { grid-template-columns:1fr 1fr; }
+  .inspo .col { grid-template-columns:1fr; }
+  .hero-full h1 { font-size:30px; }
+  .s-head { flex-direction:column; align-items:flex-start; }
 }

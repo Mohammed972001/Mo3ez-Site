@@ -12,10 +12,10 @@
 | T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ✅ |
 | T02 | عناصر UI الأساسية (Primitives) | ✅ |
 | T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ✅ |
-| T04 | طبقة البيانات (تصنيفات/منتجات/NAP) | ⬜ |
-| T05 | خط أنابيب الصور (تحسين + slugs + alt) | ⬜ |
-| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | ⬜ |
-| T07 | الرئيسية (تصميم A) | ⬜ |
+| T04 | طبقة البيانات (٩ منتجات = ٩ فولدرات/NAP) | ✅ |
+| T05 | خط أنابيب الصور (تحسين + slugs + alt) | 🟡 |
+| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | 🟡 |
+| T07 | الرئيسية (تصميم A) | ✅ |
 | T08 | الكتالوج (تصميم B) | ⬜ |
 | T09 | صفحات التصنيف `/c/[category]` (B + محتوى SEO) | ⬜ |
 | T10 | صفحة المنتج `/p/[product]` (تصميم A) | ⬜ |
@@ -65,9 +65,12 @@ UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FA
 `lib/seo/metadata.ts` · `components/seo/JsonLd.tsx` · `app/sitemap.ts` · `app/robots.ts` · `app/llms.txt` · canonical/OG base.
 **القبول:** sitemap/robots/llms صحيحة وتشمل كل المسارات · JSON-LD يجتاز Rich Results · لا تكرار canonical.
 
-### T07 — الرئيسية (A)
-كل أقسام تصميم A (Hero، شريط ثقة، الأكثر مبيعًا، تسوّق بالغرفة/النوع، الميزانية، إلهام، عروض، نشرة) ببيانات حقيقية. `Organization`+`LocalBusiness`+`WebSite` JSON-LD.
+### T07 — الرئيسية (A) ✅
+كل أقسام تصميم A (Hero، شريط ثقة، الأكثر طلبًا، تسوّق بالنوع، حسب المكان، أدلّة/إلهام، عروض + عدّاد، حسب الاستخدام، بانر، تواصل) ببيانات حقيقية. `Organization`+`LocalBusiness`+`WebSite` JSON-LD.
 **القبول:** مطابقة A · LCP<2.5s (hero `priority`) · CLS<0.1 · SEO=100 · موبايل-أولاً.
+**التنفيذ:** `app/page.tsx` (Server Component، static prerender) — نقل تصميم A من `Home.html` بأقسامه، مُكيَّفًا لموكيت + توليد عملاء (لا سلة/أسعار → «السعر عند الطلب» + CTA واتساب). CSS الهيرو وأقسام الهوم نُقل إلى `ds-storefront.css` مع **ريسبونسف موبايل-أولاً** (نقاط 1100/820/560 من ملاحظات «على الجوال» بالريفرنس). العدّاد التنازلي = `components/home/Countdown.tsx` (client، بلا hydration mismatch). الصور عبر `next/image` (hero `priority`، باقي lazy + `sizes`). `metadata` + JSON-LD (Organization/WebSite/LocalBusiness/OpeningHours). تحقّق: `next build` ✅ (`/` static)، `tsc` نظيف، SSR يعرض كل الأقسام، الصور عبر `/_next/image` بـ srcset، قواعد الريسبونسف مشحونة في bundle الإنتاج.
+
+> ملاحظة انضباط: نُفِّذت T04 (طبقة البيانات) و T07 ضمن فرع `feature/storefront-design-system` المجمِّع للـ chrome+بيانات+هوم (معلَم مرئي واحد) بدل فرع T مستقل. الفروع القادمة (T08 المتجر، T10 المنتج) تعود لنمط `feature/T<NN>`. T05/T06 جزئيّتان: تحسين الصور تلقائي عبر `next/image`، و JSON-LD/metadata لكل صفحة موجودة — لكن `sitemap.ts`/`robots.ts`/`llms.txt` وخط أنابيب الـ slugs المركزي لسه (تُغلق قبل النشر).
 
 ### T08 — الكتالوج (B)
 شبكة 4 أعمدة + فلاتر علوية + معاينة سريعة (تصميم B) لكل المنتجات. `ItemList` JSON-LD · ترقيم/تحميل.
