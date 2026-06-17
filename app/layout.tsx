@@ -4,6 +4,7 @@ import "./globals.css";
 import "./ds-components.css";
 import "./ds-storefront.css";
 import { business } from "@/lib/data/business";
+import { SITE_URL } from "@/lib/seo/site";
 import { UtilityBar } from "@/components/layout/UtilityBar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -28,13 +29,11 @@ const cairo = Cairo({
 const fontVars = `${reemKufi.variable} ${cairo.variable}`;
 
 export const metadata: Metadata = {
-  title: {
-    default: `${business.name} — موكيت وأرضيات الرياض`,
-    template: `%s | ${business.name}`,
-  },
+  // عنوان افتراضي فقط — كل صفحة تضبط عنوانها الكامل (يتضمّن الاسم) فلا تكرار للعلامة.
+  title: `${business.name} — موكيت وأرضيات الرياض`,
   description:
     "موكيت ومفروشات وأرضيات بالرياض: موكيت مساجد ومكاتب، عشب صناعي، فينيل، وأرضيات مطاطية — توصيل وتركيب. تواصل واتساب مباشر.",
-  metadataBase: new URL("https://example.com"), // يُضبط النطاق الحقيقي في T06
+  metadataBase: new URL(SITE_URL),
 };
 
 /* يضبط الوضع (داكن/فاتح) قبل الرسم لمنع وميض الثيم — يقرأ التخزين ثم تفضيل النظام. */
