@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* تفعيل الوضع الداكن عبر سمة [data-theme="dark"] على <html> (تبديل يدوي يتجاوز النظام).
+   التوكنز نفسها تنقلب بالـ CSS variables، فمعظم المكوّنات تستخدم utilities دلالية بلا dark:. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ===========================================================================
+   توكنز الثيم — Palette 4 (Soft Nordic) لايت · Palette 5 (Dark Premium) دارك
+   كل القيم متحقّقة WCAG AA (انظر سجلّ القرارات، القرار 16).
+   =========================================================================== */
+:root {
+  /* Light · Soft Nordic */
+  --bg: #fcfbf9;
+  --surface: #ede9e2;
+  --text: #2c2925;
+  --muted: #837c72;
+  --border: #e6e1d8;
+  --primary: #5e6b5a; /* سيج (sage) */
+  --on-primary: #ffffff;
+  --accent: #b98e6b; /* كامل (camel) — تعبئة بنص داكن */
+  --on-accent: #2c2925;
+  --accent-ink: #8e5c39; /* كامل أغمق لنص الإيبرو الصغير (يجتاز AA) */
+  --success: #4e7a5e;
+  --sale: #b5503c;
+  --star: #b98e6b;
+  color-scheme: light;
+
+  /* مكدّسات الخطوط (يضبطها next/font على <html>) — Type 3 عربي-أولًا.
+     الخط العربي أول المكدّس → لا يعترضه أي fallback، فيظهر ريم كوفي/Cairo دائمًا. */
+  --font-display-stack: var(--font-reem), Georgia, "Times New Roman", serif;
+  --font-body-stack: var(--font-cairo), system-ui, -apple-system, sans-serif;
+
+  /* مقاييس مشتركة */
+  --radius: 0.875rem;
+  --wrap: 80rem; /* 1280px */
+
+  /* ---- جسر لنظام تصميم الريفرنس (ds-components.css / ds-storefront.css) ----
+     يستخدم الريفرنس أسماء --c-* ؛ نوصّلها بتوكنزنا فتنقلب تلقائيًّا في الوضع الداكن. */
+  --c-bg: var(--bg);
+  --c-surface: var(--surface);
+  --c-text: var(--text);
+  --c-muted: var(--muted);
+  --c-border: var(--border);
+  --c-primary: var(--primary);
+  --c-on-primary: var(--on-primary);
+  --c-accent: var(--accent);
+  --c-on-accent: var(--on-accent);
+  --c-accent2: var(--primary);
+  --c-on-accent2: var(--on-primary);
+  --c-accent-ink: var(--accent-ink);
+  --c-success: var(--success);
+  --c-sale: var(--sale);
+  --c-star: var(--star);
+  --font-display: var(--font-display-stack);
+  --font-body: var(--font-body-stack);
+  /* مقياس المسافات/الزوايا/الظلال من نظام التصميم */
+  --sp-xs: 8px; --sp-sm: 12px; --sp-md: 16px; --sp-lg: 24px;
+  --sp-xl: 32px; --sp-2xl: 48px; --sp-3xl: 64px;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 16px;
+  --sh-sm: 0 1px 2px rgba(0, 0, 0, .06), 0 1px 3px rgba(0, 0, 0, .05);
+  --sh-md: 0 4px 10px -2px rgba(0, 0, 0, .10), 0 2px 6px -2px rgba(0, 0, 0, .08);
+  --sh-lg: 0 16px 34px -16px rgba(0, 0, 0, .30);
+  --sh-xl: 0 30px 60px -24px rgba(0, 0, 0, .45);
+}
+
+[data-theme="dark"] {
+  /* Dark · Dark Premium */
+  --bg: #14110e;
+  --surface: #1f1a16;
+  --text: #f0eae0;
+  --muted: #a39b8e;
+  --border: #312a23;
+  --primary: #c9a24b; /* ذهبي — الفعل الأساسي بنص داكن */
+  --on-primary: #14110e;
+  --accent: #c9a24b;
+  --on-accent: #14110e;
+  --accent-ink: #d9b665; /* ذهبي أفتح لنص الإيبرو على خلفية داكنة */
+  --success: #5ba77d;
+  --sale: #e08363;
+  --star: #c9a24b;
+  color-scheme: dark;
+}
+
+/* ربط التوكنز في نظام Tailwind v4 → utilities مثل bg-bg / text-text / text-primary */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-success: var(--success);
+  --color-sale: var(--sale);
+  --color-star: var(--star);
+
+  --font-display: var(--font-display-stack);
+  --font-body: var(--font-body-stack);
+
+  --radius-theme: var(--radius);
+}
+
+/* ===========================================================================
+   الأساس (Base) — RTL أصلي، خطوط، حركة مخفّضة
+   =========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.15;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+/* تركيز ظاهر متّسق (a11y) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* أرقام جدولية للأسعار */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
