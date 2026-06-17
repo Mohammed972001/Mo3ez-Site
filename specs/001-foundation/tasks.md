@@ -14,7 +14,7 @@
 | T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ✅ |
 | T04 | طبقة البيانات (٩ منتجات = ٩ فولدرات/NAP) | ✅ |
 | T05 | خط أنابيب الصور (تحسين + slugs + alt) | 🟡 |
-| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | 🟡 |
+| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | ✅ |
 | T07 | الرئيسية (تصميم A) | ✅ |
 | T08 | الكتالوج (تصميم B) `/mokeet` | ✅ |
 | T09 | صفحات التصنيف `/c/[category]` (B + محتوى SEO) | ⬜ |
@@ -61,9 +61,10 @@ UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FA
 سكربت تحويل WebP/AVIF + إعادة تسمية slug + أبعاد + blur + خريطة `alt`. (خطة §4).
 **القبول:** كل الصور محسّنة + slugs وصفية + alt عربي · أوزان أقل بكثير · أبعاد محجوزة (CLS).
 
-### T06 — معمارية SEO
+### T06 — معمارية SEO ✅
 `lib/seo/metadata.ts` · `components/seo/JsonLd.tsx` · `app/sitemap.ts` · `app/robots.ts` · `app/llms.txt` · canonical/OG base.
 **القبول:** sitemap/robots/llms صحيحة وتشمل كل المسارات · JSON-LD يجتاز Rich Results · لا تكرار canonical.
+**التنفيذ:** `lib/seo/site.ts` (SITE_URL موحّد) + `metadataBase` الحقيقي في الـ layout (لحلّ canonical/OG)، وإزالة `title.template` لتفادي تكرار العلامة (كل صفحة تضبط عنوانها الكامل). `app/sitemap.ts` (**٢٠ مسارًا**: ٧ صفحات + ٩ منتجات + ٤ فئات، المسارات العربية مُرمَّزة). `app/robots.ts` (Allow الكل + host + sitemap). `app/llms.txt/route.ts` (ملخّص GEO: NAP + المنتجات + الصفحات). JSON-LD لكل صفحة أُنجز ضمن T07/T08/T10/T13 (Organization/WebSite/LocalBusiness/Product/Breadcrumb/FAQPage/ItemList). **تحقّق:** `robots.txt`/`sitemap.xml`/`llms.txt` تُخدَم صحيحة (curl). `next build` ✅ · `tsc` نظيف.
 
 ### T07 — الرئيسية (A) ✅
 كل أقسام تصميم A (Hero، شريط ثقة، الأكثر طلبًا، تسوّق بالنوع، حسب المكان، أدلّة/إلهام، عروض + عدّاد، حسب الاستخدام، بانر، تواصل) ببيانات حقيقية. `Organization`+`LocalBusiness`+`WebSite` JSON-LD.
