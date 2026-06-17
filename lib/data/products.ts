@@ -26,9 +26,30 @@ export interface Product {
   specs: Spec[];
   faq: Faq[];
   keywords: string[];
+  category: string; // slug فئة للتصفية في /mokeet
 }
 
-const data: Omit<Product, never>[] = [
+/** فئات الكتالوج — تُستخدم في فلتر المتجر (B) وصفحات الفئة لاحقًا (T09). */
+export const categories: { slug: string; label: string }[] = [
+  { slug: "موكيت", label: "موكيت" },
+  { slug: "أرضيات-مطاطية", label: "أرضيات مطاطية" },
+  { slug: "فينيل-وأرضيات", label: "فينيل وأرضيات صلبة" },
+  { slug: "عشب-صناعي", label: "عشب صناعي" },
+];
+
+const categoryOf: Record<string, string> = {
+  "موكيت-مساجد": "موكيت",
+  "موكيت-مكاتب": "موكيت",
+  "موكيت-تركي": "موكيت",
+  "أرضيات-مكتبية": "فينيل-وأرضيات",
+  "فينيل": "فينيل-وأرضيات",
+  "عشب-صناعي": "عشب-صناعي",
+  "أرضيات-جيم": "أرضيات-مطاطية",
+  "أرضيات-خيول": "أرضيات-مطاطية",
+  "أرضيات-مانعة-للانزلاق": "أرضيات-مطاطية",
+};
+
+const data: Omit<Product, "category">[] = [
   {
     slug: "موكيت-مساجد",
     nameAr: "موكيت مساجد",
@@ -245,7 +266,21 @@ const data: Omit<Product, never>[] = [
 ];
 
 /** المنتجات الكاملة مع معرض الصور (من gallery.generated). */
-export const products: Product[] = data.map((p) => ({ ...p }));
+export const products: Product[] = data.map((p) => ({
+  ...p,
+  category: categoryOf[p.slug] ?? "موكيت",
+}));
+
+/** منتجات فئة معيّنة (slug). بلا وسيط = الكل. */
+export function productsByCategory(cat?: string): Product[] {
+  if (!cat) return products;
+  return products.filter((p) => p.category === cat);
+}
+
+/** عدد منتجات كل فئة (للفلتر). */
+export function categoryCount(cat: string): number {
+  return products.filter((p) => p.category === cat).length;
+}
 
 export function productImages(slug: string): GalleryImage[] {
   return gallery[slug] ?? [];

@@ -16,7 +16,7 @@
 | T05 | خط أنابيب الصور (تحسين + slugs + alt) | 🟡 |
 | T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | 🟡 |
 | T07 | الرئيسية (تصميم A) | ✅ |
-| T08 | الكتالوج (تصميم B) | ⬜ |
+| T08 | الكتالوج (تصميم B) `/mokeet` | ✅ |
 | T09 | صفحات التصنيف `/c/[category]` (B + محتوى SEO) | ⬜ |
 | T10 | صفحة المنتج `/p/[product]` (تصميم A) | ⬜ |
 | T11 | توليد العملاء (واتساب/اتصال/فورم عرض سعر) | ⬜ |
@@ -72,9 +72,12 @@ UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FA
 
 > ملاحظة انضباط: نُفِّذت T04 (طبقة البيانات) و T07 ضمن فرع `feature/storefront-design-system` المجمِّع للـ chrome+بيانات+هوم (معلَم مرئي واحد) بدل فرع T مستقل. الفروع القادمة (T08 المتجر، T10 المنتج) تعود لنمط `feature/T<NN>`. T05/T06 جزئيّتان: تحسين الصور تلقائي عبر `next/image`، و JSON-LD/metadata لكل صفحة موجودة — لكن `sitemap.ts`/`robots.ts`/`llms.txt` وخط أنابيب الـ slugs المركزي لسه (تُغلق قبل النشر).
 
-### T08 — الكتالوج (B)
+### T08 — الكتالوج (B) `/mokeet` ✅
 شبكة 4 أعمدة + فلاتر علوية + معاينة سريعة (تصميم B) لكل المنتجات. `ItemList` JSON-LD · ترقيم/تحميل.
 **القبول:** مطابقة B · فلاتر تعمل (URL state للـ SEO) · CWV ضمن الميزانية.
+**التنفيذ:** `app/mokeet/page.tsx` (Server Component، يُرندر عند الطلب لقراءة `searchParams`). تصميم B: مسار تصفّح + h1 بالكلمة المستهدفة + فقرة GEO + **شريط فلاتر علوي** (قائمة «الفئة» منسدلة native `<details>` بروابط تُحدّث `?cat=`) + شريحة فلتر نشطة قابلة للإزالة + أدوات (عدد ديناميكي + ترتيب) + **شبكة `pgrid c4`** ببطاقات `ProductCard` (بلا أسعار، معاينة واتساب عند المرور). الترتيب عبر `components/shop/SortSelect.tsx` (client، `?sort=`). أُضيف حقل `category` للمنتجات (٤ فئات) + `productsByCategory`/`categoryCount`. CSS تصميم B (`.filterbar/.fdrop/.toolbar/.select-wrap`) نُقل إلى `ds-storefront.css` بريسبونسف. `ItemList` JSON-LD + `metadata`. **تحقّق بصري Playwright:** ديسكتوب وموبايل بلا overflow، والفلتر يعمل خادميًّا (`?cat=موكيت` ⇒ 3/9). `next build` ✅ · `tsc` نظيف.
+
+> ملاحظة: الفلتر الفعّال = «الفئة» (المنتجات أنواع متمايزة فلا تصلح فلاتر اللون/المقاس/السعر بالريفرنس). يبقى الهيكل البصري لتصميم B. الترقيم غير لازم (٩ منتجات).
 
 ### T09 — صفحات التصنيف
 `/c/[category]` بتصميم B + **كتلة إجابة مباشرة (GEO)** + وصف عربي أصيل + **FAQ** + `ItemList`+`Breadcrumb`+`FAQPage`.
