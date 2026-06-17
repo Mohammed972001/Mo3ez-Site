@@ -9,15 +9,15 @@ export function UtilityBar() {
         <span className="uitem">
           <Icon name="truck" /> توصيل وتركيب احترافي
         </span>
-        <span className="uitem max-sm:hidden">
+        <span className="uitem u-sec">
           <Icon name="shield" /> ضمان على الجودة
         </span>
         <span className="spacer" />
-        <span className="uitem max-sm:hidden">
+        <span className="uitem u-sec">
           <Icon name="location" /> {business.address.city}
         </span>
-        <a href={telLink} dir="ltr" className="uitem font-semibold">
-          <Icon name="phone" /> {business.phone.display}
+        <a href={telLink} className="uitem font-semibold" aria-label={`اتصل بنا: ${business.phone.display}`}>
+          <Icon name="phone" /> <bdi dir="ltr">{business.phone.display}</bdi>
         </a>
       </div>
     </div>

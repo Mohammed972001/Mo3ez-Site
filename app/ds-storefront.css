@@ -14,12 +14,18 @@
 /* utility bar above nav */
 .ubar { background:var(--c-primary); color:var(--c-on-primary); font-size:12.5px; }
 .ubar .wrap { display:flex; align-items:center; gap:18px; height:38px; }
-.ubar .uitem { display:flex; align-items:center; gap:7px; opacity:.92; }
+.ubar .uitem { display:flex; align-items:center; gap:7px; opacity:.92; white-space:nowrap; }
 .ubar .uitem svg { width:15px; height:15px; }
 .ubar .spacer { flex:1; }
 .ubar a { color:inherit; text-decoration:none; opacity:.9; }
 .ubar a:hover { opacity:1; }
 .ubar .ulinks { display:flex; gap:16px; }
+/* على الجوال: نُبقي «توصيل وتركيب» + الهاتف فقط، ونخفي الثانوي (الفئة الأعلى تخصيصًا
+   تتجاوز Tailwind max-sm:hidden، فنتحكّم هنا مباشرة). */
+@media (max-width: 640px) {
+  .ubar .wrap { gap:10px; height:36px; }
+  .ubar .u-sec { display:none; }
+}
 
 /* sticky storefront navbar (distinct from DS .nav demo card) */
 .snav { position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--c-bg) 90%, transparent);
