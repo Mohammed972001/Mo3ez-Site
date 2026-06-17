@@ -168,8 +168,10 @@ image-slot { background:var(--c-surface); }
 /* صورة تملأ الإطار وتكون هي المحتوى (بطاقة/تصنيف) */
 .coverimg { object-fit:cover; }
 
-/* روابط بطاقات الهوم بلا خط/لون افتراضي */
-.style-tile, .budget-card, .ccard, .roomcard, .pcard { text-decoration:none; color:inherit; }
+/* روابط بطاقات الهوم بلا خط افتراضي (اللون يضبطه كل كارت بنفسه) */
+.style-tile, .budget-card, .ccard, .roomcard, .pcard { text-decoration:none; }
+/* الكارت لازم يكون سياق تكديس (stacking context) عشان صورة الخلفية z-index:-2 تظهر فوق خلفيته لا خلفها */
+.ccard { isolation:isolate; }
 
 /* صف الأكثر طلبًا: إخفاء شريط التمرير */
 .hscroll { scrollbar-width:thin; }
@@ -217,6 +219,10 @@ image-slot { background:var(--c-surface); }
   .promo-banner { padding:30px; min-height:260px; }
   .promo-banner h2 { font-size:28px; }
   .news { grid-template-columns:1fr; padding:28px; gap:18px; }
+
+  /* الفوتر — كان ٤ أعمدة ثابتة (سبب الـ overflow الأفقي) → عمودان */
+  .foot .top { grid-template-columns:1fr 1fr; gap:22px; }
+  .foot { padding:26px 18px 18px; }
 }
 
 @media (max-width: 560px) {
@@ -228,4 +234,9 @@ image-slot { background:var(--c-surface); }
   .inspo .col { grid-template-columns:1fr; }
   .hero-full h1 { font-size:30px; }
   .s-head { flex-direction:column; align-items:flex-start; }
+  /* الفوتر عمود واحد على الشاشات الصغيرة جدًا */
+  .foot .top { grid-template-columns:1fr; }
 }
+
+/* حارس أمان: لا تمرير أفقي ناتج عن أي عنصر شارد (لا يُوضع على body حتى لا يكسر sticky) */
+.store, main { overflow-x:clip; }
