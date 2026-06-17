@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { ProductsMenu } from "./MegaMenu";
@@ -50,15 +51,16 @@ export function MobileDrawer() {
         <Icon name="menu" className="size-6" />
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="قائمة التنقّل">
+      {open &&
+        createPortal(
+          <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="قائمة التنقّل">
           <button
             type="button"
             aria-label="إغلاق القائمة"
             onClick={close}
             className="absolute inset-0 bg-black/40"
           />
-          <div className="absolute inset-block-0 end-0 flex h-full w-[86%] max-w-sm flex-col bg-bg shadow-xl">
+          <div className="absolute bottom-0 end-0 top-0 flex w-[86%] max-w-sm flex-col bg-bg shadow-xl">
             <div className="flex items-center justify-between border-b border-border p-4">
               <span className="font-display text-lg font-bold text-text">القائمة</span>
               <button
@@ -103,8 +105,9 @@ export function MobileDrawer() {
               </a>
             </div>
           </div>
-        </div>
-      )}
+        </div>,
+          document.body,
+        )}
     </>
   );
 }
