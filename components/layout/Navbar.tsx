@@ -56,7 +56,7 @@ export function Navbar() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-accent btn-sm max-lg:hidden"
+              className="nav-wa btn btn-accent btn-sm"
             >
               <Icon name="whatsapp" /> تواصل واتساب
             </a>

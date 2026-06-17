@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Countdown } from "@/components/home/Countdown";
+import { ProductCard } from "@/components/home/ProductCard";
 import { business, whatsappLink, telLink } from "@/lib/data/business";
-import { products, productPath, productHero, productImages, getProduct } from "@/lib/data/products";
+import { products, productPath, productHero, productImages } from "@/lib/data/products";
 
 const SITE_URL = "https://www.mokeet-elsuarye.com";
 
@@ -86,45 +87,6 @@ function HomeJsonLd() {
   };
   return (
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
-  );
-}
-
-/* --------------------------------------------------------- بطاقة منتج */
-function HomeProductCard({ slug, badge }: { slug: string; badge?: string }) {
-  const p = getProduct(slug);
-  const hero = productHero(slug);
-  if (!p) return null;
-  return (
-    <Link href={productPath(slug)} className="pcard" aria-label={p.nameAr}>
-      <div className="media">
-        {hero ? (
-          <Image
-            src={hero.src}
-            alt={hero.alt}
-            fill
-            sizes="(max-width:560px) 50vw, (max-width:820px) 33vw, 250px"
-            className="coverimg"
-          />
-        ) : (
-          <span className="ph">
-            <Icon name={p.icon} />
-          </span>
-        )}
-        {badge ? (
-          <div className="badges">
-            <span className="badge badge-sale">{badge}</span>
-          </div>
-        ) : null}
-      </div>
-      <div className="body">
-        <span className="eyebrow">{p.shortName}</span>
-        <h3 className="title">{p.nameAr}</h3>
-        <span style={{ fontSize: 12.5, color: "var(--c-muted)" }}>{p.tagline}</span>
-        <span style={{ marginTop: 4, fontSize: 13, fontWeight: 700, color: "var(--c-primary)" }}>
-          السعر عند الطلب
-        </span>
-      </div>
-    </Link>
   );
 }
 
@@ -242,8 +204,13 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="hscroll">
-            {bestSlugs.map((slug) => (
-              <HomeProductCard key={slug} slug={slug} />
+            {bestSlugs.map((slug, i) => (
+              <ProductCard
+                key={slug}
+                slug={slug}
+                badge={i === 0 ? "الأكثر طلبًا" : i === 2 ? "جديد" : undefined}
+                badgeKind={i === 0 ? "soft" : "new"}
+              />
             ))}
           </div>
         </div>
@@ -362,7 +329,7 @@ export default function HomePage() {
             </div>
             <div className="pgrid c4" style={{ ["--c-bg" as string]: "#fff" }}>
               {offersSlugs.map((slug) => (
-                <HomeProductCard key={slug} slug={slug} badge="عرض" />
+                <ProductCard key={slug} slug={slug} badge="عرض" badgeKind="soft" />
               ))}
             </div>
           </div>

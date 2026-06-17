@@ -45,7 +45,7 @@ export function MobileDrawer() {
         onClick={() => setOpen(true)}
         aria-label="فتح القائمة"
         aria-expanded={open}
-        className="grid size-11 place-items-center rounded-xl text-text hover:bg-surface lg:hidden"
+        className="nav-hamburger size-11 place-items-center rounded-xl text-text hover:bg-surface"
       >
         <Icon name="menu" className="size-6" />
       </button>

@@ -173,6 +173,33 @@ image-slot { background:var(--c-surface); }
 /* الكارت لازم يكون سياق تكديس (stacking context) عشان صورة الخلفية z-index:-2 تظهر فوق خلفيته لا خلفها */
 .ccard { isolation:isolate; }
 
+/* بطاقة المنتج (.pcard) — إضافات لنموذج بلا أسعار + رابط ممتدّ */
+.pcard .media .coverimg { transition:transform .5s ease; }
+.pcard:hover .media .coverimg { transform:scale(1.05); }
+.pcard .card-link { position:absolute; inset:0; z-index:1; }   /* رابط ممتدّ للزحف/التنقّل */
+.pcard .wish { z-index:3; }                                     /* فوق الرابط الممتدّ */
+.pcard .quick { z-index:3; }
+.pcard .body { position:relative; z-index:0; }
+.pcard .feat-line { display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--c-muted); }
+.pcard .feat-line svg { width:15px; height:15px; color:var(--c-success); flex:none; }
+.pcard .on-req { font-size:14px; font-weight:800; color:var(--c-primary); }
+.pcard .swrow .swdot { width:18px; height:18px; border-radius:50%; border:1px solid color-mix(in srgb, var(--c-text) 14%, transparent); }
+.pcard .swrow .more { font-size:11px; color:var(--c-muted); align-self:center; }
+
+/* =========================================================================
+   NAVBAR RESPONSIVE — لا يوجد موبايل في الريفرنس، فهذه نسخة موبايل من تصميمنا:
+   شعار + (بحث · ثيم · همبرغر) في صفّ واحد، وإخفاء روابط الديسكتوب وزر الواتساب.
+   ========================================================================= */
+.snav .nav-hamburger { display:none; }       /* يظهر على الموبايل فقط */
+@media (max-width: 1023px) {
+  .snav .row { height:62px; gap:8px; }
+  .snav .links { display:none; }              /* روابط الديسكتوب */
+  .snav .nav-wa { display:none; }             /* زر «تواصل واتساب» النصّي */
+  .snav .nav-hamburger { display:grid; }
+  .snav .logo { font-size:22px; }
+  .snav .logo small { font-size:8.5px; letter-spacing:.28em; }
+}
+
 /* صف الأكثر طلبًا: إخفاء شريط التمرير */
 .hscroll { scrollbar-width:thin; }
 
