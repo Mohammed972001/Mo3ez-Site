@@ -11,8 +11,8 @@ const browser = await chromium.launch();
 async function snap(name, width, height) {
   const ctx = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1 });
   const page = await ctx.newPage();
-  await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
-  await page.waitForTimeout(600);
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+  await page.waitForTimeout(2500);
   if (scrollY) {
     await page.evaluate((y) => window.scrollTo(0, y), scrollY);
     await page.waitForTimeout(400);
