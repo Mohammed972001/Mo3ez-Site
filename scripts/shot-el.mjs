@@ -10,8 +10,8 @@ const [url, selector, out, width] = [
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 2 });
 const page = await ctx.newPage();
-await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
-await page.waitForTimeout(700);
+await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+await page.waitForTimeout(2200);
 const el = page.locator(selector).first();
 await el.scrollIntoViewIfNeeded();
 await page.waitForTimeout(500);

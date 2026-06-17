@@ -72,6 +72,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         brand: { "@type": "Brand", name: business.name },
         category: catLabel,
         url: `${SITE_URL}${productPath(product.slug)}`,
+        material: product.specs.find((s) => s.k === "الخامة")?.v,
+        additionalProperty: product.specs.map((s) => ({
+          "@type": "PropertyValue",
+          name: s.k,
+          value: s.v,
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -170,18 +176,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                 {
                   key: "desc",
                   label: "الوصف",
-                  content: (
-                    <>
-                      <p className="pdesc">{product.description}</p>
-                      <ul className="features" style={{ marginTop: 16 }}>
-                        {product.features.map((f) => (
-                          <li key={f}>
-                            <Icon name="check" /> {f}
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  ),
+                  content: <p className="pdesc">{product.description}</p>,
                 },
                 {
                   key: "specs",
@@ -197,23 +192,32 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                     </div>
                   ),
                 },
-                {
-                  key: "faq",
-                  label: `الأسئلة الشائعة (${product.faq.length})`,
-                  content: (
-                    <div className="faq-list">
-                      {product.faq.map((f) => (
-                        <div className="faq-item" key={f.q}>
-                          <h4>{f.q}</h4>
-                          <p>{f.a}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ),
-                },
               ]}
             />
           </div>
+
+          {/* الأسئلة الشائعة — قسم ظاهر (أفضل للسيو/GEO من تبويب مخفي) */}
+          {product.faq.length ? (
+            <section style={{ marginTop: 48 }} aria-labelledby="faq-h">
+              <div className="s-head">
+                <div>
+                  <div className="kick">يسألنا العملاء</div>
+                  <h2 id="faq-h">أسئلة شائعة عن {product.nameAr}</h2>
+                </div>
+              </div>
+              <div className="faq-list">
+                {product.faq.map((f) => (
+                  <details className="faq-item" key={f.q}>
+                    <summary>
+                      <h3>{f.q}</h3>
+                      <Icon name="chevDown" className="fchev" />
+                    </summary>
+                    <p>{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* منتجات مرتبطة */}
           <div style={{ marginTop: 48 }}>

@@ -6,8 +6,17 @@ import { products, productPath } from "@/lib/data/products";
    كلها روابط <a> حقيقية قابلة للزحف لصفحات المنتجات (/p/<slug>). */
 export function ProductsMenu({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <ul className="grid gap-1.5 sm:grid-cols-2">
-      {products.map((p) => (
+    <>
+      <Link
+        href="/mokeet"
+        onClick={onNavigate}
+        className="mb-2 flex items-center justify-between rounded-xl bg-[var(--c-surface)] px-3.5 py-2.5 text-sm font-bold text-[var(--c-primary)]"
+      >
+        عرض كل المنتجات
+        <Icon name="chevLeft" className="size-4" />
+      </Link>
+      <ul className="grid gap-1.5 sm:grid-cols-2">
+        {products.map((p) => (
         <li key={p.slug}>
           <Link
             href={productPath(p.slug)}
@@ -24,7 +33,8 @@ export function ProductsMenu({ onNavigate }: { onNavigate?: () => void }) {
             <Icon name="chevLeft" className="size-4 shrink-0 text-[var(--c-muted)]" />
           </Link>
         </li>
-      ))}
-    </ul>
+        ))}
+      </ul>
+    </>
   );
 }
