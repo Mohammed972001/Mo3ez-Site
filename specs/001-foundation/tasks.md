@@ -12,16 +12,16 @@
 | T01 | الثيم والتوكنز + الخطوط (Light/Dark) | ✅ |
 | T02 | عناصر UI الأساسية (Primitives) | ✅ |
 | T03 | هيكل الصفحة (Navbar + Mega C + Footer + WhatsApp FAB) | ✅ |
-| T04 | طبقة البيانات (تصنيفات/منتجات/NAP) | ⬜ |
-| T05 | خط أنابيب الصور (تحسين + slugs + alt) | ⬜ |
-| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | ⬜ |
-| T07 | الرئيسية (تصميم A) | ⬜ |
-| T08 | الكتالوج (تصميم B) | ⬜ |
+| T04 | طبقة البيانات (٩ منتجات = ٩ فولدرات/NAP) | ✅ |
+| T05 | خط أنابيب الصور (تحسين + slugs + alt) | 🟡 |
+| T06 | معمارية SEO (metadata/JSON-LD/sitemap/robots/llms) | 🟡 |
+| T07 | الرئيسية (تصميم A) | ✅ |
+| T08 | الكتالوج (تصميم B) `/mokeet` | ✅ |
 | T09 | صفحات التصنيف `/c/[category]` (B + محتوى SEO) | ⬜ |
-| T10 | صفحة المنتج `/p/[product]` (تصميم A) | ⬜ |
+| T10 | صفحة المنتج `/p/[slug]` (تصميم A) | ✅ |
 | T11 | توليد العملاء (واتساب/اتصال/فورم عرض سعر) | ⬜ |
 | T12 | نظام المدوّنة (MDX) — الأساس بلا مقالات | ⬜ |
-| T13 | صفحات: من نحن / تواصل | ⬜ |
+| T13 | صفحات: من نحن / تواصل / خصوصية / شروط | ✅ |
 | T14 | تمريرة الأداء (CWV) | ⬜ |
 | T15 | تمريرة a11y + RTL | ⬜ |
 | T16 | الاختبارات (Playwright + Lighthouse CI) | ⬜ |
@@ -65,21 +65,30 @@ UtilityBar + Navbar (sticky) + **Mega Menu تصميم C** + Footer + WhatsApp FA
 `lib/seo/metadata.ts` · `components/seo/JsonLd.tsx` · `app/sitemap.ts` · `app/robots.ts` · `app/llms.txt` · canonical/OG base.
 **القبول:** sitemap/robots/llms صحيحة وتشمل كل المسارات · JSON-LD يجتاز Rich Results · لا تكرار canonical.
 
-### T07 — الرئيسية (A)
-كل أقسام تصميم A (Hero، شريط ثقة، الأكثر مبيعًا، تسوّق بالغرفة/النوع، الميزانية، إلهام، عروض، نشرة) ببيانات حقيقية. `Organization`+`LocalBusiness`+`WebSite` JSON-LD.
+### T07 — الرئيسية (A) ✅
+كل أقسام تصميم A (Hero، شريط ثقة، الأكثر طلبًا، تسوّق بالنوع، حسب المكان، أدلّة/إلهام، عروض + عدّاد، حسب الاستخدام، بانر، تواصل) ببيانات حقيقية. `Organization`+`LocalBusiness`+`WebSite` JSON-LD.
 **القبول:** مطابقة A · LCP<2.5s (hero `priority`) · CLS<0.1 · SEO=100 · موبايل-أولاً.
+**التنفيذ:** `app/page.tsx` (Server Component، static prerender) — نقل تصميم A من `Home.html` بأقسامه، مُكيَّفًا لموكيت + توليد عملاء (لا سلة/أسعار → «السعر عند الطلب» + CTA واتساب). CSS الهيرو وأقسام الهوم نُقل إلى `ds-storefront.css` مع **ريسبونسف موبايل-أولاً** (نقاط 1100/820/560 من ملاحظات «على الجوال» بالريفرنس). العدّاد التنازلي = `components/home/Countdown.tsx` (client، بلا hydration mismatch). الصور عبر `next/image` (hero `priority`، باقي lazy + `sizes`). `metadata` + JSON-LD (Organization/WebSite/LocalBusiness/OpeningHours). تحقّق: `next build` ✅ (`/` static)، `tsc` نظيف، SSR يعرض كل الأقسام، الصور عبر `/_next/image` بـ srcset، قواعد الريسبونسف مشحونة في bundle الإنتاج.
 
-### T08 — الكتالوج (B)
+> ملاحظة انضباط: نُفِّذت T04 (طبقة البيانات) و T07 ضمن فرع `feature/storefront-design-system` المجمِّع للـ chrome+بيانات+هوم (معلَم مرئي واحد) بدل فرع T مستقل. الفروع القادمة (T08 المتجر، T10 المنتج) تعود لنمط `feature/T<NN>`. T05/T06 جزئيّتان: تحسين الصور تلقائي عبر `next/image`، و JSON-LD/metadata لكل صفحة موجودة — لكن `sitemap.ts`/`robots.ts`/`llms.txt` وخط أنابيب الـ slugs المركزي لسه (تُغلق قبل النشر).
+
+### T08 — الكتالوج (B) `/mokeet` ✅
 شبكة 4 أعمدة + فلاتر علوية + معاينة سريعة (تصميم B) لكل المنتجات. `ItemList` JSON-LD · ترقيم/تحميل.
 **القبول:** مطابقة B · فلاتر تعمل (URL state للـ SEO) · CWV ضمن الميزانية.
+**التنفيذ:** `app/mokeet/page.tsx` (Server Component، يُرندر عند الطلب لقراءة `searchParams`). تصميم B: مسار تصفّح + h1 بالكلمة المستهدفة + فقرة GEO + **شريط فلاتر علوي** (قائمة «الفئة» منسدلة native `<details>` بروابط تُحدّث `?cat=`) + شريحة فلتر نشطة قابلة للإزالة + أدوات (عدد ديناميكي + ترتيب) + **شبكة `pgrid c4`** ببطاقات `ProductCard` (بلا أسعار، معاينة واتساب عند المرور). الترتيب عبر `components/shop/SortSelect.tsx` (client، `?sort=`). أُضيف حقل `category` للمنتجات (٤ فئات) + `productsByCategory`/`categoryCount`. CSS تصميم B (`.filterbar/.fdrop/.toolbar/.select-wrap`) نُقل إلى `ds-storefront.css` بريسبونسف. `ItemList` JSON-LD + `metadata`. **تحقّق بصري Playwright:** ديسكتوب وموبايل بلا overflow، والفلتر يعمل خادميًّا (`?cat=موكيت` ⇒ 3/9). `next build` ✅ · `tsc` نظيف.
+
+> ملاحظة: الفلتر الفعّال = «الفئة» (المنتجات أنواع متمايزة فلا تصلح فلاتر اللون/المقاس/السعر بالريفرنس). يبقى الهيكل البصري لتصميم B. الترقيم غير لازم (٩ منتجات).
 
 ### T09 — صفحات التصنيف
 `/c/[category]` بتصميم B + **كتلة إجابة مباشرة (GEO)** + وصف عربي أصيل + **FAQ** + `ItemList`+`Breadcrumb`+`FAQPage`.
 **القبول:** محتوى فريد لكل تصنيف · h1 بالكلمة المستهدفة · FAQ schema صحيح · SEO=100.
 
-### T10 — صفحة المنتج (A)
+### T10 — صفحة المنتج (A) `/p/[slug]` ✅
 معرض + مواصفات + تقييمات + CTA واتساب/عرض سعر (تصميم A). `Product`+`Breadcrumb` JSON-LD · صور alt.
 **القبول:** مطابقة A · Product schema صحيح · CTA يفتح واتساب معبّأ · LCP<2.5s.
+**التنفيذ:** `app/p/[slug]/page.tsx` — **SSG** عبر `generateStaticParams` (٩ صفحات ثابتة) + `generateMetadata` لكل منتج. تصميم A: مسار تصفّح + `pdp-2col classic` (معرض | لوحة معلومات). المعرض `components/product/Gallery.tsx` (client: صورة رئيسية `priority` + مصغّرات تبدّلها). اللوحة بلا سعر/سلة: عنوان + شارات + كتلة GEO + قائمة مميزات + **CTA واتساب/اتصال** + توصيل/تركيب + شبكة ثقة. التبويبات `components/product/Tabs.tsx` (client يبدّل الظهور، والمحتوى مُرندَر خادميًّا للزحف): الوصف · المواصفات · **الأسئلة الشائعة** (بدل التقييمات المختلقة). منتجات مرتبطة (`ProductCard`) + **شريط CTA ثابت للجوال** (`.pbar`). JSON-LD: `Product` + `BreadcrumbList` + `FAQPage`. CSS تصميم A نُقل إلى `ds-storefront.css`. **تحقّق Playwright:** ديسكتوب/موبايل بلا overflow، الشريط الثابت يظهر على الجوال، التبويبات تعمل، والـ JSON-LD الثلاثة + محتوى كل التبويبات في DOM. `next build` ✅ (٩ صفحات SSG) · `tsc` نظيف.
+
+> بهذا اكتملت صفحات الريفرنس الثلاث: الرئيسية (A) · المتجر (B) · المنتج (A)، والموقع صار قابلًا للتصفّح من البداية للنهاية (البطاقات → صفحة المنتج).
 
 ### T11 — توليد العملاء
 WhatsApp FAB + أزرار CTA (`wa.me` معبّأة) + `tel:` + فورم `/quote` (Server Action + zod + honeypot).
@@ -89,9 +98,15 @@ WhatsApp FAB + أزرار CTA (`wa.me` معبّأة) + `tel:` + فورم `/quote
 `/blog` فهرس + `/blog/[slug]` (MDX) + `Article`+`Breadcrumb` + metadata + `next/image`. **بلا مقالات** (تُكتب في النهاية).
 **القبول:** النظام يعرض مقال تجريبي ويُحذف · Article schema صحيح · جاهز ليكتب المالك مقالات داخل الكود.
 
-### T13 — من نحن / تواصل
+### T13 — من نحن / تواصل / خصوصية / شروط ✅
 `/about` (E-E-A-T: خبرة/ضمان/أعمال) + `/contact` (NAP موحّد + خريطة + واتساب/اتصال + ساعات).
 **القبول:** NAP مطابق لـ business.ts · `LocalBusiness` schema · موبايل-أولاً.
+**التنفيذ:** أربع صفحات ثابتة (static) + `metadata`/canonical لكل واحدة، بستايل موحّد (`.page-hero`/`.prose`/`.info-card` في `ds-storefront.css`):
+- `/about`: قصة + ماذا نقدّم + لماذا نختارنا (شبكة مزايا) + CTA واتساب/اتصال + `LocalBusiness` JSON-LD.
+- `/contact`: ٤ بطاقات (واتساب/اتصال/عنوان/ساعات) + **خريطة Google مضمّنة** + `LocalBusiness` (+ `OpeningHours`/`geo`) JSON-LD.
+- `/privacy` و`/terms`: محتوى عربي مُصمَّم لنموذج الكتالوج/توليد العملاء (لا بيع/دفع أونلاين، الطلب عبر واتساب).
+- **الفوتر:** أُزيل «الأسعار شاملة الضريبة» وطرق الدفع الأونلاين (Visa/Apple Pay/تابي/تمارا) — استُبدلت بـ نقد/تحويل/مدى/شبكة عند التسليم (اتساق مع نموذج بلا أسعار)، وأُضيفت روابط الخصوصية/الشروط.
+**تحقّق Playwright:** الصفحات بلا overflow، الخريطة تُحمّل، الفوتر نظيف. `next build` ✅ (الكل static) · `tsc` نظيف. (يتبقّى من الفلو: T12 المدوّنة، T06 sitemap/robots/llms، T11 فورم عرض السعر.)
 
 ### T14 — تمريرة الأداء (CWV)
 قياس Lighthouse لكل صفحة رئيسية، إصلاح LCP/CLS/INP، تأكيد `priority`/أبعاد/تأجيل JS.

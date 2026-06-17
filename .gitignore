@@ -39,3 +39,6 @@ Thumbs.db
 
 # Local agent/tooling artifacts
 .image-slots.state.json
+
+# لقطات تحقّق محلية
+.shots/

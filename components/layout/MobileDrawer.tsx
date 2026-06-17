@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
-import { CategoryList } from "./MegaMenu";
+import { ProductsMenu } from "./MegaMenu";
 import { whatsappLink, telLink } from "@/lib/data/business";
 
 const navLinks = [
@@ -46,20 +46,21 @@ export function MobileDrawer() {
         onClick={() => setOpen(true)}
         aria-label="فتح القائمة"
         aria-expanded={open}
-        className="grid size-11 place-items-center rounded-xl text-text hover:bg-surface lg:hidden"
+        className="nav-hamburger size-11 place-items-center rounded-xl text-text hover:bg-surface"
       >
         <Icon name="menu" className="size-6" />
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="قائمة التنقّل">
+      {open &&
+        createPortal(
+          <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="قائمة التنقّل">
           <button
             type="button"
             aria-label="إغلاق القائمة"
             onClick={close}
             className="absolute inset-0 bg-black/40"
           />
-          <div className="absolute inset-block-0 end-0 flex h-full w-[86%] max-w-sm flex-col bg-bg shadow-xl">
+          <div className="absolute bottom-0 end-0 top-0 flex w-[86%] max-w-sm flex-col bg-bg shadow-xl">
             <div className="flex items-center justify-between border-b border-border p-4">
               <span className="font-display text-lg font-bold text-text">القائمة</span>
               <button
@@ -89,23 +90,24 @@ export function MobileDrawer() {
                 </ul>
               </nav>
 
-              <p className="mb-2 mt-5 px-3 text-[11px] font-bold uppercase tracking-widest text-muted">
-                التصنيفات
+              <p className="mb-2 mt-5 px-3 text-[11px] font-bold uppercase tracking-widest text-[var(--c-muted)]">
+                المنتجات
               </p>
-              <CategoryList onNavigate={close} />
+              <ProductsMenu onNavigate={close} />
             </div>
 
-            <div className="grid grid-cols-2 gap-2 border-t border-border p-4">
-              <Button href={whatsappLink()} variant="accent" size="sm">
+            <div className="grid grid-cols-2 gap-2 border-t border-[var(--c-border)] p-4">
+              <a href={whatsappLink()} onClick={close} className="btn btn-accent btn-sm">
                 <Icon name="whatsapp" /> واتساب
-              </Button>
-              <Button href={telLink} variant="secondary" size="sm">
+              </a>
+              <a href={telLink} onClick={close} className="btn btn-secondary btn-sm">
                 <Icon name="phone" /> اتصال
-              </Button>
+              </a>
             </div>
           </div>
-        </div>
-      )}
+        </div>,
+          document.body,
+        )}
     </>
   );
 }
