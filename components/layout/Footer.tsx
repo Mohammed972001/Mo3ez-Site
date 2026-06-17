@@ -8,9 +8,12 @@ const helpLinks = [
   { label: "من نحن", href: "/about" },
   { label: "المدوّنة", href: "/blog" },
   { label: "كل المنتجات", href: "/mokeet" },
+  { label: "سياسة الخصوصية", href: "/privacy" },
+  { label: "الشروط والأحكام", href: "/terms" },
 ];
 
-const payments = ["مدى", "Visa", "Mastercard", "Apple Pay", "تابي", "تمارا"];
+// الموقع كتالوج/توليد عملاء (بلا دفع أونلاين) — طرق دفع واقعية عند التسليم/التركيب.
+const payments = ["نقد", "تحويل بنكي", "مدى", "شبكة"];
 
 function Column({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
@@ -70,7 +73,7 @@ export function Footer() {
 
         <div className="bottom">
           <span>
-            © {new Date().getFullYear()} {business.name} — جميع الحقوق محفوظة · الأسعار شاملة ضريبة القيمة المضافة
+            © {new Date().getFullYear()} {business.name} — جميع الحقوق محفوظة · موكيت وأرضيات في {business.address.city}
           </span>
           <div className="social">
             <a href={whatsappLink()} aria-label="واتساب">
