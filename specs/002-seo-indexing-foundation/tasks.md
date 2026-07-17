@@ -84,7 +84,7 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Goal**: GSC + Bing verified, sitemap accepted, coverage visible (plan Phase A.2 completion).
 **Independent test**: Properties verified; sitemap "Success"; URL inspection of 5 URLs = indexable.
 
-- [ ] T020 [US3] Support owner through owner-actions.md: confirm env vars set in Vercel, verification passes, sitemap submitted in GSC + Bing
+- [x] T020 [US3] Support owner through owner-actions.md: confirm env vars set in Vercel, verification passes, sitemap submitted in GSC + Bing
 - [ ] T021 [US3] Run URL-inspection checks on 5 representative URLs (home, one category, one product, service page, blog index); log results + fix any coverage errors found
 
 **Checkpoint**: Coverage/performance reports populating — SC-003 clock running.
@@ -111,7 +111,7 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Independent test**: A brief converted to a post renders indexable with Article schema + internal links.
 
 - [x] T026 [P] [US6] Write `specs/002-seo-indexing-foundation/article-briefs.md`: 8 briefs from research D6 — each with target keyword, Arabic H2 outline phrased as questions, 40–60-word answer-block draft per section, internal links to `/c/`+`/p/`, FAQ slots
-- [ ] T027 [US6] Extend `lib/blog/posts.ts` Post type if needed (FAQ field, updatedAt) + ensure `app/blog/[slug]/page.tsx` renders FAQPage schema when FAQs present and visible «آخر تحديث»
+- [x] T027 [US6] Extend `lib/blog/posts.ts` Post type if needed (FAQ field, updatedAt) + ensure `app/blog/[slug]/page.tsx` renders FAQPage schema when FAQs present and visible «آخر تحديث»
 - [ ] T028 [US6] Publish article #1 with owner's content (or placeholder-reviewed draft of brief #1 upon owner approval) to prove the pipeline end-to-end
 
 **Checkpoint**: Owner can ship articles by editing one data file.
@@ -120,9 +120,9 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 
 ## Phase 9: Polish & Cross-Cutting
 
-- [ ] T029 [P] Lighthouse mobile audit on home/category/product; fix top CWV offenders (LCP image priority/sizes, font loading, CLS reserves) to meet LCP<2.5s / CLS<0.1 / INP<200ms
-- [ ] T030 [P] Update `README.md` (English): SEO architecture section — single sources (`lib/seo/site.ts`, `lib/data/business.ts`, `lib/data/categories.ts`), guards, verification env vars
-- [ ] T031 Final release: PR feature→develop→main; run `scripts/verify-live-seo.mjs` against production; record SC-001…SC-010 baseline status in `specs/002-seo-indexing-foundation/results.md`
+- [x] T029 [P] Lighthouse mobile audit on home/category/product; fix top CWV offenders (LCP image priority/sizes, font loading, CLS reserves) to meet LCP<2.5s / CLS<0.1 / INP<200ms
+- [x] T030 [P] Update `README.md` (English): SEO architecture section — single sources (`lib/seo/site.ts`, `lib/data/business.ts`, `lib/data/categories.ts`), guards, verification env vars
+- [x] T031 Final release: PR feature→develop→main; run `scripts/verify-live-seo.mjs` against production; record SC-001…SC-010 baseline status in `specs/002-seo-indexing-foundation/results.md`
 
 ---
 

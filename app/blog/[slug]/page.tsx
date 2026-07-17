@@ -49,6 +49,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
         headline: post.title,
         description: post.description,
         datePublished: post.date,
+        dateModified: post.updated ?? post.date,
         image: post.cover ? `${SITE_URL}${post.cover}` : undefined,
         author: { "@type": "Organization", name: business.name },
         publisher: { "@type": "Organization", name: business.name },
@@ -62,6 +63,18 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
           { "@type": "ListItem", position: 3, name: post.title },
         ],
       },
+      ...(post.faqs?.length
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: post.faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 
@@ -82,6 +95,13 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
           <p>
             <time dateTime={post.date}>{fmtDate(post.date)}</time>
             {post.readingMinutes ? ` · قراءة ${post.readingMinutes} دقائق` : ""}
+            {post.updated && post.updated !== post.date ? (
+              <>
+                {" · "}
+                <span>آخر تحديث: </span>
+                <time dateTime={post.updated}>{fmtDate(post.updated)}</time>
+              </>
+            ) : null}
           </p>
         </div>
       </section>
@@ -102,6 +122,23 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                 ))}
               </div>
             ))}
+
+            {post.faqs?.length ? (
+              <section aria-labelledby="post-faq-h">
+                <h2 id="post-faq-h">أسئلة شائعة</h2>
+                <div className="faq-list">
+                  {post.faqs.map((f) => (
+                    <details className="faq-item" key={f.q}>
+                      <summary>
+                        <h3>{f.q}</h3>
+                        <Icon name="chevDown" className="fchev" />
+                      </summary>
+                      <p>{f.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </article>
         </div>
       </section>
