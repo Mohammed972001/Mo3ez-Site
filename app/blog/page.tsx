@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { business, whatsappLink } from "@/lib/data/business";
 import { allPosts, postPath } from "@/lib/blog/posts";
+import { categorySeo, categoryPath } from "@/lib/data/categories";
 
 export const metadata: Metadata = {
   title: `المدوّنة | ${business.name} — نصائح الموكيت والأرضيات`,
@@ -69,6 +70,13 @@ export default function BlogIndex() {
               <a className="btn btn-accent" href={whatsappLink("السلام عليكم، أرغب باستشارة")} target="_blank" rel="noopener noreferrer">
                 <Icon name="whatsapp" /> استشر عبر واتساب
               </a>
+              <div className="chips" style={{ marginTop: 18, justifyContent: "center" }}>
+                {categorySeo.map((c) => (
+                  <Link key={c.slug} href={categoryPath(c.slug)} className="chip">
+                    {c.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>

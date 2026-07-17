@@ -13,6 +13,7 @@ import {
   productPath,
   categories,
 } from "@/lib/data/products";
+import { categoryPath } from "@/lib/data/categories";
 import { SITE_URL } from "@/lib/seo/site";
 
 type Params = { slug: string };
@@ -83,7 +84,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "الرئيسية", item: SITE_URL },
           { "@type": "ListItem", position: 2, name: "المنتجات", item: `${SITE_URL}/mokeet` },
-          { "@type": "ListItem", position: 3, name: catLabel, item: `${SITE_URL}/mokeet?cat=${product.category}` },
+          { "@type": "ListItem", position: 3, name: catLabel, item: `${SITE_URL}${categoryPath(product.category)}` },
           { "@type": "ListItem", position: 4, name: product.nameAr },
         ],
       },
@@ -109,7 +110,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             <Icon name="chevLeft" className="sep" />
             <Link href="/mokeet">المنتجات</Link>
             <Icon name="chevLeft" className="sep" />
-            <Link href={`/mokeet?cat=${product.category}`}>{catLabel}</Link>
+            <Link href={categoryPath(product.category)}>{catLabel}</Link>
             <Icon name="chevLeft" className="sep" />
             <span className="cur">{product.nameAr}</span>
           </nav>
