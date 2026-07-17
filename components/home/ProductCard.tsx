@@ -28,10 +28,13 @@ export function ProductCard({
   slug,
   badge,
   badgeKind = "best",
+  priority = false,
 }: {
   slug: string;
   badge?: string;
   badgeKind?: "best" | "new" | "soft";
+  /** LCP hint — set on the first above-the-fold card in a grid (spec 002, T029) */
+  priority?: boolean;
 }) {
   const p = getProduct(slug);
   const hero = productHero(slug);
@@ -49,6 +52,7 @@ export function ProductCard({
             src={hero.src}
             alt={hero.alt}
             fill
+            priority={priority}
             sizes="(max-width:560px) 72vw, (max-width:820px) 45vw, 250px"
             className="coverimg"
           />
