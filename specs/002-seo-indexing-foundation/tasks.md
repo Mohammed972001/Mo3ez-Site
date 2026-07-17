@@ -71,9 +71,9 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Goal**: Crawlers reach every real page; zero duplicates/orphans/soft-404s (plan Phase A guards + C).
 **Independent test**: All sitemap URLs 200 self-canonical; no orphan pages; 404s return 404.
 
-- [ ] T017 [US2] Internal-linking pass: home «تسوّق حسب النوع» cards → `/c/…`; product pages link their category page; blog empty-state links categories — no orphan among the ~35 URLs
-- [ ] T018 [P] [US2] Confirm 404 behavior: unknown `/p/…`, `/c/…`, `/blog/…` slugs call `notFound()`; add `app/not-found.tsx` with helpful Arabic links (still HTTP 404)
-- [ ] T019 [US2] Post-deploy verification sweep: script `scripts/verify-live-seo.mjs` — fetch every sitemap `<loc>`, assert 200 + self-canonical + correct host; run against production after merge
+- [x] T017 [US2] Internal-linking pass: home «تسوّق حسب النوع» cards → `/c/…`; product pages link their category page; blog empty-state links categories — no orphan among the ~35 URLs
+- [x] T018 [P] [US2] Confirm 404 behavior: unknown `/p/…`, `/c/…`, `/blog/…` slugs call `notFound()`; add `app/not-found.tsx` with helpful Arabic links (still HTTP 404)
+- [x] T019 [US2] Post-deploy verification sweep: script `scripts/verify-live-seo.mjs` — fetch every sitemap `<loc>`, assert 200 + self-canonical + correct host; run against production after merge
 
 **Checkpoint**: Discovery graph complete and verified against production.
 
@@ -96,10 +96,10 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Goal**: Zero-error structured data + AI-citable structure (plan Phase D).
 **Independent test**: Rich Results Test passes per template; llms.txt current; AI engine extracts correct NAP+products.
 
-- [ ] T022 [US4] Validate all JSON-LD templates (home, category, product, service, blog) with Google Rich Results Test; fix every error/warning
-- [ ] T023 [P] [US4] Enrich schema: LocalBusiness (geo coordinates, openingHoursSpecification 24/7, areaServed Riyadh emphasis), Product (material + full additionalProperty from specs), Organization (finalized brand; add sameAs when socials exist) in `app/page.tsx` + `app/p/[slug]/page.tsx`
-- [ ] T024 [P] [US4] Update `app/llms.txt/route.ts`: add categories `/c/…` + service page + brand differentiation line; keep product list synced
-- [ ] T025 [US4] GEO structure pass: visible «آخر تحديث» dates on category/service pages; concrete spec numbers (densities/thicknesses/warranty) in product specs; confirm robots.txt has no AI-bot blocks
+- [x] T022 [US4] Validate all JSON-LD templates (home, category, product, service, blog) with Google Rich Results Test; fix every error/warning
+- [x] T023 [P] [US4] Enrich schema: LocalBusiness (geo coordinates, openingHoursSpecification 24/7, areaServed Riyadh emphasis), Product (material + full additionalProperty from specs), Organization (finalized brand; add sameAs when socials exist) in `app/page.tsx` + `app/p/[slug]/page.tsx`
+- [x] T024 [P] [US4] Update `app/llms.txt/route.ts`: add categories `/c/…` + service page + brand differentiation line; keep product list synced
+- [x] T025 [US4] GEO structure pass: visible «آخر تحديث» dates on category/service pages; concrete spec numbers (densities/thicknesses/warranty) in product specs; confirm robots.txt has no AI-bot blocks
 
 **Checkpoint**: US4 deliverable — machine-readable layer complete and validated.
 
