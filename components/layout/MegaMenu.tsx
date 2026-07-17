@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { products, productPath } from "@/lib/data/products";
+import { categorySeo, categoryPath } from "@/lib/data/categories";
 
-/** قائمة المنتجات (الأنواع التسعة) — تُستخدم في القائمة الكبرى (hover) والدرج.
-   كلها روابط <a> حقيقية قابلة للزحف لصفحات المنتجات (/p/<slug>). */
+/** Products menu (mega menu + mobile drawer). All entries are real,
+   crawlable <a> links: category landing pages (/c/…) then products (/p/…). */
 export function ProductsMenu({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <>
@@ -15,6 +16,19 @@ export function ProductsMenu({ onNavigate }: { onNavigate?: () => void }) {
         عرض كل المنتجات
         <Icon name="chevLeft" className="size-4" />
       </Link>
+      {/* Category landing pages — the indexable hubs (spec 002, US5) */}
+      <div className="mb-2 flex flex-wrap gap-1.5">
+        {categorySeo.map((c) => (
+          <Link
+            key={c.slug}
+            href={categoryPath(c.slug)}
+            onClick={onNavigate}
+            className="rounded-full border border-[var(--c-border)] px-3 py-1.5 text-xs font-semibold text-[var(--c-text)] transition-colors hover:bg-[var(--c-surface)]"
+          >
+            {c.label}
+          </Link>
+        ))}
+      </div>
       <ul className="grid gap-1.5 sm:grid-cols-2">
         {products.map((p) => (
         <li key={p.slug}>

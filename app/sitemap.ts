@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo/site";
-import { products, categories } from "@/lib/data/products";
+import { products } from "@/lib/data/products";
+import { categorySeo } from "@/lib/data/categories";
 
-/** خريطة الموقع — كل المسارات القابلة للأرشفة (المسارات العربية مُرمَّزة). */
+/** Sitemap — canonical indexable URLs only (Arabic paths percent-encoded).
+    Category URLs are the dedicated /c/ landing pages, never ?cat= params. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -23,11 +25,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const categoryRoutes: MetadataRoute.Sitemap = categories.map((c) => ({
-    url: `${SITE_URL}/mokeet?cat=${encodeURIComponent(c.slug)}`,
+  const categoryRoutes: MetadataRoute.Sitemap = categorySeo.map((c) => ({
+    url: `${SITE_URL}/c/${encodeURIComponent(c.slug)}`,
     lastModified: now,
     changeFrequency: "weekly",
-    priority: 0.5,
+    priority: 0.8,
   }));
 
   return [...staticRoutes, ...productRoutes, ...categoryRoutes];

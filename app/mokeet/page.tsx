@@ -5,24 +5,32 @@ import { ProductCard } from "@/components/home/ProductCard";
 import { SortSelect } from "@/components/shop/SortSelect";
 import { business } from "@/lib/data/business";
 import { products, productsByCategory, categories, categoryCount, productPath } from "@/lib/data/products";
+import { categoryPath } from "@/lib/data/categories";
 import { SITE_URL } from "@/lib/seo/site";
 
-export const metadata: Metadata = {
-  title: `كل المنتجات | موكيت وأرضيات وعشب صناعي وفينيل — ${business.name}`,
-  description:
-    "تصفّح كل أنواع الموكيت والأرضيات في الرياض: موكيت مساجد ومكاتب، موكيت تركي، عشب صناعي، فينيل، وأرضيات مطاطية للجيم والخيول والحمامات. السعر عند الطلب — اطلب عرض سعر عبر واتساب.",
-  keywords: ["موكيت", "أرضيات", "موكيت الرياض", "عشب صناعي", "فينيل", "أرضيات مطاطية", "موكيت مساجد", "موكيت مكاتب"],
-  alternates: { canonical: "/mokeet" },
-  openGraph: {
-    type: "website",
-    locale: "ar_SA",
-    siteName: business.name,
-    title: `كل المنتجات — موكيت وأرضيات في ${business.address.city}`,
-    url: `${SITE_URL}/mokeet`,
-  },
-};
-
 type SP = { cat?: string; sort?: string };
+
+/* Filtered views (?cat=…) canonicalize to the dedicated /c/[category]
+   landing page (spec 002, T009) so parameterized URLs never compete with
+   the indexable category pages. The unfiltered view keeps self-canonical. */
+export async function generateMetadata({ searchParams }: { searchParams: Promise<SP> }): Promise<Metadata> {
+  const sp = await searchParams;
+  const activeCat = categories.find((c) => c.slug === sp.cat);
+  return {
+    title: `كل المنتجات | موكيت وأرضيات وعشب صناعي وفينيل — ${business.name}`,
+    description:
+      "تصفّح كل أنواع الموكيت والأرضيات في الرياض: موكيت مساجد ومكاتب، موكيت تركي، عشب صناعي، فينيل، وأرضيات مطاطية للجيم والخيول والحمامات. السعر عند الطلب — اطلب عرض سعر عبر واتساب.",
+    keywords: ["موكيت", "أرضيات", "موكيت الرياض", "عشب صناعي", "فينيل", "أرضيات مطاطية", "موكيت مساجد", "موكيت مكاتب"],
+    alternates: { canonical: activeCat ? categoryPath(activeCat.slug) : "/mokeet" },
+    openGraph: {
+      type: "website",
+      locale: "ar_SA",
+      siteName: business.name,
+      title: `كل المنتجات — موكيت وأرضيات في ${business.address.city}`,
+      url: `${SITE_URL}/mokeet`,
+    },
+  };
+}
 
 export default async function ShopPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
