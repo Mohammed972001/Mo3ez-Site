@@ -13,8 +13,7 @@ import {
   productPath,
   categories,
 } from "@/lib/data/products";
-
-const SITE_URL = "https://www.mokeet-elsuarye.com";
+import { SITE_URL } from "@/lib/seo/site";
 
 type Params = { slug: string };
 

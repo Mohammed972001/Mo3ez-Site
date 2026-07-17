@@ -6,8 +6,7 @@ import { Countdown } from "@/components/home/Countdown";
 import { ProductCard } from "@/components/home/ProductCard";
 import { business, whatsappLink, telLink } from "@/lib/data/business";
 import { products, productPath, productHero, productImages } from "@/lib/data/products";
-
-const SITE_URL = "https://www.mokeet-elsuarye.com";
+import { SITE_URL } from "@/lib/seo/site";
 
 /* ---------------------------------------------------------------- SEO */
 export const metadata: Metadata = {
