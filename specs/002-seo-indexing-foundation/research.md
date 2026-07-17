@@ -5,24 +5,21 @@
 
 ## Executive Summary
 
-The new site (`moket-elsuarye.com`) is technically healthy: fully rendered Arabic RTL, correct canonical/robots/sitemap/llms.txt (fixed 2026-07-17), valid JSON-LD, 9 product pages with galleries. **But the single most important discovery of this research is that the business's OLD website at `www.mokeet-elsuarye.com` is still live on Vercel, still indexed, and currently RANKS in Google for target queries** (verified in live SERPs for "موكيت مساجد الرياض" and "موكيت الرياض تركيب") while the new site has zero index presence. The two sites now compete as duplicates. **Priority #1 is therefore a proper 301 domain migration old → new** to transfer existing equity, ahead of any content work. Overall assessment: **strong foundation, one critical migration blocker, clear content-gap runway**.
+The new site (`moket-elsuarye.com`) is technically healthy: fully rendered Arabic RTL, correct canonical/robots/sitemap/llms.txt (fixed 2026-07-17), valid JSON-LD, 9 product pages with galleries. Live-SERP research surfaced a decisive competitive fact: **`www.mokeet-elsuarye.com` — a similarly-named site that currently ranks for our target queries — is an unrelated, independently-owned competitor** (owner-confirmed 2026-07-17; no redirect or cross-linking is permissible). Its domain had accidentally leaked into this codebase's SEO constants (fixed; a grep-guard now prevents recurrence). The niche contains **three near-identical «السريع» brands** (this client, mokeet-elsuarye, and alsourayia.com), so brand differentiation is a first-class workstream alongside indexing. Overall assessment: **strong technical foundation, zero index presence yet, crowded namesake SERP — win via dedicated landing-page inventory, verification/monitoring, GEO structure, and brand-entity consistency**.
 
-## D1 — Critical discovery: live old site (migration scenario)
+## D1 — Namesake competitor on the previously-leaked domain (owner-corrected)
 
-| Evidence | Old site `www.mokeet-elsuarye.com` | New site `moket-elsuarye.com` |
+| Evidence | Competitor `www.mokeet-elsuarye.com` | Our site `moket-elsuarye.com` |
 |---|---|---|
-| Status | 200 OK, on Vercel (216.198.79.65) | 200 OK, on Vercel |
+| Ownership | **Independent competitor** (unrelated business — owner-confirmed) | This client |
+| Status | 200 OK, on Vercel | 200 OK, on Vercel |
 | Title | «موكيت ومفروشات السريع \| أفضل موكيت ومفروشات الرياض» | «السريع للموكيت والأرضيات \| موكيت وأرضيات وعشب صناعي وفينيل في الرياض» |
-| robots.txt | Different (disallows /api/, /admin/, /private/) — a different, older app | Correct, generated |
-| `/mokeet` route | 404 (different information architecture) | 200 |
-| Google index | **Indexed & ranking** (appears in SERPs for target queries) | Not yet indexed |
+| Google index | **Indexed & ranking** for target queries | Not yet indexed |
 
-**Implication**: classic site-migration situation. Without 301s the old domain keeps the equity and the new domain starts from zero while duplicating the old one's topic. With page-level 301s (old URLs → closest new equivalents) the accumulated equity transfers.
-
-**Required actions** (owner + code):
-1. Owner: in Vercel, point the old project's domains (`mokeet-elsuarye.com`, `www.mokeet-elsuarye.com`) at a redirect configuration → new domain (or attach both domains to the new project and let it 301). Domain-level, permanent (301/308).
-2. Page mapping: old-site URLs → new equivalents (home→home; old product/category paths → nearest `/c/…` or `/p/…`; unmatched → home with 301, never 404 for previously-ranking URLs).
-3. After redirects live: verify old property in GSC too and submit a Change of Address.
+**Implications**:
+1. **No redirect, no cross-linking, ever** — the two businesses are competitors. (An earlier draft of this research proposed a migration; that is void.)
+2. The competitor's domain had leaked into this codebase's SEO constants (fixed 2026-07-17). **Regression guard**: CI/manual grep that `mokeet-elsuarye` never re-appears in the repo.
+3. The competitor already ranks with a near-identical brand («السريع») and near-identical domain spelling. Confusable-brand risk is real in both directions: SERP snippets, brand queries, and even typed URLs. Countermeasures: consistent full brand name «السريع للموكيت والأرضيات» everywhere, strong Organization/LocalBusiness entity signals (distinct NAP, geo, hours), Google Business Profile, and winning distinct keyword-page inventory (Phase B) rather than fighting head-on for the shared brand term first.
 
 ## D2 — Competitor landscape (live SERP, 2026-07-17)
 
@@ -31,8 +28,9 @@ Queries tested: «موكيت مساجد الرياض», «موكيت الريا�
 | Competitor | Observed strength | Notes for us |
 |---|---|---|
 | `mafrushat-alriyad.com` («مفروشات الرياض») | **Dominant**: 4 of top-10 results for موكيت مساجد via multiple keyword-variant product pages | Uses programmatic per-keyword product pages («موكيت مساجد بأسعار الجملة», «أفضل أنواع موكيت المساجد») — validates our dedicated category/landing-page strategy |
-| `alsourayia.com` («السريع للأرضيات والمفروشات») | Large store, brand nearly identical to ours | **Brand-name collision**: «السريع» is contested in this niche. Brand SERP differentiation needed (consistent NAP, Organization schema, distinct full name) |
-| `mafrushat-alsourayia.com` («السريع للمفروشات وللأرضيات») | Ranks #2 for موكيت مساجد الرياض | Same collision; likely related/competing namesake |
+| `alsourayia.com` («السريع للأرضيات والمفروشات») | Large store, brand nearly identical to ours — **confirmed pure competitor** (owner, 2026-07-17) | «السريع» is contested in this niche. Brand SERP differentiation needed (consistent NAP, Organization schema, distinct full name) |
+| `mafrushat-alsourayia.com` («السريع للمفروشات وللأرضيات») | Ranks #2 for موكيت مساجد الرياض | Same collision; competing namesake |
+| `www.mokeet-elsuarye.com` («موكيت ومفروشات السريع») | Ranks for target queries; near-identical domain spelling to ours | See D1 — independent competitor, no relationship |
 | `mokeyat-riyadh.com`, `moket-sa.com`, `alamiyaksa.com`, `sahebalryed.com` | Mid-tail catalog sites | Beatable with better structure + CWV + GEO |
 | `ksaldecor.com`, `naseemalriad.com`, `tarkib-athath.com`, `awael-alkhaleg.com` | Rank for «تركيب» (installation) intent with phone-first service pages | **Content gap**: we have no dedicated installation-service page; «تركيب موكيت بالرياض» is a high-intent query we don't target |
 
@@ -73,7 +71,7 @@ Sources: existing local keyword map (validated), SERP checks. No paid volume too
 
 | Page | Issue | Severity | Fix |
 |---|---|---|---|
-| All | Old domain still live & indexed → duplicate site | **Critical** | D1 migration (301s + change of address) |
+| All | Site not indexed at all yet (no GSC property, sitemap never submitted) while namesake competitors rank | **Critical** | Verification + sitemap submission (Phase A) |
 | Canonical host | Canonical says non-www but non-www 308→www (Vercel primary = www) | **High** | Owner flips Vercel primary domain to non-www |
 | `/mokeet?cat=…` | Parameterized category URLs in sitemap; weakly indexable, no dedicated copy | High | Dedicated `/c/[category]` pages; remove params from sitemap; canonical `?cat=` → `/c/` |
 | Category intents | No landing page per category with unique intro copy (programmatic-SEO quality bar) | High | Build `/c/…` with unique 120–180-word intros, per-category FAQ, product grid, cross-links |
@@ -92,7 +90,7 @@ Sources: existing local keyword map (validated), SERP checks. No paid volume too
 | robots.txt | ✅ Pass | Allow all + correct sitemap/host |
 | sitemap.xml | ⚠️ Warning | Correct domain (20/20) but includes `?cat=` params → replace with `/c/` URLs |
 | Redirect health | ⚠️ Warning | www↔non-www single hop OK; **canonical (non-www) itself redirects** until Vercel primary flipped |
-| Old-domain duplication | ❌ Fail | See D1 — migration required |
+| Competitor-domain leakage | ✅ Guarded | `mokeet-elsuarye` fully purged from repo (grep = 0); keep a regression grep-guard |
 | Structured data | ✅ Pass (validate) | Org/WebSite/LocalBusiness/Product/Breadcrumb/FAQ present; needs validator run + enrichment |
 | Mobile rendering | ✅ Pass | RTL responsive verified previously (Playwright) |
 | CWV | ⚠️ Unmeasured | Images optimized (sharp ≤1700px); needs Lighthouse/CrUX measurement pass |
@@ -136,7 +134,7 @@ Comparison articles are the highest-citation GEO format (~33% of AI citations) �
 | # | Action | Where |
 |---|---|---|
 | 1 | Flip primary domain to `moket-elsuarye.com` (non-www) | Vercel → Settings → Domains |
-| 2 | Redirect old `mokeet-elsuarye.com` project/domains → new domain (301) | Vercel (old project) |
-| 3 | Add GSC + Bing properties, click Verify (tags will be in the site) | search consoles |
+| 2 | Add GSC + Bing properties, click Verify (tags will be in the site) | search consoles |
+| 3 | Submit sitemap in both consoles after verification | search consoles |
 | 4 | Create/claim **Google Business Profile** (Riyadh, العزيزية) with exact NAP | Google Maps |
-| 5 | Confirm whether `alsourayia.com` is a related business or a pure competitor | — |
+| 5 | Authorize Ahrefs/Similarweb connectors for precise volume/difficulty data | claude.ai → Settings → Connectors |

@@ -5,7 +5,7 @@
 
 ## Summary
 
-Get every real page of `moket-elsuarye.com` indexed, ranking for Arabic موكيت/أرضيات + Riyadh intent, and citable by AI engines. Research surfaced one critical blocker that reorders everything: the business's **old site (`mokeet-elsuarye.com`) is still live and holds the existing Google rankings** — so Phase A is a proper 301 domain migration to transfer that equity, followed by dedicated category/service landing pages (the pattern the winning competitor uses), verification/monitoring, schema+GEO enrichment, and an owner-authored article pipeline. Riyadh-only, lead-gen (no prices), brand «السريع للموكيت والأرضيات» finalized.
+Get every real page of `moket-elsuarye.com` indexed, ranking for Arabic موكيت/أرضيات + Riyadh intent, and citable by AI engines. The site starts from **zero index presence in a SERP crowded with three near-identical «السريع» namesake competitors** (including `mokeet-elsuarye.com` — an unrelated competitor whose domain once leaked into this codebase; no redirect/cross-link is ever permissible). Strategy: (A) consolidate the canonical host + get verified and submitted fast, (B) build the dedicated category/service landing-page inventory that the winning competitor pattern proves out, (C) metadata uniqueness + alt coverage, (D) schema + GEO enrichment for brand-entity differentiation, (E) owner-authored article pipeline + CWV. Riyadh-only, lead-gen (no prices), brand «السريع للموكيت والأرضيات» finalized.
 
 ## Technical Context
 
@@ -40,7 +40,6 @@ specs/002-seo-indexing-foundation/
 ├── research.md          # Done (Phase 0 audit)
 ├── plan.md              # This file
 ├── keyword-map.md       # Phase 1: canonical keyword→page mapping (EN doc, AR data)
-├── redirect-map.md      # Phase 1: old-domain URL → new URL mapping for migration
 └── tasks.md             # /speckit-tasks output (next)
 ```
 
@@ -61,18 +60,17 @@ lib/
 ├── data/business.ts             # brand marked FINAL; NAP source of truth
 └── data/categories.ts           # NEW: per-category SEO copy (intro, FAQ, keyword)
 
-vercel.json (old project — owner)  # 301 redirect map old domain → new (or domain reattach)
 ```
 
 **Structure Decision**: extend the existing single Next.js app; all SEO copy lives in typed data modules (`lib/data/categories.ts`) so pages stay thin and copy is reviewable in one place.
 
 ## Execution Phases
 
-### Phase A — Migration & host consolidation (P1, unblocks all equity)
-1. Build `redirect-map.md`: crawl old site's indexed URLs (SERP + old sitemap if present) → map each to nearest new URL.
-2. Owner actions (documented, hand-held): flip new project primary domain → non-www; point old domain at new project (Vercel auto-301s secondary domains) or add explicit 301 map.
-3. Verify: old URLs 301 (single hop) to mapped new URLs; canonical non-www serves 200.
-   **Gate: SC-001, FR-001/002.**
+### Phase A — Host consolidation & fast verification (P1, unblocks indexing)
+1. Owner action (documented, hand-held): flip Vercel primary domain → non-www so the canonical URL serves 200 directly.
+2. GSC + Bing verification meta tags in `layout.tsx` (env-var driven); owner adds properties, verifies, submits sitemap immediately — indexing clock starts now, in parallel with all later phases.
+3. Regression guards in place: grep that the competitor domain string and duplicate `SITE_URL` consts never re-enter the repo; no app-level host redirects.
+   **Gate: SC-001/003 start, FR-001/002/013/014.**
 
 ### Phase B — Category & service landing pages (P1, the ranking inventory)
 1. `lib/data/categories.ts`: per category — slug, H1, title/description, unique 120–180-word intro (programmatic-SEO quality bar: no template-swapping), 3–4 category FAQs, target keyword.
@@ -82,12 +80,11 @@ vercel.json (old project — owner)  # 301 redirect map old domain → new (or d
 5. `sitemap.ts`: replace param URLs with `/c/` + service page.
    **Gate: SC-007, FR-004/007/009.**
 
-### Phase C — Metadata, verification & monitoring (P1→P2)
-1. GSC + Bing verification meta tags in `layout.tsx` (values via env vars, placeholders documented).
-2. Title/description uniqueness sweep (all pages vs. D3 keyword map); H1 keyword presence; first-100-words check.
-3. Alt-text audit across all gallery images → descriptive Arabic alt from product data.
-4. Owner submits sitemap in both consoles; Change of Address for old domain after Phase A.
-   **Gate: SC-002/003/004, FR-003/006/013/014.**
+### Phase C — Metadata uniqueness & alt coverage (P1→P2)
+1. Title/description uniqueness sweep (all pages vs. D3 keyword map); H1 keyword presence; first-100-words check.
+2. Alt-text audit across all gallery images → descriptive Arabic alt from product data.
+3. Brand consistency sweep: finalized «السريع للموكيت والأرضيات» everywhere (titles, schema, llms.txt) for namesake differentiation.
+   **Gate: SC-002/004/008, FR-003/006/016.**
 
 ### Phase D — Schema & GEO enrichment (P2)
 1. Validate all existing JSON-LD (Rich Results test); fix errors.
@@ -111,7 +108,8 @@ vercel.json (old project — owner)  # 301 redirect map old domain → new (or d
 
 | Risk | Mitigation |
 |---|---|
-| Old-domain redirects delayed (owner-dependent) | Ship Phases B–D anyway; new site earns its own index while equity transfer pends |
+| Namesake competitors already rank (incl. near-identical domain `mokeet-elsuarye.com`) | Don't fight the shared brand term first; win distinct keyword-page inventory (Phase B) + entity differentiation (Phase D); never link/redirect between the sites |
+| Owner actions delayed (Vercel flip, GSC verify) | Tags shipped code-side regardless; phases B–E proceed in parallel |
 | Brand-name collision («السريع» namesakes) | Full-name consistency + Organization schema + GBP; monitor brand SERP |
 | Arabic-slug encoding duplicates | Canonicals always emit one encoded form; sitemap is the reference form |
 | Over-generating thin pages | Only 4–5 categories + 1 service page, each with unique researched copy (programmatic-SEO quality bar) |
