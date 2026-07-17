@@ -6,6 +6,7 @@ import { Countdown } from "@/components/home/Countdown";
 import { ProductCard } from "@/components/home/ProductCard";
 import { business, whatsappLink, telLink } from "@/lib/data/business";
 import { products, productPath, productHero, productImages } from "@/lib/data/products";
+import { categorySeo, categoryPath } from "@/lib/data/categories";
 import { SITE_URL } from "@/lib/seo/site";
 
 /* ---------------------------------------------------------------- SEO */
@@ -225,6 +226,17 @@ export default function HomePage() {
             </div>
             <Link className="more" href="/mokeet">
               كل الأنواع <Icon name="chevLeft" />
+            </Link>
+          </div>
+          {/* Category hubs — internal links to the indexable /c/ pages (T017) */}
+          <div className="chips" style={{ marginBottom: 16 }}>
+            {categorySeo.map((c) => (
+              <Link key={c.slug} href={categoryPath(c.slug)} className="chip">
+                {c.label}
+              </Link>
+            ))}
+            <Link href="/services/tarkeeb" className="chip active">
+              خدمة التركيب
             </Link>
           </div>
           <div className="roomgrid pgrid c3">
