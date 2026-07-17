@@ -121,8 +121,8 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
           </div>
 
           <div className="pgrid c4">
-            {list.map((p) => (
-              <ProductCard key={p.slug} slug={p.slug} />
+            {list.map((p, i) => (
+              <ProductCard key={p.slug} slug={p.slug} priority={i === 0} />
             ))}
           </div>
 

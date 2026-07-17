@@ -116,8 +116,8 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
 
           {list.length ? (
             <div className="pgrid c4">
-              {list.map((p) => (
-                <ProductCard key={p.slug} slug={p.slug} />
+              {list.map((p, i) => (
+                <ProductCard key={p.slug} slug={p.slug} priority={i === 0} />
               ))}
             </div>
           ) : (

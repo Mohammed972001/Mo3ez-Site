@@ -8,14 +8,21 @@ export interface PostSection {
   paragraphs: string[];
 }
 
+export interface PostFaq {
+  q: string;
+  a: string;
+}
+
 export interface Post {
   slug: string;
   title: string;
   description: string;
-  date: string; // ISO: "2026-06-18"
-  cover?: string; // مسار صورة في /public
+  date: string; // ISO published date, e.g. "2026-06-18"
+  updated?: string; // ISO last-updated date (GEO signal); falls back to `date`
+  cover?: string; // image path under /public
   readingMinutes?: number;
   sections: PostSection[];
+  faqs?: PostFaq[]; // optional Q&A block → renders visible FAQ + FAQPage schema
 }
 
 /** المقالات — فارغة الآن عمدًا (الأساس جاهز، المحتوى يُكتب لاحقًا). */
