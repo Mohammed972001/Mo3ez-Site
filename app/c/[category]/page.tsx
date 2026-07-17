@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/home/ProductCard";
 import { business, whatsappLink, telLink } from "@/lib/data/business";
 import { productsByCategory, productPath } from "@/lib/data/products";
 import { categorySeo, getCategorySeo, categoryPath } from "@/lib/data/categories";
+import { allPosts, postPath } from "@/lib/blog/posts";
 import { SITE_URL } from "@/lib/seo/site";
 
 /* Dedicated category landing pages (spec 002, US5): one clean, indexable,
@@ -49,6 +50,9 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
 
   const list = productsByCategory(cat.slug);
   const siblings = categorySeo.filter((c) => c.slug !== cat.slug);
+  const relatedPosts = allPosts().filter((p) =>
+    p.links?.some((l) => l.href === categoryPath(cat.slug)),
+  );
   const wa = whatsappLink(`السلام عليكم، أرغب بعرض سعر — ${cat.label}`);
 
   const jsonLd = {
@@ -157,6 +161,28 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
               ))}
             </div>
           </section>
+
+          {/* Related articles (topic cluster) */}
+          {relatedPosts.length ? (
+            <section style={{ marginTop: 40 }} aria-labelledby="cat-posts-h">
+              <div className="s-head">
+                <div>
+                  <div className="kick">من المدوّنة</div>
+                  <h2 id="cat-posts-h">أدلّة قد تفيدك</h2>
+                </div>
+                <Link className="more" href="/blog">
+                  كل المقالات <Icon name="chevLeft" />
+                </Link>
+              </div>
+              <div className="chips">
+                {relatedPosts.map((p) => (
+                  <Link key={p.slug} href={postPath(p.slug)} className="chip">
+                    {p.title}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* Cross-links to sibling categories (hub-and-spoke) */}
           <section style={{ marginTop: 40 }} aria-labelledby="cat-more-h">

@@ -112,7 +112,7 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 
 - [x] T026 [P] [US6] Write `specs/002-seo-indexing-foundation/article-briefs.md`: 8 briefs from research D6 — each with target keyword, Arabic H2 outline phrased as questions, 40–60-word answer-block draft per section, internal links to `/c/`+`/p/`, FAQ slots
 - [x] T027 [US6] Extend `lib/blog/posts.ts` Post type if needed (FAQ field, updatedAt) + ensure `app/blog/[slug]/page.tsx` renders FAQPage schema when FAQs present and visible «آخر تحديث»
-- [ ] T028 [US6] Publish article #1 with owner's content (or placeholder-reviewed draft of brief #1 upon owner approval) to prove the pipeline end-to-end
+- [x] T028 [US6] Publish article #1 with owner's content (or placeholder-reviewed draft of brief #1 upon owner approval) to prove the pipeline end-to-end
 
 **Checkpoint**: Owner can ship articles by editing one data file.
 

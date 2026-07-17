@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo/site";
 import { products } from "@/lib/data/products";
 import { categorySeo } from "@/lib/data/categories";
+import { allPosts, postPath } from "@/lib/blog/posts";
 
 /** Sitemap — canonical indexable URLs only (Arabic paths percent-encoded).
     Category URLs are the dedicated /c/ landing pages, never ?cat= params. */
@@ -33,5 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...productRoutes, ...categoryRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = allPosts().map((p) => ({
+    url: `${SITE_URL}${postPath(encodeURIComponent(p.slug))}`,
+    lastModified: new Date(p.updated ?? p.date),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...productRoutes, ...categoryRoutes, ...blogRoutes];
 }
