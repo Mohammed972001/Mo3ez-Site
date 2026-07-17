@@ -272,7 +272,7 @@ select.input { appearance:none; padding-inline-end:38px; cursor:pointer; }
    FOOTER
    ========================================================================= */
 .foot { background:var(--c-surface); border:1px solid var(--c-border); border-radius:14px; padding:30px 26px 22px; }
-.foot .top { display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:26px; padding-bottom:24px; border-bottom:1px solid var(--c-border); }
+.foot .top { display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr 1fr; gap:26px; padding-bottom:24px; border-bottom:1px solid var(--c-border); }
 .foot .logo { font-family:var(--font-display); font-size:22px; font-weight:600; color:var(--c-text); margin-bottom:9px; }
 .foot p.desc { font-size:13px; color:var(--c-muted); line-height:1.65; max-width:34ch; }
 .foot h5 { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--c-muted); margin:0 0 13px; font-weight:700; }

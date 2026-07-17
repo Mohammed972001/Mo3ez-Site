@@ -1,13 +1,15 @@
 /**
- * مصدر الحقيقة الموحّد لبيانات النشاط (NAP) — يُستهلك في الهيدر/الفوتر/التواصل
- * وفي JSON-LD (LocalBusiness). توحيد هذه القيمة عبر الموقع إشارة سيو محلية قوية.
- * المرجع: الدستور (المادة 1) + القرار 12 في سجلّ القرارات.
+ * Single source of truth for business facts (NAP) — consumed by the
+ * header/footer/contact UI and by JSON-LD (LocalBusiness/Organization).
+ * Keeping these values identical everywhere is a strong local-SEO signal.
  *
- * ملاحظة: الاسم النهائي للنشاط لم يُحسم بعد — غيّر `name` في مكان واحد فقط.
+ * Brand name FINALIZED by the owner on 2026-07-17 (spec 002, FR-016).
+ * Three near-identical «السريع» namesakes compete in this niche — always
+ * use the FULL name below verbatim for brand-entity differentiation.
  */
 
 export const business = {
-  /** الاسم التجاري — مؤقت حتى يحسمه المالك (مرشّحون: السريع / العمودي للموكيت / أرضيات وموكيت الرياض) */
+  /** Official brand name — FINAL (do not change without owner sign-off) */
   name: "السريع للموكيت والأرضيات",
   shortName: "السريع",
   legalName: "السريع للموكيت والأرضيات",
