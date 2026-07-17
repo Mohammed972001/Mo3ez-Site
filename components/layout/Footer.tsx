@@ -5,6 +5,7 @@ import { products, productPath } from "@/lib/data/products";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
 
 const helpLinks = [
+  { label: "خدمة التركيب", href: "/services/tarkeeb" },
   { label: "تواصل معنا", href: "/contact" },
   { label: "من نحن", href: "/about" },
   { label: "المدوّنة", href: "/blog" },

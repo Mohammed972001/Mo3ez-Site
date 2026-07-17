@@ -175,6 +175,9 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
                   {s.label}
                 </Link>
               ))}
+              <Link href="/services/tarkeeb" className="chip active">
+                خدمة التركيب بالرياض
+              </Link>
             </div>
           </section>
         </div>

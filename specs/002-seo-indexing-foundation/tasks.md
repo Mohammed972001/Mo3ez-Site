@@ -30,7 +30,7 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 
 - [x] T004 Add GSC + Bing verification meta tags to `app/layout.tsx` via `metadata.verification` (values from `NEXT_PUBLIC_GSC_VERIFICATION` / `NEXT_PUBLIC_BING_VERIFICATION` env vars; render only when set); document in `.env.example`
 - [x] T005 [P] Write `specs/002-seo-indexing-foundation/owner-actions.md` (English): step-by-step for (1) Vercel primary-domain flip to non-www, (2) adding GSC/Bing properties + Verify + sitemap submission, (3) Google Business Profile creation with exact NAP, (4) claude.ai connector authorization for Ahrefs/Similarweb
-- [ ] T006 Deploy checkpoint: merge Phases 1–2 to develop→main, verify live `<meta name="google-site-verification">` renders when env set, then hand owner-actions.md to owner
+- [x] T006 Deploy checkpoint: merge Phases 1–2 to develop→main, verify live `<meta name="google-site-verification">` renders when env set, then hand owner-actions.md to owner
 
 **Checkpoint**: Owner can verify + submit sitemap — indexing starts in parallel with everything below.
 
@@ -57,10 +57,10 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Goal**: Every money page targets its query from research.md D3 (plan Phases B4+C).
 **Independent test**: Titles/descriptions unique site-wide; H1 contains target keyword; installation intent has a dedicated page.
 
-- [ ] T013 [US1] Create installation-service page `app/services/tarkeeb/page.tsx` («تركيب موكيت وأرضيات بالرياض»): SSG, hero + direct-answer block, process steps (numbered, HowTo-friendly), Riyadh areas served, FAQs + FAQPage JSON-LD, WhatsApp/call CTAs, links from Footer + relevant categories; add to sitemap
-- [ ] T014 [US1] Title/H1/copy sweep per D3 mapping: `app/page.tsx` (home), `app/mokeet/page.tsx`, all product pages via `lib/data/products.ts` SEO fields — target keyword in title ≤60 chars, H1, and first 100 words; no duplicate titles/descriptions site-wide
-- [ ] T015 [P] [US1] Alt-text audit: ensure every gallery/category/hero image gets descriptive Arabic alt from product/category data (`components/product/Gallery.tsx`, `components/home/ProductCard.tsx`, category page media)
-- [ ] T016 [US1] Verify: build + script check for title/description uniqueness across rendered pages (extend `scripts/seo-guard.mjs`), screenshot service page
+- [x] T013 [US1] Create installation-service page `app/services/tarkeeb/page.tsx` («تركيب موكيت وأرضيات بالرياض»): SSG, hero + direct-answer block, process steps (numbered, HowTo-friendly), Riyadh areas served, FAQs + FAQPage JSON-LD, WhatsApp/call CTAs, links from Footer + relevant categories; add to sitemap
+- [x] T014 [US1] Title/H1/copy sweep per D3 mapping: `app/page.tsx` (home), `app/mokeet/page.tsx`, all product pages via `lib/data/products.ts` SEO fields — target keyword in title ≤60 chars, H1, and first 100 words; no duplicate titles/descriptions site-wide
+- [x] T015 [P] [US1] Alt-text audit: ensure every gallery/category/hero image gets descriptive Arabic alt from product/category data (`components/product/Gallery.tsx`, `components/home/ProductCard.tsx`, category page media)
+- [x] T016 [US1] Verify: build + script check for title/description uniqueness across rendered pages (extend `scripts/seo-guard.mjs`), screenshot service page
 
 **Checkpoint**: Every commercial intent from the keyword table has exactly one targeted page.
 
@@ -110,7 +110,7 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Goal**: 8 ready-to-write briefs + publishing path (plan Phase E.1).
 **Independent test**: A brief converted to a post renders indexable with Article schema + internal links.
 
-- [ ] T026 [P] [US6] Write `specs/002-seo-indexing-foundation/article-briefs.md`: 8 briefs from research D6 — each with target keyword, Arabic H2 outline phrased as questions, 40–60-word answer-block draft per section, internal links to `/c/`+`/p/`, FAQ slots
+- [x] T026 [P] [US6] Write `specs/002-seo-indexing-foundation/article-briefs.md`: 8 briefs from research D6 — each with target keyword, Arabic H2 outline phrased as questions, 40–60-word answer-block draft per section, internal links to `/c/`+`/p/`, FAQ slots
 - [ ] T027 [US6] Extend `lib/blog/posts.ts` Post type if needed (FAQ field, updatedAt) + ensure `app/blog/[slug]/page.tsx` renders FAQPage schema when FAQs present and visible «آخر تحديث»
 - [ ] T028 [US6] Publish article #1 with owner's content (or placeholder-reviewed draft of brief #1 upon owner approval) to prove the pipeline end-to-end
 
