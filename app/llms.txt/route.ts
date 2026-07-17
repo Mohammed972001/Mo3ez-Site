@@ -2,6 +2,7 @@ import { SITE_URL } from "@/lib/seo/site";
 import { business } from "@/lib/data/business";
 import { products, productPath } from "@/lib/data/products";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
+import { allPosts, postPath } from "@/lib/blog/posts";
 
 /** /llms.txt — machine-readable site summary for AI answer engines (GEO). */
 export function GET() {
@@ -24,6 +25,13 @@ export function GET() {
     "## المنتجات",
     ...products.map((p) => `- [${p.nameAr}](${SITE_URL}${productPath(p.slug)}): ${p.blurb}`),
     "",
+    ...(allPosts().length
+      ? [
+          "## المقالات",
+          ...allPosts().map((p) => `- [${p.title}](${SITE_URL}${postPath(p.slug)}): ${p.description}`),
+          "",
+        ]
+      : []),
     "## صفحات مهمة",
     `- كل المنتجات: ${SITE_URL}/mokeet`,
     `- من نحن: ${SITE_URL}/about`,

@@ -423,3 +423,10 @@ a.chip { text-decoration:none; }   /* شريحة فلتر نشطة كرابط */
 .steps-list .num{flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--c-primary);color:#fff;font-weight:700;font-size:15px}
 .steps-list b{display:block;margin-bottom:2px}
 .steps-list p{margin:0;color:var(--c-muted);font-size:13.5px;line-height:1.7}
+
+/* ---- Blog comparison tables (spec 002 T028) ---- */
+.prose .table-wrap{overflow-x:auto;margin:6px 0 18px}
+.prose .cmp-table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:420px}
+.prose .cmp-table th,.prose .cmp-table td{border:1px solid var(--c-border);padding:9px 12px;text-align:start;vertical-align:top}
+.prose .cmp-table thead th{background:var(--c-surface);font-weight:700}
+.prose .cmp-table tbody tr:nth-child(even){background:color-mix(in srgb, var(--c-surface) 45%, transparent)}
