@@ -120,6 +120,35 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                 {s.paragraphs.map((p, j) => (
                   <p key={j}>{p}</p>
                 ))}
+                {s.list?.length ? (
+                  <ul>
+                    {s.list.map((li, k) => (
+                      <li key={k}>{li}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                {s.table ? (
+                  <div className="table-wrap">
+                    <table className="cmp-table">
+                      <thead>
+                        <tr>
+                          {s.table.headers.map((h, k) => (
+                            <th key={k}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {s.table.rows.map((row, r) => (
+                          <tr key={r}>
+                            {row.map((cell, c) => (
+                              <td key={c}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
               </div>
             ))}
 
@@ -135,6 +164,19 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                       </summary>
                       <p>{f.a}</p>
                     </details>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            {post.links?.length ? (
+              <section aria-labelledby="post-links-h">
+                <h2 id="post-links-h">روابط مفيدة</h2>
+                <div className="chips">
+                  {post.links.map((l) => (
+                    <Link key={l.href} href={l.href} className="chip">
+                      {l.label}
+                    </Link>
                   ))}
                 </div>
               </section>
