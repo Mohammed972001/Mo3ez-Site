@@ -63,6 +63,34 @@ try {
   errors.push("next.config.ts: missing");
 }
 
+// -- Check 4 (optional, needs a prior `next build`): title/description
+//    uniqueness across every prerendered page (spec 002, T016) ---------------
+try {
+  const seenTitle = new Map();
+  const seenDesc = new Map();
+  let pages = 0;
+  for (const file of walk(join(ROOT, ".next", "server", "app"))) {
+    if (!file.endsWith(".html")) continue;
+    const rel = relative(join(ROOT, ".next", "server", "app"), file).replaceAll("\\", "/");
+    const html = readFileSync(file, "utf8");
+    const title = html.match(/<title>([^<]*)<\/title>/)?.[1];
+    const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1];
+    pages++;
+    if (title) {
+      if (seenTitle.has(title)) errors.push(`duplicate <title> on "${rel}" and "${seenTitle.get(title)}": ${title.slice(0, 60)}…`);
+      else seenTitle.set(title, rel);
+    } else errors.push(`missing <title> on "${rel}"`);
+    if (desc) {
+      if (seenDesc.has(desc)) errors.push(`duplicate meta description on "${rel}" and "${seenDesc.get(desc)}"`);
+      else seenDesc.set(desc, rel);
+    }
+  }
+  if (pages) console.log(`uniqueness check: ${pages} prerendered pages, ${seenTitle.size} unique titles.`);
+  else console.log("uniqueness check skipped (no .next build output).");
+} catch {
+  console.log("uniqueness check skipped (no .next build output).");
+}
+
 // -- Report -----------------------------------------------------------------
 if (errors.length) {
   console.error("SEO guard FAILED:\n" + errors.map((e) => `  - ${e}`).join("\n"));
