@@ -5,8 +5,7 @@ import { ProductCard } from "@/components/home/ProductCard";
 import { SortSelect } from "@/components/shop/SortSelect";
 import { business } from "@/lib/data/business";
 import { products, productsByCategory, categories, categoryCount, productPath } from "@/lib/data/products";
-
-const SITE_URL = "https://www.mokeet-elsuarye.com";
+import { SITE_URL } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
   title: `كل المنتجات | موكيت وأرضيات وعشب صناعي وفينيل — ${business.name}`,

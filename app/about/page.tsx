@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { business, whatsappLink, telLink } from "@/lib/data/business";
-
-const SITE_URL = "https://www.mokeet-elsuarye.com";
+import { SITE_URL } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
   title: `من نحن | ${business.name} — موكيت وأرضيات في ${business.address.city}`,
