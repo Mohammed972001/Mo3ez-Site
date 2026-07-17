@@ -16,9 +16,9 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 
 **Purpose**: Single sources of truth + guards that every story depends on.
 
-- [ ] T001 Finalize brand in `lib/data/business.ts`: mark name «السريع للموكيت والأرضيات» as FINAL (remove "undecided" comments), keep NAP as single source; English comments per repo rule
-- [ ] T002 [P] Create `lib/data/categories.ts`: typed per-category SEO module — slug, nameAr, H1, title, metaDescription, target keyword, unique 120–180-word Arabic intro, 3–4 category FAQs (from research.md D3 keyword table)
-- [ ] T003 [P] Add regression guard script `scripts/seo-guard.mjs`: fails if repo contains `mokeet-elsuarye` (competitor domain), a second `const SITE_URL` declaration, or host redirects in `next.config.ts`; wire as `npm run seo:guard`
+- [x] T001 Finalize brand in `lib/data/business.ts`: mark name «السريع للموكيت والأرضيات» as FINAL (remove "undecided" comments), keep NAP as single source; English comments per repo rule
+- [x] T002 [P] Create `lib/data/categories.ts`: typed per-category SEO module — slug, nameAr, H1, title, metaDescription, target keyword, unique 120–180-word Arabic intro, 3–4 category FAQs (from research.md D3 keyword table)
+- [x] T003 [P] Add regression guard script `scripts/seo-guard.mjs`: fails if repo contains `mokeet-elsuarye` (competitor domain), a second `const SITE_URL` declaration, or host redirects in `next.config.ts`; wire as `npm run seo:guard`
 
 **Checkpoint**: `npm run seo:guard` passes; build green.
 
@@ -28,8 +28,8 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 
 **Purpose**: Verification tags + host consolidation docs — unblocks the indexing clock (plan Phase A).
 
-- [ ] T004 Add GSC + Bing verification meta tags to `app/layout.tsx` via `metadata.verification` (values from `NEXT_PUBLIC_GSC_VERIFICATION` / `NEXT_PUBLIC_BING_VERIFICATION` env vars; render only when set); document in `.env.example`
-- [ ] T005 [P] Write `specs/002-seo-indexing-foundation/owner-actions.md` (English): step-by-step for (1) Vercel primary-domain flip to non-www, (2) adding GSC/Bing properties + Verify + sitemap submission, (3) Google Business Profile creation with exact NAP, (4) claude.ai connector authorization for Ahrefs/Similarweb
+- [x] T004 Add GSC + Bing verification meta tags to `app/layout.tsx` via `metadata.verification` (values from `NEXT_PUBLIC_GSC_VERIFICATION` / `NEXT_PUBLIC_BING_VERIFICATION` env vars; render only when set); document in `.env.example`
+- [x] T005 [P] Write `specs/002-seo-indexing-foundation/owner-actions.md` (English): step-by-step for (1) Vercel primary-domain flip to non-www, (2) adding GSC/Bing properties + Verify + sitemap submission, (3) Google Business Profile creation with exact NAP, (4) claude.ai connector authorization for Ahrefs/Similarweb
 - [ ] T006 Deploy checkpoint: merge Phases 1–2 to develop→main, verify live `<meta name="google-site-verification">` renders when env set, then hand owner-actions.md to owner
 
 **Checkpoint**: Owner can verify + submit sitemap — indexing starts in parallel with everything below.
@@ -41,12 +41,12 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Goal**: One clean, indexable, keyword-targeted URL per category — the ranking inventory (plan Phase B).
 **Independent test**: Each `/c/[slug]` returns 200 SSG, unique H1/title/intro, product grid, FAQ, breadcrumb; reachable from nav; `?cat=` canonicalizes to it.
 
-- [ ] T007 [US5] Build `app/c/[category]/page.tsx` (SSG via generateStaticParams over `lib/data/categories.ts`): breadcrumb + BreadcrumbList JSON-LD, 40–60-word direct-answer intro block (GEO), unique category copy, product grid (existing ProductCard), category FAQ `<details>` + FAQPage JSON-LD, ItemList JSON-LD, cross-links to sibling categories
-- [ ] T008 [US5] Add `generateMetadata` per category: unique title «{category} بالرياض | {brand}», meta description with CTA, self canonical `/c/{slug}`
-- [ ] T009 [US5] Update `app/mokeet/page.tsx`: filtered views (`?cat=…`) emit `rel=canonical` to the matching `/c/[slug]`; unfiltered view keeps self-canonical
-- [ ] T010 [P] [US5] Update navigation to link `/c/…`: `components/layout/MegaMenu.tsx` category links + `components/layout/Footer.tsx` category column
-- [ ] T011 [US5] Update `app/sitemap.ts`: replace `?cat=` URLs with `/c/[slug]` URLs (priority 0.8); keep products/statics
-- [ ] T012 [US5] Verify: `next build` (SSG count grows), Playwright screenshots desktop+mobile of one category page, curl canonical/robots of `/c/…` on preview
+- [x] T007 [US5] Build `app/c/[category]/page.tsx` (SSG via generateStaticParams over `lib/data/categories.ts`): breadcrumb + BreadcrumbList JSON-LD, 40–60-word direct-answer intro block (GEO), unique category copy, product grid (existing ProductCard), category FAQ `<details>` + FAQPage JSON-LD, ItemList JSON-LD, cross-links to sibling categories
+- [x] T008 [US5] Add `generateMetadata` per category: unique title «{category} بالرياض | {brand}», meta description with CTA, self canonical `/c/{slug}`
+- [x] T009 [US5] Update `app/mokeet/page.tsx`: filtered views (`?cat=…`) emit `rel=canonical` to the matching `/c/[slug]`; unfiltered view keeps self-canonical
+- [x] T010 [P] [US5] Update navigation to link `/c/…`: `components/layout/MegaMenu.tsx` category links + `components/layout/Footer.tsx` category column
+- [x] T011 [US5] Update `app/sitemap.ts`: replace `?cat=` URLs with `/c/[slug]` URLs (priority 0.8); keep products/statics
+- [x] T012 [US5] Verify: `next build` (SSG count grows), Playwright screenshots desktop+mobile of one category page, curl canonical/robots of `/c/…` on preview
 
 **Checkpoint**: Category inventory live and linked — US5 independently delivered.
 

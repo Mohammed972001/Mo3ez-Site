@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { business, telLink, whatsappLink } from "@/lib/data/business";
 import { products, productPath } from "@/lib/data/products";
+import { categorySeo, categoryPath } from "@/lib/data/categories";
 
 const helpLinks = [
   { label: "تواصل معنا", href: "/contact" },
@@ -53,6 +54,10 @@ export function Footer() {
             </div>
           </div>
 
+          <Column
+            title="الأقسام"
+            links={categorySeo.map((c) => ({ label: c.label, href: categoryPath(c.slug) }))}
+          />
           <Column
             title="المنتجات"
             links={products.slice(0, 6).map((p) => ({ label: p.nameAr, href: productPath(p.slug) }))}

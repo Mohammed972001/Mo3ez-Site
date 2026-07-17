@@ -29,11 +29,21 @@ const cairo = Cairo({
 const fontVars = `${reemKufi.variable} ${cairo.variable}`;
 
 export const metadata: Metadata = {
-  // عنوان افتراضي فقط — كل صفحة تضبط عنوانها الكامل (يتضمّن الاسم) فلا تكرار للعلامة.
+  // Default title only — every page sets its own full title (brand included).
   title: `${business.name} — موكيت وأرضيات الرياض`,
   description:
     "موكيت ومفروشات وأرضيات بالرياض: موكيت مساجد ومكاتب، عشب صناعي، فينيل، وأرضيات مطاطية — توصيل وتركيب. تواصل واتساب مباشر.",
   metadataBase: new URL(SITE_URL),
+  // Search-console ownership verification (spec 002, T004). Tags render only
+  // when the env vars are set in Vercel — see .env.example and owner-actions.md.
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+      : {}),
+    ...(process.env.NEXT_PUBLIC_BING_VERIFICATION
+      ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } }
+      : {}),
+  },
 };
 
 /* يضبط الوضع (داكن/فاتح) قبل الرسم لمنع وميض الثيم — يقرأ التخزين ثم تفضيل النظام. */
