@@ -12,7 +12,7 @@ time-based and re-measured over the following weeks from GSC/CrUX.
 | SC-002 | All real pages indexable, self-canonical, no duplicate/wrong-domain canonical | ✅ **Met** | Live verifier per-URL canonical check passes; `?cat=` canonicalizes to `/c/` |
 | SC-003 | ≥90% of submitted URLs indexed within 4 weeks | ⏳ **Pending** (clock started 2026-07-18) | GSC domain property verified, sitemap submitted (20 pages discovered) |
 | SC-004 | Every title & meta description unique | ✅ **Met** | `seo:guard` uniqueness check: 22/22 unique titles, 0 duplicate descriptions |
-| SC-005 | Structured data validates with 0 errors (home/product/category) | ✅ **Met (lab)** | `seo:verify-live` asserts valid JSON-LD on every URL; templates: Org/WebSite/LocalBusiness, Product, BreadcrumbList, FAQPage, ItemList, Service |
+| SC-005 | Structured data validates with 0 errors (home/product/category) | ✅ **Met (lab)** | `seo:verify-live` asserts valid JSON-LD on all 29 URLs; templates: Org/WebSite/LocalBusiness, Product, BreadcrumbList, FAQPage, ItemList, Service, Article |
 | SC-006 | CWV pass on mobile (LCP<2.5s, CLS<0.1, INP<200ms) | 🟢 **On track (lab)** | Preview measurement: **CLS = 0** on home & category; TTFB 33ms, load <500ms; hero + first grid card use `priority`. Field p75 tracked in CrUX/GSC over ~28 days |
 | SC-007 | Every category intent has a dedicated indexable page | ✅ **Met** | 4 `/c/[category]` SSG pages live; no intent served only by `?cat=` |
 | SC-008 | Business facts identical across all surfaces | ✅ **Met** | Single `business` source feeds UI + JSON-LD + llms.txt; verified in build |
@@ -38,11 +38,20 @@ time-based and re-measured over the following weeks from GSC/CrUX.
 - GSC domain property verified (DNS TXT); `sitemap.xml` submitted. ✅
 - Bing Webmaster imported from GSC; processing (≤48h). ✅
 
+## Content pipeline — published (T027–T028) ✅
+
+All 8 briefed articles are written and live (SSG), each with question-style
+H2s, 40–60-word direct-answer blocks, per-article FAQs (FAQPage schema),
+internal links, and — for the two comparison pieces — an RTL comparison table:
+موكيت المساجد · أسعار الموكيت · الموكيت أم الفينيل · رول أم بلاط · العشب الصناعي ·
+العناية بالموكيت · أرضيات الجيم · أرضيات الإسطبلات. Blog posts are in the sitemap
+(29 URLs total) and llms.txt; category pages link related articles (topic cluster).
+
 ## Open / owner-gated tail
 
-- **T021** — URL-inspection of 5 URLs in GSC (owner; or CSV to maintainer once data accrues).
-- **T027–T028** — publish blog article #1 from `article-briefs.md` (owner writes; priority order 1→2→3→5→7→4→6→8).
-- **SC-003/009** — re-measure indexation & impressions at weeks 4 and 8.
+- **T021** — URL-inspection of 5 URLs in GSC + "Request indexing" (owner-only;
+  no GSC connector — owner runs it or exports CSV). **This is the sole remaining task.**
+- **SC-003/009** — re-measure indexation & impressions at weeks 4 and 8 (time-based).
 - **GBP** — create/verify Google Business Profile (largest local lever; owner-actions.md #4).
 
 ## Note on data access
