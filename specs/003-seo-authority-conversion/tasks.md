@@ -23,8 +23,8 @@ US1 = Map Pack presence · US2 = trust proof (reviews/photos) · US3 = external 
 
 ## Phase 2: Foundational — Owner operations kit (blocks the biggest wins)
 
-- [ ] T003 Write `specs/003-seo-authority-conversion/owner-playbook.md` (English) covering: (1) business-profile creation + verification with the exact category choice and the anti-suspension rules (real facts, no keyword-stuffed name), (2) claiming the non-Google map/search platforms — including the one that feeds AI answer engines, (3) a prioritized regional/business directory list with the identical NAP, (4) a review-request message the team sends after each completed job (no incentives, no gating), (5) a photo brief telling the client exactly which shots to send to replace the AI placeholders
-- [ ] T004 Deploy checkpoint: ship Phases 1–2, hand `owner-playbook.md` + `npm run business:kit` output to the owner
+- [x] T003 Write `specs/003-seo-authority-conversion/owner-playbook.md` (English) covering: (1) business-profile creation + verification with the exact category choice and the anti-suspension rules (real facts, no keyword-stuffed name), (2) claiming the non-Google map/search platforms — including the one that feeds AI answer engines, (3) a prioritized regional/business directory list with the identical NAP, (4) a review-request message the team sends after each completed job (no incentives, no gating), (5) a photo brief telling the client exactly which shots to send to replace the AI placeholders
+- [x] T004 Deploy checkpoint: ship Phases 1–2, hand `owner-playbook.md` + `npm run business:kit` output to the owner
 
 **Checkpoint**: owner can execute US1/US3 without further input from the maintainer.
 
@@ -38,9 +38,9 @@ US1 = Map Pack presence · US2 = trust proof (reviews/photos) · US3 = external 
 - [x] T005 [US2] Build `components/reviews/ReviewList.tsx`: renders genuine reviews (author, star rating, visible date, text, source) using existing DS patterns; renders nothing when the list is empty
 - [x] T006 [US2] Place reviews on `app/p/[slug]/page.tsx` (product-specific first, else general) and `app/page.tsx` (home trust section)
 - [x] T007 [US2] Emit `aggregateRating`/`review` in Product JSON-LD **only** when real reviews exist for that product — guard the emission behind a non-empty check (this is the honest fix for the 3 invalid Product-snippet items)
-- [ ] T008 [P] [US2] Add a credentials/trust block to `app/about/page.tsx` (who we are, where, coverage, hours, contact) strengthening E-E-A-T
-- [ ] T009 [US2] Document the real-photo swap in `README.md`: drop client photos into the product folder → run `node scripts/gen-gallery.mjs` → placeholders gone, no code change
-- [ ] T010 [US2] Verify: build, Rich Results check on a product page confirming **no** rating markup while reviews are empty, screenshots
+- [x] T008 [P] [US2] Add a credentials/trust block to `app/about/page.tsx` (who we are, where, coverage, hours, contact) strengthening E-E-A-T
+- [x] T009 [US2] Document the real-photo swap in `README.md`: drop client photos into the product folder → run `node scripts/gen-gallery.mjs` → placeholders gone, no code change
+- [x] T010 [US2] Verify: build, Rich Results check on a product page confirming **no** rating markup while reviews are empty, screenshots
 
 **Checkpoint**: US2 shippable; schema stays honest at zero reviews and upgrades automatically when real ones land.
 
