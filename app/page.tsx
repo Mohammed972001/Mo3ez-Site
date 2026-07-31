@@ -123,7 +123,8 @@ function Bg({ slug, index = 0, sizes }: { slug: string; index?: number; sizes: s
   const imgs = productImages(slug);
   const img = imgs[index] ?? imgs[0];
   if (!img) return null;
-  return <Image src={img.src} alt={img.alt} fill sizes={sizes} className="bgimg" />;
+  // Card backgrounds sit under scrims — lower quality is invisible but lighter.
+  return <Image src={img.src} alt={img.alt} fill quality={60} sizes={sizes} className="bgimg" />;
 }
 
 /* ===================================================================== */
@@ -138,7 +139,9 @@ export default function HomePage() {
       {/* ============ الهيرو ============ */}
       <section className="hero-full">
         {hero ? (
-          <Image src={hero.src} alt={hero.alt} fill priority sizes="100vw" className="bgimg" />
+          // quality 55: full-viewport background under a scrim — visually
+          // indistinguishable, but cuts LCP image bytes sharply (spec 002 CWV)
+          <Image src={hero.src} alt={hero.alt} fill priority quality={55} sizes="100vw" className="bgimg" />
         ) : null}
         <div className="scrim" />
         <div className="wrap">

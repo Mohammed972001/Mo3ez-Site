@@ -53,6 +53,7 @@ export function ProductCard({
             alt={hero.alt}
             fill
             priority={priority}
+            quality={60}
             sizes="(max-width:560px) 72vw, (max-width:820px) 45vw, 250px"
             className="coverimg"
           />
