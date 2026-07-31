@@ -14,8 +14,8 @@ US1 = Map Pack presence · US2 = trust proof (reviews/photos) · US3 = external 
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-- [ ] T001 Create `scripts/business-kit.mjs` (`npm run business:kit`): prints the canonical listing kit — exact name, address, phone (local + international), hours, service areas, website, suggested primary/secondary categories, and the short/long Arabic descriptions — all derived from `lib/data/business.ts` so every external listing uses one source
-- [ ] T002 [P] Create `lib/data/reviews.ts`: typed `Review` module (author, rating 1–5, date ISO, text, source platform, optional productSlug) exported as an **empty** array with a header comment forbidding fabricated entries
+- [x] T001 Create `scripts/business-kit.mjs` (`npm run business:kit`): prints the canonical listing kit — exact name, address, phone (local + international), hours, service areas, website, suggested primary/secondary categories, and the short/long Arabic descriptions — all derived from `lib/data/business.ts` so every external listing uses one source
+- [x] T002 [P] Create `lib/data/reviews.ts`: typed `Review` module (author, rating 1–5, date ISO, text, source platform, optional productSlug) exported as an **empty** array with a header comment forbidding fabricated entries
 
 **Checkpoint**: kit prints correct values; build green.
 
@@ -35,9 +35,9 @@ US1 = Map Pack presence · US2 = trust proof (reviews/photos) · US3 = external 
 **Goal**: genuine social proof visible on the money pages, with honest structured data.
 **Independent test**: with reviews present they render with author/rating/date and appear in schema; with none present, no rating markup is emitted anywhere.
 
-- [ ] T005 [US2] Build `components/reviews/ReviewList.tsx`: renders genuine reviews (author, star rating, visible date, text, source) using existing DS patterns; renders nothing when the list is empty
-- [ ] T006 [US2] Place reviews on `app/p/[slug]/page.tsx` (product-specific first, else general) and `app/page.tsx` (home trust section)
-- [ ] T007 [US2] Emit `aggregateRating`/`review` in Product JSON-LD **only** when real reviews exist for that product — guard the emission behind a non-empty check (this is the honest fix for the 3 invalid Product-snippet items)
+- [x] T005 [US2] Build `components/reviews/ReviewList.tsx`: renders genuine reviews (author, star rating, visible date, text, source) using existing DS patterns; renders nothing when the list is empty
+- [x] T006 [US2] Place reviews on `app/p/[slug]/page.tsx` (product-specific first, else general) and `app/page.tsx` (home trust section)
+- [x] T007 [US2] Emit `aggregateRating`/`review` in Product JSON-LD **only** when real reviews exist for that product — guard the emission behind a non-empty check (this is the honest fix for the 3 invalid Product-snippet items)
 - [ ] T008 [P] [US2] Add a credentials/trust block to `app/about/page.tsx` (who we are, where, coverage, hours, contact) strengthening E-E-A-T
 - [ ] T009 [US2] Document the real-photo swap in `README.md`: drop client photos into the product folder → run `node scripts/gen-gallery.mjs` → placeholders gone, no code change
 - [ ] T010 [US2] Verify: build, Rich Results check on a product page confirming **no** rating markup while reviews are empty, screenshots

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "seo:guard": "node scripts/seo-guard.mjs",
-    "seo:verify-live": "node scripts/verify-live-seo.mjs"
+    "seo:verify-live": "node scripts/verify-live-seo.mjs",
+    "business:kit": "node scripts/business-kit.mjs"
   },
   "dependencies": {
     "next": "16.2.9",
