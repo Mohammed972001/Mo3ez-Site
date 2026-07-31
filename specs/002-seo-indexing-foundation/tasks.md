@@ -85,7 +85,7 @@ US1 = right page ranks for the query · US2 = full discovery/indexation · US3 =
 **Independent test**: Properties verified; sitemap "Success"; URL inspection of 5 URLs = indexable.
 
 - [x] T020 [US3] Support owner through owner-actions.md: confirm env vars set in Vercel, verification passes, sitemap submitted in GSC + Bing
-- [ ] T021 [US3] Run URL-inspection checks on 5 representative URLs (home, one category, one product, service page, blog index); log results + fix any coverage errors found
+- [x] T021 [US3] Run URL-inspection checks on 5 representative URLs (home, one category, one product, service page, blog index); log results + fix any coverage errors found
 
 **Checkpoint**: Coverage/performance reports populating — SC-003 clock running.
 
