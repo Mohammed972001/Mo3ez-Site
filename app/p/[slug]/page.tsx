@@ -14,6 +14,8 @@ import {
   categories,
 } from "@/lib/data/products";
 import { categoryPath } from "@/lib/data/categories";
+import { reviewsForProduct, aggregate } from "@/lib/data/reviews";
+import { ReviewList } from "@/components/reviews/ReviewList";
 import { SITE_URL } from "@/lib/seo/site";
 
 type Params = { slug: string };
@@ -60,6 +62,8 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   const catLabel = categories.find((c) => c.slug === product.category)?.label ?? "المنتجات";
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
   const wa = whatsappLink(`السلام عليكم، أرغب بعرض سعر وتفاصيل عن ${product.nameAr}`);
+  const productReviews = reviewsForProduct(product.slug);
+  const productAgg = aggregate(productReviews);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -78,6 +82,30 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           name: s.k,
           value: s.v,
         })),
+        /* Ratings are emitted ONLY when genuine customer reviews exist for
+           this product (spec 003). While the list is empty nothing is added —
+           we never publish a rating we cannot back with real reviews. */
+        ...(productAgg
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: productAgg.value,
+                reviewCount: productAgg.count,
+              },
+              review: productReviews.slice(0, 5).map((r) => ({
+                "@type": "Review",
+                author: { "@type": "Person", name: r.author },
+                datePublished: r.date,
+                reviewBody: r.text,
+                reviewRating: {
+                  "@type": "Rating",
+                  ratingValue: r.rating,
+                  bestRating: 5,
+                  worstRating: 1,
+                },
+              })),
+            }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -218,6 +246,13 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               </div>
             </section>
           ) : null}
+
+          {/* آراء العملاء — تُنشر بعد التحقّق فقط */}
+          <ReviewList
+            list={productReviews}
+            title={`آراء عملائنا عن ${product.nameAr}`}
+            emptyLead={`اشتريت ${product.nameAr} منّا؟ شاركنا رأيك — تقييمك يساعد غيرك على الاختيار.`}
+          />
 
           {/* منتجات مرتبطة */}
           <div style={{ marginTop: 48 }}>
