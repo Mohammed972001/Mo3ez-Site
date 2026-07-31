@@ -30,6 +30,15 @@ function LocalBusinessLd() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />;
 }
 
+/* Verifiable identity block (spec 003, T008) — E-E-A-T: a first-time visitor
+   should be able to confirm who we are, where, and how to reach us. */
+const credentials: [IconName, string, string][] = [
+  ["location", "مقرّنا", `${"الرياض"} — حي العزيزية، حراج بن قاسم`],
+  ["phone", "تواصل مباشر", "0546465316 — واتساب واتصال، 24 ساعة"],
+  ["truck", "نطاق الخدمة", "الرياض وجميع أحيائها، والمشاريع في كل المملكة"],
+  ["check", "طريقة العمل", "معاينة وقياس مجاني ثم عرض سعر واضح قبل التنفيذ"],
+];
+
 const why: [IconName, string, string][] = [
   ["shield", "خبرة وجودة", "خامات أصلية مختارة تناسب المناخ والاستخدام الكثيف."],
   ["truck", "توصيل وتركيب", "فريق تركيب محترف لكل مدن المملكة."],
@@ -67,8 +76,9 @@ export default function AboutPage() {
               <li>موكيت مكاتب وشركات متين وعملي (رول وبلاط).</li>
               <li>موكيت تركي مشجّر فاخر للمجالس والغرف.</li>
               <li>عشب صناعي للحدائق والأسطح والملاعب.</li>
-              <li>فينيل وأرضيات صلبة مقاومة للماء.</li>
+              <li>فينيل وأرضيات صلبة مقاومة للماء، وباركيه HDF وSPC.</li>
               <li>أرضيات مطاطية للصالات الرياضية والإسطبلات والحمامات.</li>
+              <li>أرضيات طبية للمستشفيات والعيادات والمختبرات.</li>
             </ul>
 
             <h2>لماذا تختارنا</h2>
@@ -87,6 +97,33 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+
+          {/* Verifiable identity — who/where/how, in one glance */}
+          <section style={{ marginTop: 36 }} aria-labelledby="cred-h">
+            <div className="s-head">
+              <div>
+                <div className="kick">تعرّف علينا</div>
+                <h2 id="cred-h">بياناتنا بوضوح</h2>
+              </div>
+            </div>
+            <div className="info-grid">
+              {credentials.map(([icon, t, s]) => (
+                <div className="info-card" key={t}>
+                  <div className="ic">
+                    <Icon name={icon} />
+                  </div>
+                  <div>
+                    <b>{t}</b>
+                    <span>{s}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p style={{ marginTop: 14, fontSize: 13.5, color: "var(--c-muted)", lineHeight: 1.8 }}>
+              نحن نشاط مستقل في {business.address.city}، ولا نتبع أي متجر آخر مشابه في الاسم. تأكّد
+              دائمًا أنك تتواصل معنا عبر الرقم {business.phone.display} أو موقعنا الرسمي.
+            </p>
+          </section>
 
           <div className="cta-row" style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
             <a className="btn btn-accent btn-lg" href={whatsappLink("السلام عليكم، أرغب بالاستفسار والاستشارة")} target="_blank" rel="noopener noreferrer">

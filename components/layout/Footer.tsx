@@ -6,6 +6,7 @@ import { categorySeo, categoryPath } from "@/lib/data/categories";
 
 const helpLinks = [
   { label: "خدمة التركيب", href: "/services/tarkeeb" },
+  { label: "أضف تقييمك", href: "/review" },
   { label: "تواصل معنا", href: "/contact" },
   { label: "من نحن", href: "/about" },
   { label: "المدوّنة", href: "/blog" },

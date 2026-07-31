@@ -28,6 +28,39 @@ npm run start      # serve the production build
 | `npm run build` | Production build; fails on type errors or SSG failures |
 | `npm run seo:guard` | Regression guard — see below (run in CI / before release) |
 | `npm run seo:verify-live [origin]` | Post-release sweep of the live sitemap (200 / self-canonical / valid JSON-LD) |
+| `npm run business:kit` | Prints the canonical business-listing kit (NAP, hours, categories, descriptions) for external directories |
+
+## Content operations
+
+### Replacing product photos
+
+Product galleries are generated from folders under `public/` — one folder per
+product, wired in `scripts/gen-gallery.mjs`. To swap images (for example to
+replace the AI-generated placeholders in `public/medical-vinyl/` and
+`public/hospital-flooring/` with the client's real photos):
+
+```bash
+# 1. drop the new images into the product's folder under public/
+# 2. regenerate the gallery data
+node scripts/gen-gallery.mjs
+```
+
+No code change is required — alt text and ordering are derived automatically.
+
+### Customer reviews
+
+Reviews live in `lib/data/reviews.ts` and are **moderated**: the `/review` form
+posts to `app/api/review/route.ts`, which delivers the submission for
+verification (set `REVIEW_WEBHOOK_URL`, otherwise it is logged server-side).
+Only after the owner confirms the customer is the review added to the data file.
+
+**Integrity rules** (enforced by convention, documented in the module):
+
+- Never add a review that did not come from a real customer.
+- Never copy reviews from Google Business Profile or another platform.
+- `Product` `aggregateRating`/`review` markup is emitted **only** when genuine
+  reviews exist for that product; self-serving reviews are never used for
+  `LocalBusiness`/`Organization` ratings (Google disallows it).
 
 ## SEO architecture
 
