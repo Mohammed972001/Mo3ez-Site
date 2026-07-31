@@ -629,5 +629,43 @@ export const gallery: Record<string, GalleryImage[]> = {
       "src": "/makteb/WhatsApp%20Image%202025-08-02%20at%206.41.46%20PM.jpeg",
       "alt": "أرضيات مكتبية — صورة 4 — الرياض"
     }
+  ],
+  "باركيه": [
+    {
+      "src": "/braqiee/WhatsApp%20Image%202025-08-02%20at%206.34.33%20PM%20(1).jpeg",
+      "alt": "باركيه خشب — صورة 1 — الرياض"
+    },
+    {
+      "src": "/braqiee/WhatsApp%20Image%202025-08-02%20at%206.34.33%20PM.jpeg",
+      "alt": "باركيه خشب — صورة 2 — الرياض"
+    }
+  ],
+  "فينيل-طبي": [
+    {
+      "src": "/medical-vinyl/medical-vinyl-rolls.jpg",
+      "alt": "فينيل طبي — صورة 1 — الرياض"
+    },
+    {
+      "src": "/medical-vinyl/medical-vinyl-texture.jpg",
+      "alt": "فينيل طبي — صورة 2 — الرياض"
+    },
+    {
+      "src": "/medical-vinyl/medical-vinyl-welded-seam.jpg",
+      "alt": "فينيل طبي — صورة 3 — الرياض"
+    }
+  ],
+  "أرضيات-مستشفيات": [
+    {
+      "src": "/hospital-flooring/clinic-waiting-area.jpg",
+      "alt": "أرضيات مستشفيات — صورة 1 — الرياض"
+    },
+    {
+      "src": "/hospital-flooring/hospital-corridor.jpg",
+      "alt": "أرضيات مستشفيات — صورة 2 — الرياض"
+    },
+    {
+      "src": "/hospital-flooring/operating-room.jpg",
+      "alt": "أرضيات مستشفيات — صورة 3 — الرياض"
+    }
   ]
 };

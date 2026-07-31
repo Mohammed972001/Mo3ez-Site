@@ -20,6 +20,12 @@ const PRODUCTS = [
   { slug: "أرضيات-خيول", folder: "Non-slip, moisture-proof, and fire-resistant horse flooring rubber", nameAr: "أرضيات مطاطية للخيول" },
   { slug: "أرضيات-مانعة-للانزلاق", folder: "Non-slip rubber flooring and toilets", nameAr: "أرضيات مانعة للانزلاق" },
   { slug: "أرضيات-مكتبية", folder: "makteb", nameAr: "أرضيات مكتبية" },
+  { slug: "باركيه", folder: "braqiee", nameAr: "باركيه خشب" },
+  // NOTE: the two folders below currently hold AI-generated illustrative
+  // images (spec 003). Replace them with the client's real photos as soon as
+  // they arrive, then re-run this script — no code change needed.
+  { slug: "فينيل-طبي", folder: "medical-vinyl", nameAr: "فينيل طبي" },
+  { slug: "أرضيات-مستشفيات", folder: "hospital-flooring", nameAr: "أرضيات مستشفيات" },
 ];
 
 const encPath = (folder, file) => "/" + encodeURIComponent(folder) + "/" + encodeURIComponent(file);
