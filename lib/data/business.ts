@@ -8,21 +8,37 @@
  * use the FULL name below verbatim for brand-entity differentiation.
  */
 
+/** Contact lines, PRIMARY FIRST. Every phone shown anywhere on the site (and
+ *  in every external listing — see `npm run business:kit`) comes from here.
+ *  Keep the local display format exactly as the business publishes it. */
+const phones = [
+  {
+    /** Local display format */
+    display: "0546465316",
+    /** International format for tel: links and schema */
+    intl: "+966546465316",
+    /** wa.me format (digits only, no +) */
+    whatsapp: "966546465316",
+    label: "الخط الأول",
+  },
+  {
+    display: "0538965654",
+    intl: "+966538965654",
+    whatsapp: "966538965654",
+    label: "الخط الثاني",
+  },
+] as const;
+
 export const business = {
   /** Official brand name — FINAL (do not change without owner sign-off) */
   name: "السريع للموكيت والأرضيات",
   shortName: "السريع",
   legalName: "السريع للموكيت والأرضيات",
 
-  /** التواصل — صيغة موحّدة في كل مكان */
-  phone: {
-    /** صيغة العرض المحلية */
-    display: "0546465316",
-    /** صيغة دولية للـ tel: و schema */
-    intl: "+966546465316",
-    /** رقم واتساب بصيغة wa.me (بدون +) */
-    whatsapp: "966546465316",
-  },
+  /** Primary contact line (kept as `phone` so existing call sites work). */
+  phone: phones[0],
+  /** All contact lines, primary first — both accept calls and WhatsApp. */
+  phones,
 
   /** العنوان (NAP) — قابل للتغيير */
   address: {
@@ -53,13 +69,22 @@ export const business = {
   social: [] as string[],
 } as const;
 
-/** رابط واتساب جاهز برسالة مُعبّأة (lead-gen) */
-export function whatsappLink(message?: string): string {
-  const base = `https://wa.me/${business.phone.whatsapp}`;
+/** WhatsApp link with an optional pre-filled message (lead-gen).
+ *  Defaults to the primary line; pass a wa.me number for a specific line. */
+export function whatsappLink(message?: string, waNumber?: string): string {
+  const base = `https://wa.me/${waNumber ?? business.phone.whatsapp}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-/** رابط اتصال مباشر */
+/** tel: link for the primary line. */
 export const telLink = `tel:${business.phone.intl}`;
+
+/** tel: link for any line. */
+export function telLinkFor(intl: string): string {
+  return `tel:${intl}`;
+}
+
+/** All lines in international format — used for schema `telephone`. */
+export const allPhonesIntl = business.phones.map((p) => p.intl);
 
 export type Business = typeof business;
