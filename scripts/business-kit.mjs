@@ -18,9 +18,22 @@ const src = readFileSync("lib/data/business.ts", "utf8");
 const val = (key) => src.match(new RegExp(`${key}:\\s*"([^"]*)"`))?.[1] ?? "";
 
 const name = val("name");
-const display = val("display");
-const intl = val("intl");
-const whatsapp = val("whatsapp");
+
+/** All contact lines from the `phones` array, primary first.
+ *  Parsed per-object so JSDoc comments between fields can't break it. */
+const phonesBlock = src.match(/const phones = \[([\s\S]*?)\] as const;/)?.[1] ?? "";
+const lines = [...phonesBlock.matchAll(/\{([\s\S]*?)\}/g)]
+  .map(([, block]) => ({
+    display: block.match(/display:\s*"([^"]+)"/)?.[1] ?? "",
+    intl: block.match(/intl:\s*"([^"]+)"/)?.[1] ?? "",
+    whatsapp: block.match(/whatsapp:\s*"([^"]+)"/)?.[1] ?? "",
+  }))
+  .filter((p) => p.display && p.intl && p.whatsapp);
+
+if (!lines.length) {
+  console.error("business-kit: could not parse any phone from lib/data/business.ts");
+  process.exit(1);
+}
 const city = val("city");
 const region = val("region");
 const district = val("district");
@@ -43,10 +56,12 @@ S("");
 S("NAME (use verbatim, no keywords appended — keyword stuffing gets profiles suspended)");
 S(`  ${name}`);
 S("");
-S("PHONE");
-S(`  Local display : ${display}`);
-S(`  International : ${intl}`);
-S(`  WhatsApp      : https://wa.me/${whatsapp}`);
+S("PHONE — primary line goes in the listing's main phone field;");
+S("        additional lines go in the 'additional phones' field.");
+lines.forEach((p, i) => {
+  S(`  ${i === 0 ? "PRIMARY  " : "Additional"} : ${p.display}   (intl ${p.intl})`);
+  S(`               WhatsApp: https://wa.me/${p.whatsapp}`);
+});
 S("");
 S("ADDRESS");
 S(`  Full     : ${full}`);

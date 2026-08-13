@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/ui/icon";
-import { business, whatsappLink, telLink } from "@/lib/data/business";
+import { business, whatsappLink, telLink, telLinkFor, allPhonesIntl } from "@/lib/data/business";
 import { SITE_URL } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ function LocalBusinessLd() {
     "@type": "LocalBusiness",
     name: business.name,
     url: `${SITE_URL}/contact`,
-    telephone: business.phone.intl,
+    telephone: allPhonesIntl,
     address: {
       "@type": "PostalAddress",
       streetAddress: `${business.address.district} - ${business.address.landmark}`,
@@ -66,15 +66,17 @@ export default function ContactPage() {
                 <span>أسرع طريقة لعرض السعر والاستشارة</span>
               </div>
             </a>
-            <a className="info-card" href={telLink} dir="ltr">
-              <div className="ic">
-                <Icon name="phone" />
-              </div>
-              <div>
-                <b>اتصال مباشر</b>
-                <span>{business.phone.display}</span>
-              </div>
-            </a>
+            {business.phones.map((p, i) => (
+              <a key={p.intl} className="info-card" href={telLinkFor(p.intl)}>
+                <div className="ic">
+                  <Icon name="phone" />
+                </div>
+                <div>
+                  <b>{i === 0 ? "اتصال مباشر" : "خط إضافي"}</b>
+                  <span dir="ltr">{p.display}</span>
+                </div>
+              </a>
+            ))}
             <div className="info-card">
               <div className="ic">
                 <Icon name="location" />

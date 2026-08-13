@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Countdown } from "@/components/home/Countdown";
 import { ProductCard } from "@/components/home/ProductCard";
-import { business, whatsappLink, telLink } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesIntl } from "@/lib/data/business";
 import { products, productPath, productHero, productImages } from "@/lib/data/products";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
 import { SITE_URL } from "@/lib/seo/site";
@@ -48,7 +48,7 @@ function HomeJsonLd() {
         "@id": `${SITE_URL}/#org`,
         name: business.name,
         url: SITE_URL,
-        telephone: business.phone.intl,
+        telephone: allPhonesIntl,
         areaServed: business.areaServed,
       },
       {
@@ -65,7 +65,7 @@ function HomeJsonLd() {
         name: business.name,
         image: `${SITE_URL}${productHero(products[0].slug)?.src ?? ""}`,
         url: SITE_URL,
-        telephone: business.phone.intl,
+        telephone: allPhonesIntl,
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",

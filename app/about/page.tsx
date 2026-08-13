@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
-import { business, whatsappLink, telLink } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesIntl } from "@/lib/data/business";
 import { SITE_URL } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ function LocalBusinessLd() {
     "@type": "LocalBusiness",
     name: business.name,
     url: `${SITE_URL}/about`,
-    telephone: business.phone.intl,
+    telephone: allPhonesIntl,
     address: {
       "@type": "PostalAddress",
       streetAddress: `${business.address.district} - ${business.address.landmark}`,
@@ -33,8 +33,12 @@ function LocalBusinessLd() {
 /* Verifiable identity block (spec 003, T008) — E-E-A-T: a first-time visitor
    should be able to confirm who we are, where, and how to reach us. */
 const credentials: [IconName, string, string][] = [
-  ["location", "مقرّنا", `${"الرياض"} — حي العزيزية، حراج بن قاسم`],
-  ["phone", "تواصل مباشر", "0546465316 — واتساب واتصال، 24 ساعة"],
+  ["location", "مقرّنا", business.address.full],
+  [
+    "phone",
+    "تواصل مباشر",
+    `${business.phones.map((p) => p.display).join(" · ")} — واتساب واتصال، 24 ساعة`,
+  ],
   ["truck", "نطاق الخدمة", "الرياض وجميع أحيائها، والمشاريع في كل المملكة"],
   ["check", "طريقة العمل", "معاينة وقياس مجاني ثم عرض سعر واضح قبل التنفيذ"],
 ];
@@ -121,7 +125,8 @@ export default function AboutPage() {
             </div>
             <p style={{ marginTop: 14, fontSize: 13.5, color: "var(--c-muted)", lineHeight: 1.8 }}>
               نحن نشاط مستقل في {business.address.city}، ولا نتبع أي متجر آخر مشابه في الاسم. تأكّد
-              دائمًا أنك تتواصل معنا عبر الرقم {business.phone.display} أو موقعنا الرسمي.
+              دائمًا أنك تتواصل معنا عبر أرقامنا ({business.phones.map((p) => p.display).join(" · ")}) أو
+              موقعنا الرسمي.
             </p>
           </section>
 
