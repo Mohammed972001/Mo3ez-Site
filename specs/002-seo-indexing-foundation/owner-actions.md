@@ -39,7 +39,7 @@ is already shipped; each item below unblocks a gate in [tasks.md](./tasks.md).
    - Name: **السريع للموكيت والأرضيات**
    - Category: متجر سجاد / متجر أرضيات
    - Address: الرياض، حي العزيزية، حراج بن قاسم
-   - Phone: 0546465316 · Hours: 24 ساعة · Website: `https://moket-elsuarye.com`
+   - Phone: 0538965654 · Hours: 24 ساعة · Website: `https://moket-elsuarye.com`
 2. Complete phone/postcard verification when prompted.
 3. Add real photos of products/installations — profiles with photos get
    dramatically more calls.

@@ -41,7 +41,7 @@ Category { slug, nameAr, h1, metaTitle, metaDescription, keywords[],
 Product  { slug, title, nameAr, categorySlug, images[{src, alt, w, h}],
            shortDesc, specs[{k,v}], badges[], priceNote?, related[] }
 
-Business { name, phone(+966546465316), whatsapp, address(الرياض/العزيزية/حراج بن قاسم),
+Business { name, phone(+966538965654), whatsapp, address(الرياض/العزيزية/حراج بن قاسم),
            hours(24/7), areaServed[], geo, social[] }   // مصدر NAP الموحّد
 ```
 
@@ -62,8 +62,8 @@ Business { name, phone(+966546465316), whatsapp, address(الرياض/العزي
 كل المسارات: `generateMetadata` (title/description عربية فريدة، canonical، OG)، `lang=ar` `dir=rtl` `hreflang=ar-sa`.
 
 ## 6) توليد العملاء (Lead-gen)
-- زر **واتساب عائم** + أزرار CTA: `wa.me/966546465316` برسالة مُعبّأة باسم المنتج/التصنيف.
-- زر **اتصال** `tel:+966546465316`.
+- زر **واتساب عائم** + أزرار CTA: `wa.me/966538965654` برسالة مُعبّأة باسم المنتج/التصنيف.
+- زر **اتصال** `tel:+966538965654`.
 - **فورم عرض سعر** (الاسم/الجوال/النوع/الرسالة) → server action + تحقّق `zod` + حماية spam (honeypot) → يرسل عبر واتساب/بريد (تُحدَّد القناة في الخطة).
 
 ## 7) معايير القبول العامة (Definition of Done)
