@@ -13,19 +13,10 @@
  *  Keep the local display format exactly as the business publishes it. */
 const phones = [
   {
-    /** Local display format */
-    display: "0546465316",
-    /** International format for tel: links and schema */
-    intl: "+966546465316",
-    /** wa.me format (digits only, no +) */
-    whatsapp: "966546465316",
-    label: "الخط الأول",
-  },
-  {
     display: "0538965654",
     intl: "+966538965654",
     whatsapp: "966538965654",
-    label: "الخط الثاني",
+    label: "الخط الرئيسي",
   },
 ] as const;
 

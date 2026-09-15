@@ -26,7 +26,7 @@ We currently score **0** here because no profile exists.
    - **Additional categories**: `متجر أرضيات`, `خدمة تركيب أرضيات`, `متجر مفروشات`.
    - **Address**: `الرياض، حي العزيزية، حراج بن قاسم` — then **drag the map pin
      onto the actual shop entrance**. The auto-placed pin is often wrong.
-   - **Phone**: `0546465316` · **Website**: `https://moket-elsuarye.com`
+   - **Phone**: `0538965654` · **Website**: `https://moket-elsuarye.com`
    - **Hours**: open 24 hours, every day.
 3. **Verify** (video call, postcard, or phone — Google chooses). Do not skip;
    an unverified profile does not rank.
