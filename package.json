@@ -9,10 +9,13 @@
     "lint": "eslint",
     "seo:guard": "node scripts/seo-guard.mjs",
     "seo:verify-live": "node scripts/verify-live-seo.mjs",
-    "business:kit": "node scripts/business-kit.mjs"
+    "business:kit": "node scripts/business-kit.mjs",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
-    "next": "16.2.9",
+    "@opennextjs/cloudflare": "^1.20.12",
+    "next": "^16.4.2",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -22,9 +25,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "^16.4.2",
     "playwright": "^1.61.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.151.1"
   }
 }
