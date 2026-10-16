@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "moket-elsuarye",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "moket-elsuarye" }],
+  // next/image resizing through Cloudflare Images (replaces Vercel image optimization).
+  "images": { "binding": "IMAGES" },
+  "observability": { "enabled": true },
+  "routes": [
+    { "pattern": "moket-elsuarye.com", "custom_domain": true },
+    { "pattern": "www.moket-elsuarye.com", "custom_domain": true }
+  ],
+  "workers_dev": false
+}
