@@ -11,6 +11,12 @@
   "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "moket-elsuarye" }],
   // next/image resizing through Cloudflare Images (replaces Vercel image optimization).
   "images": { "binding": "IMAGES" },
+  // Chat assistant (lib/chat): Workers AI is the fallback when Gemini fails; the limiter
+  // caps each visitor at 15 questions a minute. GEMINI_API_KEY is a Worker secret.
+  "ai": { "binding": "AI" },
+  "ratelimits": [
+    { "name": "CHAT_LIMITER", "namespace_id": "1003", "simple": { "limit": 15, "period": 60 } }
+  ],
   "observability": { "enabled": true },
   "routes": [
     { "pattern": "moket-elsuarye.com", "custom_domain": true },

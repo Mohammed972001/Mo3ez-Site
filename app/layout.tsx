@@ -9,6 +9,7 @@ import { UtilityBar } from "@/components/layout/UtilityBar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
+import ChatWidget from "@/components/layout/ChatWidget";
 
 /* Type 3 (الجانب العربي) — العناوين: ريم كوفي · النص: Cairo.
    موقع عربي أولًا: نستضيف خطّي العربية فقط (self-hosted, display:swap) — أخفّ وأسرع
@@ -66,6 +67,9 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <div className="fixed bottom-24 end-5 z-50">
+          <ChatWidget panelPosition="bottom-40 end-5" />
+        </div>
         <WhatsAppFab />
       </body>
     </html>
