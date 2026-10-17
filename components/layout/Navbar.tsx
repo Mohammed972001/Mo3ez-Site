@@ -19,9 +19,14 @@ export function Navbar() {
     <nav className="snav">
       <div className="wrap">
         <div className="row">
-          <Link className="logo" href="/">
-            {business.shortName}
-            <small>موكيت · أرضيات</small>
+          <Link className="logo brand" href="/">
+            {/* Official mark: a rolled and spread carpet (design/brand-mark.svg) */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- 96px static PNG, nothing to optimise */}
+            <img className="mark" src="/brand/mark.png" alt="" width={44} height={44} />
+            <span>
+              {business.shortName}
+              <small>موكيت · أرضيات</small>
+            </span>
           </Link>
 
           <div className="links max-lg:hidden">
