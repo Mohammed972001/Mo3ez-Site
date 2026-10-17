@@ -16,6 +16,7 @@ function LocalBusinessLd() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: business.name,
+    logo: `${SITE_URL}/logo.png`,
     url: `${SITE_URL}/about`,
     telephone: allPhonesIntl,
     address: {
