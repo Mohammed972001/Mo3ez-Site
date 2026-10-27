@@ -88,7 +88,11 @@ export function Footer() {
 
         <div className="bottom">
           <span>
-            © {new Date().getFullYear()} {business.name} — جميع الحقوق محفوظة · موكيت وأرضيات في {business.address.city}
+            © {new Date().getFullYear()} {business.name} — جميع الحقوق محفوظة · موكيت وأرضيات في {business.address.city} ·{" "}
+            {/* Agency credit; data-credit marks it as not a chat with the shop. */}
+            <a href="https://wa.me/201003736539" target="_blank" rel="nofollow noopener" dir="ltr" data-credit className="credit">
+              Powered by Digitalizing Tech
+            </a>
           </span>
           <div className="social">
             <a href={whatsappLink()} aria-label="واتساب">

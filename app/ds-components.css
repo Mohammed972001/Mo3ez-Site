@@ -281,6 +281,8 @@ select.input { appearance:none; padding-inline-end:38px; cursor:pointer; }
 .foot .pay { display:flex; gap:7px; margin-top:13px; }
 .foot .pay span { font-size:10px; font-weight:700; color:var(--c-muted); border:1px solid var(--c-border); border-radius:6px; padding:4px 7px; background:var(--c-bg); }
 .foot .bottom { display:flex; align-items:center; justify-content:space-between; gap:14px; padding-top:18px; font-size:12px; color:var(--c-muted); flex-wrap:wrap; }
+.foot .credit { color:inherit; }
+.foot .credit:hover { color:var(--c-text); }
 .foot .social { display:flex; gap:8px; }
 .foot .social a { width:36px; height:36px; border-radius:9px; border:1px solid var(--c-border); display:grid; place-items:center; color:var(--c-text); transition:.15s; }
 .foot .social a:hover { background:var(--c-bg); border-color:var(--c-text); }
