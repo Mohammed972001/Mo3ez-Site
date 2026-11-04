@@ -45,5 +45,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
           # Public value: the Search Console meta tag rendered in every page head.
           NEXT_PUBLIC_GSC_VERIFICATION: Hg-eu7GtZqduPoK6FDitUgThwJJZptg0cQxxHJsgGEQ
+          # Public value: the GA4 measurement id of this site (properties/562446541).
+          NEXT_PUBLIC_GA4_ID: G-B83NR6JH01
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
