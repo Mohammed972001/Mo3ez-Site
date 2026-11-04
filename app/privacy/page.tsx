@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { business, whatsappLink } from "@/lib/data/business";
+import { business, whatsappLink, allPhonesText } from "@/lib/data/business";
 
 export const metadata: Metadata = {
   title: `سياسة الخصوصية | ${business.name}`,
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
               <a href={whatsappLink("استفسار بخصوص سياسة الخصوصية")} target="_blank" rel="noopener noreferrer">
                 واتساب
               </a>{" "}
-              أو على {business.phone.display}.
+              أو على {allPhonesText}.
             </p>
           </div>
         </div>

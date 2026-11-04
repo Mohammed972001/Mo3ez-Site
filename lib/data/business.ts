@@ -8,17 +8,21 @@
  * use the FULL name below verbatim for brand-entity differentiation.
  */
 
-/** Contact lines, PRIMARY FIRST. Every phone shown anywhere on the site (and
- *  in every external listing — see `npm run business:kit`) comes from here.
+/** Contact lines, PRIMARY FIRST. Every tel:/wa.me link, schema `telephone` and
+ *  external listing (see `npm run business:kit`) comes from here.
  *  Keep the local display format exactly as the business publishes it. */
 const phones = [
   {
-    display: "0538965654",
-    intl: "+966538965654",
-    whatsapp: "966538965654",
+    display: "0575894076",
+    intl: "+966575894076",
+    whatsapp: "966575894076",
     label: "الخط الرئيسي",
   },
 ] as const;
+
+/** Older line, printed as text beside the primary number (see `allPhonesText`).
+ *  Calls and WhatsApp go to the primary line, so never link or mark up this one. */
+const previousPhoneDisplay = "0538965654";
 
 export const business = {
   /** Official brand name — FINAL (do not change without owner sign-off) */
@@ -28,7 +32,7 @@ export const business = {
 
   /** Primary contact line (kept as `phone` so existing call sites work). */
   phone: phones[0],
-  /** All contact lines, primary first — both accept calls and WhatsApp. */
+  /** All contact lines, primary first — each accepts calls and WhatsApp. */
   phones,
 
   /** العنوان (NAP) — قابل للتغيير */
@@ -70,12 +74,11 @@ export function whatsappLink(message?: string, waNumber?: string): string {
 /** tel: link for the primary line. */
 export const telLink = `tel:${business.phone.intl}`;
 
-/** tel: link for any line. */
-export function telLinkFor(intl: string): string {
-  return `tel:${intl}`;
-}
-
 /** All lines in international format — used for schema `telephone`. */
 export const allPhonesIntl = business.phones.map((p) => p.intl);
+
+/** Both numbers as printed on the site. Wherever this sits inside a link, the
+ *  link still dials `telLink`, which is the primary line. */
+export const allPhonesText = [previousPhoneDisplay, business.phone.display].join(" · ");
 
 export type Business = typeof business;

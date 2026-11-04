@@ -1,5 +1,5 @@
 import { Icon } from "@/components/ui/icon";
-import { business, telLink } from "@/lib/data/business";
+import { allPhonesText, business, telLink } from "@/lib/data/business";
 
 /** شريط علوي رفيع (.ubar من نظام التصميم) — قيمة مضافة + اتصال سريع. */
 export function UtilityBar() {
@@ -17,7 +17,7 @@ export function UtilityBar() {
           <Icon name="location" /> {business.address.city}
         </span>
         <a href={telLink} className="uitem font-semibold" aria-label={`اتصل بنا: ${business.phone.display}`}>
-          <Icon name="phone" /> <bdi dir="ltr">{business.phone.display}</bdi>
+          <Icon name="phone" /> <bdi dir="ltr">{allPhonesText}</bdi>
         </a>
       </div>
     </div>

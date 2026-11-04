@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { business, whatsappLink } from "@/lib/data/business";
+import { business, whatsappLink, allPhonesText } from "@/lib/data/business";
 
 export const metadata: Metadata = {
   title: `الشروط والأحكام | ${business.name}`,
@@ -52,7 +52,7 @@ export default function TermsPage() {
               <a href={whatsappLink("استفسار بخصوص الشروط والأحكام")} target="_blank" rel="noopener noreferrer">
                 واتساب
               </a>{" "}
-              أو على {business.phone.display}.
+              أو على {allPhonesText}.
             </p>
           </div>
         </div>

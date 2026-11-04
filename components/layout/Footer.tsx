@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
-import { business, telLink, telLinkFor, whatsappLink } from "@/lib/data/business";
+import { allPhonesText, business, telLink, whatsappLink } from "@/lib/data/business";
 import { products, productPath } from "@/lib/data/products";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
 
@@ -44,17 +44,14 @@ export function Footer() {
               وأرضيات مطاطية، مع توصيل وتركيب احترافي.
             </p>
             <div className="mt-3 flex flex-col gap-2 text-sm">
-              {business.phones.map((p) => (
-                <a
-                  key={p.intl}
-                  href={telLinkFor(p.intl)}
-                  dir="ltr"
-                  className="flex items-center gap-2 hover:text-[var(--c-accent)]"
-                  aria-label={`اتصل بنا: ${p.display}`}
-                >
-                  <Icon name="phone" className="size-4" /> {p.display}
-                </a>
-              ))}
+              <a
+                href={telLink}
+                dir="ltr"
+                className="flex items-center gap-2 hover:text-[var(--c-accent)]"
+                aria-label={`اتصل بنا: ${business.phone.display}`}
+              >
+                <Icon name="phone" className="size-4" /> {allPhonesText}
+              </a>
               <a href={whatsappLink()} className="flex items-center gap-2 hover:text-[var(--c-accent)]">
                 <Icon name="whatsapp" className="size-4" /> واتساب
               </a>
