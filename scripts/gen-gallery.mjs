@@ -36,16 +36,21 @@ for (const p of PRODUCTS) {
   const files = readdirSync(dir)
     .filter((f) => statSync(join(dir, f)).isFile() && IMG.has(extname(f).toLowerCase()))
     .sort();
-  out[p.slug] = files.map((f, i) => ({
-    src: encPath(p.folder, f),
-    alt: `${p.nameAr} — صورة ${i + 1} — الرياض`,
-  }));
+  // Files named illustrative-* are licence-free stand-ins (docs/image-sources.md); the page labels them.
+  out[p.slug] = files.map((f, i) => {
+    const illustrative = f.startsWith("illustrative-");
+    return {
+      src: encPath(p.folder, f),
+      alt: `${p.nameAr} — ${illustrative ? "صورة توضيحية" : "صورة"} ${i + 1} — الرياض`,
+      ...(illustrative && { illustrative }),
+    };
+  });
 }
 
 const body =
   "// مولّد آليًّا عبر scripts/gen-gallery.mjs — لا تعدّله يدويًّا.\n" +
   "// نموذج: كل فولدر = منتج، وكل صوره معرض. أعِد التوليد بعد تغيير الصور.\n\n" +
-  "export interface GalleryImage { src: string; alt: string; }\n\n" +
+  "export interface GalleryImage { src: string; alt: string; illustrative?: boolean; }\n\n" +
   "export const gallery: Record<string, GalleryImage[]> = " +
   JSON.stringify(out, null, 2) +
   ";\n";
