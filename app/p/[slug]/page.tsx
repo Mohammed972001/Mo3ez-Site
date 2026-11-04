@@ -5,7 +5,7 @@ import { Icon, type IconName } from "@/components/ui/icon";
 import { Gallery } from "@/components/product/Gallery";
 import { Tabs } from "@/components/product/Tabs";
 import { ProductCard } from "@/components/home/ProductCard";
-import { business, whatsappLink, telLink } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesText } from "@/lib/data/business";
 import {
   products,
   getProduct,
@@ -168,7 +168,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   <Icon name="whatsapp" /> اطلب عرض سعر واتساب
                 </a>
                 <a className="btn btn-secondary btn-lg" href={telLink} dir="ltr">
-                  <Icon name="phone" /> {business.phone.display}
+                  <Icon name="phone" /> {allPhonesText}
                 </a>
               </div>
 

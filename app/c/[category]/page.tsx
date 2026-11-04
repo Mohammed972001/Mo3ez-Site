@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/ui/icon";
 import { ProductCard } from "@/components/home/ProductCard";
-import { business, whatsappLink, telLink } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesText } from "@/lib/data/business";
 import { productsByCategory, productPath } from "@/lib/data/products";
 import { categorySeo, getCategorySeo, categoryPath } from "@/lib/data/categories";
 import { allPosts, postPath } from "@/lib/blog/posts";
@@ -114,7 +114,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
               <Icon name="whatsapp" /> اطلب عرض سعر واتساب
             </a>
             <a className="btn btn-secondary" href={telLink} dir="ltr">
-              <Icon name="phone" /> {business.phone.display}
+              <Icon name="phone" /> {allPhonesText}
             </a>
           </div>
 

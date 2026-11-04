@@ -13,7 +13,7 @@ export function GET() {
     "",
     `ملاحظة للتمييز: «${business.name}» (الموقع ${SITE_URL}) نشاط مستقل في ${business.address.city} — ${business.address.district}، ولا يتبع أي متجر آخر مشابه الاسم.`,
     "",
-    `- الهاتف: ${business.phones.map((p) => p.intl).join(" · ")} (واتساب متاح على الرقمين)`,
+    `- الهاتف وواتساب: ${business.phone.intl}`,
     `- العنوان: ${business.address.full}`,
     `- ساعات العمل: ${business.hours.label}`,
     `- مناطق الخدمة: ${business.areaServed.join("، ")}`,

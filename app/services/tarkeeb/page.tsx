@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
-import { business, whatsappLink, telLink } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesText } from "@/lib/data/business";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
 import { SITE_URL } from "@/lib/seo/site";
 
@@ -117,7 +117,7 @@ export default function TarkeebPage() {
               <Icon name="whatsapp" /> اطلب فني تركيب واتساب
             </a>
             <a className="btn btn-secondary btn-lg" href={telLink} dir="ltr">
-              <Icon name="phone" /> {business.phone.display}
+              <Icon name="phone" /> {allPhonesText}
             </a>
           </div>
 

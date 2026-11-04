@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Countdown } from "@/components/home/Countdown";
 import { ProductCard } from "@/components/home/ProductCard";
-import { business, whatsappLink, telLink, allPhonesIntl } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesIntl, allPhonesText } from "@/lib/data/business";
 import { products, productPath, productHero, productImages } from "@/lib/data/products";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
 import { SITE_URL } from "@/lib/seo/site";
@@ -420,7 +420,7 @@ export default function HomePage() {
                   <Icon name="whatsapp" /> اطلب عبر واتساب
                 </a>
                 <a className="btn btn-secondary btn-lg" href={telLink} dir="ltr">
-                  <Icon name="phone" /> {business.phone.display}
+                  <Icon name="phone" /> {allPhonesText}
                 </a>
               </div>
               <div className="fine">{business.hours.label} · {business.address.full}</div>
