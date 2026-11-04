@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Reem_Kufi, Cairo } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import "./ds-components.css";
 import "./ds-storefront.css";
@@ -10,6 +11,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import ChatWidget from "@/components/layout/ChatWidget";
+import { ContactTracker } from "@/components/analytics/ContactTracker";
+import { GA4_ID } from "@/lib/analytics";
 
 /* Type 3 (الجانب العربي) — العناوين: ريم كوفي · النص: Cairo.
    موقع عربي أولًا: نستضيف خطّي العربية فقط (self-hosted, display:swap) — أخفّ وأسرع
@@ -71,6 +74,25 @@ export default function RootLayout({
           <ChatWidget panelPosition="bottom-40 end-5" />
         </div>
         <WhatsAppFab />
+
+        {/* Google tag. afterInteractive, not lazyOnload: on a slow phone the load event
+            comes seconds after the WhatsApp button is already tappable. */}
+        {GA4_ID && (
+          <>
+            <ContactTracker />
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} strategy="afterInteractive" />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA4_ID}');`,
+              }}
+            />
+          </>
+        )}
       </body>
     </html>
   );
