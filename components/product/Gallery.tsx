@@ -24,6 +24,11 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
           priority
           sizes="(max-width:980px) 100vw, 50vw"
         />
+        {main.illustrative && (
+          <span style={{ position: "absolute", insetInlineEnd: 8, bottom: 8, padding: "2px 8px", borderRadius: 6, background: "rgb(0 0 0 / 60%)", color: "#fff", fontSize: 12 }}>
+            صورة توضيحية
+          </span>
+        )}
       </div>
       {thumbs.length > 1 ? (
         <div className="g-thumbs">
