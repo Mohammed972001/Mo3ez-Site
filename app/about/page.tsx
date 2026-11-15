@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/icon";
-import { business, whatsappLink, telLink, allPhonesIntl, allPhonesText } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesIntl } from "@/lib/data/business";
 import { SITE_URL } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ const credentials: [IconName, string, string][] = [
   [
     "phone",
     "تواصل مباشر",
-    `${allPhonesText} — واتساب واتصال، 24 ساعة`,
+    `${business.phone.display} — واتساب واتصال، 24 ساعة`,
   ],
   ["truck", "نطاق الخدمة", "الرياض وجميع أحيائها، والمشاريع في كل المملكة"],
   ["check", "طريقة العمل", "معاينة وقياس مجاني ثم عرض سعر واضح قبل التنفيذ"],
@@ -126,7 +126,7 @@ export default function AboutPage() {
             </div>
             <p style={{ marginTop: 14, fontSize: 13.5, color: "var(--c-muted)", lineHeight: 1.8 }}>
               نحن نشاط مستقل في {business.address.city}، ولا نتبع أي متجر آخر مشابه في الاسم. تأكّد
-              دائمًا أنك تتواصل معنا عبر أرقامنا ({allPhonesText}) أو
+              دائمًا أنك تتواصل معنا عبر رقمنا ({business.phone.display}) أو
               موقعنا الرسمي.
             </p>
           </section>
@@ -139,7 +139,7 @@ export default function AboutPage() {
               تصفّح المنتجات
             </Link>
             <a className="btn btn-ghost btn-lg" href={telLink} dir="ltr">
-              <Icon name="phone" /> {allPhonesText}
+              <Icon name="phone" /> {business.phone.display}
             </a>
           </div>
         </div>

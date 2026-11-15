@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/ui/icon";
-import { business, whatsappLink, telLink, allPhonesIntl, allPhonesText } from "@/lib/data/business";
+import { business, whatsappLink, telLink, allPhonesIntl } from "@/lib/data/business";
 import { SITE_URL } from "@/lib/seo/site";
 
 export const metadata: Metadata = {
@@ -73,7 +73,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <b>اتصال مباشر</b>
-                <span dir="ltr">{allPhonesText}</span>
+                <span dir="ltr">{business.phone.display}</span>
               </div>
             </a>
             <div className="info-card">

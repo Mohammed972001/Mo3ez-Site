@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
-import { allPhonesText, business, telLink, whatsappLink } from "@/lib/data/business";
+import { business, telLink, whatsappLink } from "@/lib/data/business";
 import { products, productPath } from "@/lib/data/products";
 import { categorySeo, categoryPath } from "@/lib/data/categories";
 
@@ -50,7 +50,7 @@ export function Footer() {
                 className="flex items-center gap-2 hover:text-[var(--c-accent)]"
                 aria-label={`اتصل بنا: ${business.phone.display}`}
               >
-                <Icon name="phone" className="size-4" /> {allPhonesText}
+                <Icon name="phone" className="size-4" /> {business.phone.display}
               </a>
               <a href={whatsappLink()} className="flex items-center gap-2 hover:text-[var(--c-accent)]">
                 <Icon name="whatsapp" className="size-4" /> واتساب
