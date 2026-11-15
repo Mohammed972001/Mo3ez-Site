@@ -20,10 +20,6 @@ const phones = [
   },
 ] as const;
 
-/** Older line, printed as text beside the primary number (see `allPhonesText`).
- *  Calls and WhatsApp go to the primary line, so never link or mark up this one. */
-const previousPhoneDisplay = "0538965654";
-
 export const business = {
   /** Official brand name — FINAL (do not change without owner sign-off) */
   name: "السريع للموكيت والأرضيات",
@@ -76,9 +72,5 @@ export const telLink = `tel:${business.phone.intl}`;
 
 /** All lines in international format — used for schema `telephone`. */
 export const allPhonesIntl = business.phones.map((p) => p.intl);
-
-/** Both numbers as printed on the site. Wherever this sits inside a link, the
- *  link still dials `telLink`, which is the primary line. */
-export const allPhonesText = [previousPhoneDisplay, business.phone.display].join(" · ");
 
 export type Business = typeof business;
